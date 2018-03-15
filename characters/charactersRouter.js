@@ -6,39 +6,36 @@ const Film = require('../films/Film.js');
 
 const router = express.Router();
 
+router.get('/', function(req, res) {
+  const { minheight } = req.query
+
+  const query = Character.find({})
+  if (req.query.minheight) {
+    query.where({ height: 188 })
+  }
+
+  query.then(characters => {
+    res.json(characters);
+  })
+  .catch(err => res.status(500).json(err));
+});
+
 router.get('/:id', function(req, res) {
   const { id } = req.params;
 
-  Character.findOne({ key: id }).then(char => {
-    if (char.movies.length === 0) {
-      let charMovies = [];
+  Character.findOne({ key: id })
+    .select('name gender skin_color hair_color eye_color height')
+    .populate('homeworld', 'name terrain climate diameter gravity')
+    .then(char => {
       Film.find({ character_ids: id })
+        .select('title producer director ')
         .then(films => {
-          charMovies = films.map(film => {
-            return Character.findOneAndUpdate(
-              { key: id },
-              { $push: { movies: film._id }},
-              { new: true },
-            );
-          });
-        })
-        .then(() => {
-          Promise.all(charMovies).then(() => {
-            Character.findOne({ key: id })
-              .populate('movies', 'title')
-              .populate('homeworld')
-              .then(results => res.send(results));
-          });
+          const character = { ...char._doc, movies: films};
+
+          res.send(character);
         });
-    } else {
-      char
-        .populate('movies', 'title')
-        .populate('homeworld')
-        .execPopulate()
-        .then(results => res.send(results));
-    };
+    });
   });
-});
 
 router.get('/:id/vehicles', function(req, res) {
   const { id } = req.params;

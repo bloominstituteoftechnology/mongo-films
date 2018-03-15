@@ -4,6 +4,8 @@ const Specie = require('./Specie.js');
 
 const router = express.Router();
 
-// add endpoints here
+router.put('/populate/characters', function(req, res) {
+
+});
 
 module.exports = router;
