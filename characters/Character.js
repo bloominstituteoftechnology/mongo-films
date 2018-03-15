@@ -6,7 +6,7 @@ const Character = mongoose.Schema({
   edited: Date,
   created: Date,
   gender: String,
-  height: String,
+  height: Number,
   hair_color: String,
   skin_color: String,
   eye_color: String,
@@ -14,6 +14,7 @@ const Character = mongoose.Schema({
   key: { type: Number, unique: true },
   homeworld_key: Number,
   homeworld: { type: ObjectId, ref: 'Planet' },
+  movies: Array,
 });
 
 module.exports = mongoose.model('Character', Character);
