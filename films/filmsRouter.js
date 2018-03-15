@@ -31,20 +31,4 @@ router.get('/', (req, res) => {
     });
 });
 
-// router.get('/', function(req, res) {
-//   const producerFilter = req.query.producer;
-//   const releaseFilter = req.query.released;
-
-//   let query = Film.find({}).sort('episode');
-//   if (producerFilter) {
-//     query.select('title producer').where({ producer: /gary kurtz/i });
-//   } else if (releaseFilter) {
-//     query.select('title release_date').where({ release_date: /2005/ });
-//   }
-
-//   query.then(films => {
-//     res.json(films);
-//   });
-// });
-
 module.exports = router;
