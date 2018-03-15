@@ -1,5 +1,6 @@
 const express = require('express');
 const Character = require('./Character.js');
+const Film = require('../films/Film.js');
 const router = express.Router();
 
 router.get('/', function(req,res) {
@@ -14,10 +15,20 @@ router.get('/', function(req,res) {
 router.get('/:_id', function(req,res) {
 	const id = req.params._id;
   Character.findOne({_id: id})
+  .select('name gender height homeworld')
   .populate('homeworld')
   .then(character => {
-    res.json(character);
+    Film.find({characters : id })
+    .select('title')
+    .then(p => res.status(200).json([character,p]))
   })
+
+
+
+
+  /*.then(character => {
+    res.json(character);
+  })*/
 })
 
 module.exports = router;
