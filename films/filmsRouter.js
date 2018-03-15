@@ -6,24 +6,24 @@ const router = express.Router();
 
 router.get('/', function(req, res) {
   const producerFilter = new RegExp(req.query.producer, 'i');
+  const releasedFilter = new RegExp(req.query.released);
 
   let query = Film.find({})
   .sort('episode')
-  .select('title producer')
-  // .populate('characters', 'name gender height skin_color')
-  // .populate('planets', 'name climate terrain gravity diameter')
-  // .then(films => {
-  //   res.status(200).json(films)
-  // })
-  // .catch(err => res.status(500).json(err));
-
-  if (producerFilter) {
-    query.where({ producer: producerFilter });
+  .populate('characters', 'name gender height skin_color')
+  .populate('planets', 'name climate terrain gravity diameter')
+  if (req.query.producer) {
+    query.where({ producer: producerFilter })
+    .select('title producer');
+  } else if (req.query.released) {
+    query.where({ release_date: releasedFilter })
+    .select('title release_date')
   }
 
   query.then(films => {
     res.json(films);
-  });
+  })
+  .catch(err => res.status(500).json(err));
 });
 
 module.exports = router;
