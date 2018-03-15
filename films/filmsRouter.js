@@ -4,14 +4,23 @@ const Film = require('./Film.js');
 
 const router = express.Router();
 router.get('/', (req, res) => {
-  const producerFilter = true;
-    let query = Film.find({})
-      .select('title producer')
-      .where({ producer: /gary kurtz/i })
-      .sort('episode')
+  const producer = req.query.producer;
+  let query = Film.find({})
+    .sort('episode')
+    .select('title producer');
+    if (producer) {
+      query.where({ producer: { $regex: producer, $options: 'i' } })
       .exec((err, answer) => {
-        res.status(200).json({ answer: answer });
+        if (answer.length > 0) {
+          res.status(200).json({ films: answer });
+        } else {
+          res.status(404).json({ error: 'No films found for this producer'})
+        }
       });
+    }
+    else {
+      res.status(400).json({ error: 'A producer must be named in the query' });
+    }
 });
 
 module.exports = router;
