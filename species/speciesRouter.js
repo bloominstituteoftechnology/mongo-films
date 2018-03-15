@@ -1,6 +1,6 @@
 const express = require('express');
 
-const Specie = require('./Specie.js');
+const Specie = require('./Species.js');
 
 const router = express.Router();
 
