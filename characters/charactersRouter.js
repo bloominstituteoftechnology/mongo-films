@@ -9,10 +9,9 @@ const router = express.Router();
 
 router.get("/:id", (req, res) => {
   const { characterId } = req.params;
-  let charFinder = Character.findOne({ charKey: characterId }).populate(
-    "homeworld"
-  );
-
+  let charFinder = Character.findOne({ charKey: characterId })
+    .populate("homeworld")
+    .exec();
   charFinder.then(character => {
     res.json(character);
   });
