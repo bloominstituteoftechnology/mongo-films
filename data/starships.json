@@ -1,0 +1,36 @@
+{"_id":{"$oid":"5aa99638b97194b732c1694c"},"starship_class":"corvette","hyperdrive_rating":"2.0","key":2,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c1694b"},"starship_class":"Star Destroyer","hyperdrive_rating":"2.0","key":3,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c1694d"},"starship_class":"landing craft","hyperdrive_rating":"1.0","key":5,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c1694e"},"starship_class":"Deep Space Mobile Battlestation","hyperdrive_rating":"4.0","key":9,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c16950"},"starship_class":"Medium transport","hyperdrive_rating":"4.0","key":17,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c1694f"},"starship_class":"Star dreadnought","hyperdrive_rating":"2.0","key":15,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c16951"},"starship_class":"Escort ship","hyperdrive_rating":"2.0","key":23,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c16952"},"starship_class":"assault starfighter","hyperdrive_rating":"1.0","key":11,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c16953"},"starship_class":"Assault Starfighter","hyperdrive_rating":"2.0","key":29,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c16954"},"starship_class":"Patrol craft","hyperdrive_rating":"3.0","key":21,"__v":2,"pilot_keys":[22],"pilots":[{"$oid":"5aa995a3b97194b732c167bf"}]}
+{"_id":{"$oid":"5aa99638b97194b732c16956"},"starship_class":"Space cruiser","hyperdrive_rating":"2.0","key":31,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c16957"},"starship_class":"Droid control ship","hyperdrive_rating":"2.0","key":32,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c16958"},"starship_class":"Starfighter","hyperdrive_rating":"1.0","key":28,"__v":2,"pilot_keys":[29],"pilots":[{"$oid":"5aa995a3b97194b732c167c3"}]}
+{"_id":{"$oid":"5aa99638b97194b732c16955"},"starship_class":"Starfighter","hyperdrive_rating":"1.0","key":12,"__v":2,"pilot_keys":[1,9,18,19],"pilots":[{"$oid":"5aa995a3b97194b732c167ab"},{"$oid":"5aa995a3b97194b732c167b1"},{"$oid":"5aa995a3b97194b732c167b7"},{"$oid":"5aa995a3b97194b732c167ba"}]}
+{"_id":{"$oid":"5aa99638b97194b732c16959"},"starship_class":"Starfighter","hyperdrive_rating":"1.0","key":39,"__v":2,"pilot_keys":[11,35,60],"pilots":[{"$oid":"5aa995a3b97194b732c167ad"},{"$oid":"5aa995a3b97194b732c167ca"},{"$oid":"5aa995a3b97194b732c167e2"}]}
+{"_id":{"$oid":"5aa99638b97194b732c1695b"},"starship_class":"yacht","hyperdrive_rating":"1.8","key":40,"__v":2,"pilot_keys":[39],"pilots":[{"$oid":"5aa995a3b97194b732c167ce"}]}
+{"_id":{"$oid":"5aa99638b97194b732c1695c"},"starship_class":"Diplomatic barge","hyperdrive_rating":"0.7","key":43,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c1695d"},"starship_class":"freighter","hyperdrive_rating":"unknown","key":47,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c1695e"},"starship_class":"Starfighter","hyperdrive_rating":"1.0","key":48,"__v":2,"pilot_keys":[10,58],"pilots":[{"$oid":"5aa995a3b97194b732c167ae"},{"$oid":"5aa995a3b97194b732c167e3"}]}
+{"_id":{"$oid":"5aa99638b97194b732c1695a"},"starship_class":"Space Transport","hyperdrive_rating":"1.5","key":41,"__v":2,"pilot_keys":[44],"pilots":[{"$oid":"5aa995a3b97194b732c167d3"}]}
+{"_id":{"$oid":"5aa99638b97194b732c16960"},"starship_class":"Star Cruiser","hyperdrive_rating":"1.0","key":27,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c16961"},"starship_class":"Starfighter","hyperdrive_rating":"1.0","key":13,"__v":2,"pilot_keys":[4],"pilots":[{"$oid":"5aa995a3b97194b732c167b0"}]}
+{"_id":{"$oid":"5aa99638b97194b732c16962"},"starship_class":"yacht","hyperdrive_rating":"1.5","key":58,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c16963"},"starship_class":"capital ship","hyperdrive_rating":"1.5","key":59,"__v":2,"pilot_keys":[10,11],"pilots":[{"$oid":"5aa995a3b97194b732c167ae"},{"$oid":"5aa995a3b97194b732c167ad"}]}
+{"_id":{"$oid":"5aa99638b97194b732c1695f"},"starship_class":"yacht","hyperdrive_rating":"0.9","key":49,"__v":2,"pilot_keys":[35],"pilots":[{"$oid":"5aa995a3b97194b732c167ca"}]}
+{"_id":{"$oid":"5aa99638b97194b732c16965"},"starship_class":"transport","hyperdrive_rating":"1.0","key":61,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c16966"},"starship_class":"yacht","hyperdrive_rating":"0.5","key":64,"__v":2,"pilot_keys":[10,35],"pilots":[{"$oid":"5aa995a3b97194b732c167ae"},{"$oid":"5aa995a3b97194b732c167ca"}]}
+{"_id":{"$oid":"5aa99638b97194b732c16967"},"starship_class":"star destroyer","hyperdrive_rating":"1.0","key":63,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c16964"},"starship_class":"Light freighter","hyperdrive_rating":"0.5","key":10,"__v":2,"pilot_keys":[13,14,25,31],"pilots":[{"$oid":"5aa995a3b97194b732c167b3"},{"$oid":"5aa995a3b97194b732c167b2"},{"$oid":"5aa995a3b97194b732c167c0"},{"$oid":"5aa995a3b97194b732c167c6"}]}
+{"_id":{"$oid":"5aa99638b97194b732c16968"},"starship_class":"starfighter","hyperdrive_rating":"1.0","key":66,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c1696a"},"starship_class":"cruiser","hyperdrive_rating":"1.0","key":68,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c1696c"},"starship_class":"Armed government transport","hyperdrive_rating":"1.0","key":22,"__v":2,"pilot_keys":[1,13,14],"pilots":[{"$oid":"5aa995a3b97194b732c167ab"},{"$oid":"5aa995a3b97194b732c167b3"},{"$oid":"5aa995a3b97194b732c167b2"}]}
+{"_id":{"$oid":"5aa99638b97194b732c16969"},"starship_class":"starfighter","hyperdrive_rating":"1.0","key":65,"__v":2,"pilot_keys":[10,11],"pilots":[{"$oid":"5aa995a3b97194b732c167ae"},{"$oid":"5aa995a3b97194b732c167ad"}]}
+{"_id":{"$oid":"5aa99638b97194b732c1696b"},"starship_class":"assault ship","hyperdrive_rating":"0.6","key":52,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa99638b97194b732c1696d"},"starship_class":"starfighter","hyperdrive_rating":"6","key":74,"__v":2,"pilot_keys":[10,79],"pilots":[{"$oid":"5aa995a3b97194b732c167ae"},{"$oid":"5aa995a3b97194b732c167f6"}]}
+{"_id":{"$oid":"5aa99638b97194b732c1696e"},"starship_class":"starfighter","hyperdrive_rating":"1.0","key":75,"__v":1,"pilot_keys":[],"pilots":[]}
