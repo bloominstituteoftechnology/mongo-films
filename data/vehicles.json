@@ -1,0 +1,39 @@
+{"_id":{"$oid":"5aa9964eb97194b732c16976"},"vehicle_class":"wheeled","key":4,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16975"},"vehicle_class":"repulsorcraft","key":6,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16978"},"vehicle_class":"repulsorcraft","key":20,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16977"},"vehicle_class":"sail barge","key":24,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16979"},"vehicle_class":"repulsorcraft cargo skiff","key":25,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c1697a"},"vehicle_class":"airspeeder","key":14,"__v":1,"pilot_keys":[1,18],"pilots":[{"$oid":"5aa995a3b97194b732c167ab"},{"$oid":"5aa995a3b97194b732c167b7"}]}
+{"_id":{"$oid":"5aa9964eb97194b732c1697d"},"vehicle_class":"repulsorcraft","key":34,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c1697c"},"vehicle_class":"space/planetary bomber","key":16,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c1697e"},"vehicle_class":"starfighter","key":33,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c1697b"},"vehicle_class":"starfighter","key":26,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16981"},"vehicle_class":"repulsorcraft","key":7,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c1697f"},"vehicle_class":"repulsorcraft","key":35,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16982"},"vehicle_class":"starfighter","key":8,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16980"},"vehicle_class":"repulsorcraft","key":36,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16983"},"vehicle_class":"speeder","key":30,"__v":1,"pilot_keys":[1,5],"pilots":[{"$oid":"5aa995a3b97194b732c167ab"},{"$oid":"5aa995a3b97194b732c167b8"}]}
+{"_id":{"$oid":"5aa9964eb97194b732c16986"},"vehicle_class":"gunship","key":51,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16985"},"vehicle_class":"submarine","key":38,"__v":1,"pilot_keys":[10,32],"pilots":[{"$oid":"5aa995a3b97194b732c167ae"},{"$oid":"5aa995a3b97194b732c167c7"}]}
+{"_id":{"$oid":"5aa9964eb97194b732c16987"},"vehicle_class":"repulsorcraft","key":44,"__v":1,"pilot_keys":[11],"pilots":[{"$oid":"5aa995a3b97194b732c167ad"}]}
+{"_id":{"$oid":"5aa9964eb97194b732c16984"},"vehicle_class":"walker","key":19,"__v":1,"pilot_keys":[13],"pilots":[{"$oid":"5aa995a3b97194b732c167b3"}]}
+{"_id":{"$oid":"5aa9964eb97194b732c16988"},"vehicle_class":"airspeeder","key":45,"__v":1,"pilot_keys":[70],"pilots":[{"$oid":"5aa995a3b97194b732c167ed"}]}
+{"_id":{"$oid":"5aa9964eb97194b732c1698b"},"vehicle_class":"walker","key":54,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c1698a"},"vehicle_class":"speeder","key":42,"__v":1,"pilot_keys":[44],"pilots":[{"$oid":"5aa995a3b97194b732c167d3"}]}
+{"_id":{"$oid":"5aa9964eb97194b732c1698c"},"vehicle_class":"speeder","key":55,"__v":1,"pilot_keys":[67],"pilots":[{"$oid":"5aa995a3b97194b732c167ec"}]}
+{"_id":{"$oid":"5aa9964eb97194b732c16989"},"vehicle_class":"walker","key":53,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c1698d"},"vehicle_class":"assault walker","key":18,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16990"},"vehicle_class":"airspeeder","key":46,"__v":1,"pilot_keys":[11],"pilots":[{"$oid":"5aa995a3b97194b732c167ad"}]}
+{"_id":{"$oid":"5aa9964eb97194b732c1698f"},"vehicle_class":"gunship","key":50,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16991"},"vehicle_class":"landing craft","key":37,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c1698e"},"vehicle_class":"transport","key":56,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16992"},"vehicle_class":"starfighter","key":57,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16994"},"vehicle_class":"droid starfighter","key":67,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16995"},"vehicle_class":"walker","key":76,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16993"},"vehicle_class":"airspeeder","key":73,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16996"},"vehicle_class":"airspeeder","key":69,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16997"},"vehicle_class":"wheeled walker","key":71,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16999"},"vehicle_class":"fire suppression ship","key":62,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c1699a"},"vehicle_class":"air speeder","key":70,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c16998"},"vehicle_class":"droid tank","key":72,"__v":1,"pilot_keys":[],"pilots":[]}
+{"_id":{"$oid":"5aa9964eb97194b732c1699b"},"vehicle_class":"wheeled walker","key":60,"__v":1,"pilot_keys":[79],"pilots":[{"$oid":"5aa995a3b97194b732c167f6"}]}
