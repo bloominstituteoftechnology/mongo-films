@@ -8,6 +8,7 @@ const router = express.Router();
 // add endpoints here
 router.get('/:id', (req, res) => {
   const id = req.params.id;
+  const height = req.params.height;
 
   Character.findOne({ _id: id })
     .populate('homeworld')
@@ -24,13 +25,36 @@ router.get('/:id', (req, res) => {
 router.get('/:id/vehicles', (req, res) => {
   const id = req.params.id;
 
-  Vehicle.find({}).where({ pilots: id })
+  Vehicle.find({})
+    .select('vehicle_class pilots').where({ pilots: id })
+    .exec()
     .then (vehicle => {
       res.status(200).json(vehicle);
     })
     .catch(error => {
       console.log(error);
       res.status(500).json({ error: 'There was an error while retrieving the vehicles from the database.' });
+    });
+});
+
+router.get('/', (req, res) => {
+  const heightFilter = req.query.height;
+
+  let query = Character.find({ gender: 'female' }).sort('name');
+
+  Character.find({})
+    .sort('name')
+    .exec()
+      if (heightFilter) {
+        query.select('gender height name').or({ height: { $gt: 100 } });
+      } 
+
+    query.then(female => {
+      res.status(200).json(female);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'There was an error while retrieving the films from the database.' });
     });
 });
 
