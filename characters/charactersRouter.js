@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', function(req,res) {
   Character.find({})
   .sort('key')
-  .select('name')
+  .populate('homeworld')
   .then(characters => {
     res.json(characters);
   })
@@ -14,6 +14,7 @@ router.get('/', function(req,res) {
 router.get('/:_id', function(req,res) {
 	const id = req.params._id;
   Character.findOne({_id: id})
+  .populate('homeworld')
   .then(character => {
     res.json(character);
   })
