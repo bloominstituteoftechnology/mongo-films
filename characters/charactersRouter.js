@@ -1,20 +1,30 @@
 const express = require('express');
 
 const Character = require('./Character.js');
-const Vehicle = require('../vehicles/Vehicle.js')
+const Film = require('../films/Film.js');
+const Vehicle = require('../vehicles/Vehicle.js');
 
 const router = express.Router();
 
 // add endpoints here
 router.get('/:id', (req, res) => {
   const id = req.params.id;
-  const height = req.params.height;
 
-  Character.findOne({ _id: id })
+  Character.findById(id)
     .populate('homeworld')
+    .populate('movies')
     .exec()
     .then(char => {
-      res.status(200).json(char);
+      Film.find({ characters: id })
+        .select('title')
+        .then(films => {
+          const character = { ...char._doc, movies: films };
+          res.status(200).json(character);
+        })
+        .catch(error => {
+          console.log(error);
+          res.status(500).json({ error: 'There was an error while retrieving the character from the database.' });
+        });
     })
     .catch(error => {
       console.log(error);
