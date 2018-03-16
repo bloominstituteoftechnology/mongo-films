@@ -16,7 +16,8 @@ const Specie = new mongoose.Schema({
   average_height: String,
   key: { type: Number, unique: true },
   homeworld_key: Number,
-  homeworld: { type: ObjectId, ref: 'Planet' }
+  homeworld: { type: ObjectId, ref: 'Planet' },
+  characters: [{ type: ObjectId, ref: 'Character'}],
 });
 
 module.exports = mongoose.model('Specie', Specie);

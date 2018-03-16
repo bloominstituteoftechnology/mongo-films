@@ -30,9 +30,8 @@ router.get('/:id', function(req, res) {
       Film.find({ character_ids: id })
         .select('title producer director ')
         .then(films => {
-          const character = { ...char._doc, movies: films};
-
-          res.send(character);
+          const character = { ...char._doc, movies: films };
+          res.json(character);
         });
     });
   });

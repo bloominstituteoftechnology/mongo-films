@@ -21,7 +21,7 @@ server.use(express.json());
 
 server.use('/api/characters', charactersRouter);
 server.use('/api/films', filmsRouter);
-server.use('/api/specie', speciesRouter);
+server.use('/api/species', speciesRouter);
 server.use('/api/starships', starshipsRouter);
 server.use('/api/vehicles', vehiclesRouter);
 server.use('/api/planets', planetsRouter);
