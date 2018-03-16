@@ -28,7 +28,7 @@ router.get('/:id', function(req, res) {
     .populate('homeworld', 'name terrain climate diameter gravity')
     .then(char => {
       Film.find({ character_ids: id })
-        .select('title producer director ')
+        .select('title producer director')
         .then(films => {
           const character = { ...char._doc, movies: films };
           res.json(character);
