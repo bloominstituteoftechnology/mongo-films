@@ -7,11 +7,11 @@ const Film = require('../films/Film.js');
 const router = express.Router();
 
 router.get('/', function(req, res) {
-  const { minheight } = req.query
+  const heightCheck = parseInt(req.query.minheight)
 
   const query = Character.find({})
   if (req.query.minheight) {
-    query.where({ height: 188 })
+    query.find({ height: { $gt: Number(heightCheck) }, gender: 'female' });
   }
 
   query.then(characters => {
