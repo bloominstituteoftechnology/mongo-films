@@ -16,7 +16,11 @@ const Specie = new mongoose.Schema({
   average_height: String,
   key: { type: Number, unique: true },
   homeworld_key: Number,
-  // add homeworld field that links the specie to it's native planet
+  film: [{ type: ObjectId, ref: 'Film'}],
+  starships: [{ type: ObjectId, ref: 'Starship' }],
+  vehicles: [{ type: ObjectId, ref: 'Vehicle' }],
+  planets: [{ type: ObjectId, ref: 'Planet' }],
+  characters: [{ type: ObjectId, ref: 'Character' }],
 });
 
 module.exports = mongoose.model('Specie', Specie);
