@@ -8,17 +8,40 @@ const router = express.Router();
 router
     .route("/")
     .get((req, res) => {
-        Film.find({})
-            .then(item => {
-                console.log("Get Request From " + req.connection.remoteAddress + " at: "
-                    + (time = new Date()));
-                res.status(200).json(item);
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json(err);
-            });
-    })
 
+        const { producer, release_date } = req.query;
+
+        const queryByProducer = Film.find({})
+            .sort('episode')
+            .populate('characters', 'name gender height skin_color hair_color eye_color')
+            .populate('planets', 'name climate terrain gravity diameter')
+
+        const queryByDate = Film.find({})
+            .sort('episode')
+            .populate('characters', 'name gender height skin_color hair_color eye_color')
+            .populate('planets', 'name climate terrain gravity diameter')
+
+        if (producer) {
+            const person = new RegExp(producer, 'i');
+            console.log("Finding movies with producer " + producer)
+            queryByProducer.where({ producer: person });
+            
+            Promise.all([queryByProducer])
+            .then(films =>{
+                res.status(200).json(films);
+            })
+        }
+
+        if (release_date) {
+            const date = new RegExp(release_date)
+            console.log("Finding movies with release date of " + release_date)
+            queryByDate.where({ release_date: date });
+
+            Promise.all([release_date])
+            .then(films =>{
+                res.status(200).json(films);
+            })
+        }
+    });
 
 module.exports = router;
