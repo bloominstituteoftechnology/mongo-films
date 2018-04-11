@@ -2,6 +2,7 @@ const express = require('express');
 
 const Character = require('./Character.js');
 const Film = require('../films/Film.js');
+const Vehicle = require('../vehicles/Vehicle');
 
 const router = express.Router();
 
@@ -71,9 +72,5 @@ router
                 res.status(500).json(err);
             })
     })
-
-
-
-
 
 module.exports = router;
