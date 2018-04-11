@@ -10,7 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/LambdaSchool/mongo-iv.git"
   },
-  "keywords": ["mongo"],
+  "keywords": [
+    "mongo"
+  ],
   "author": "Lambda School",
   "license": "ISC",
   "bugs": {
