@@ -9,8 +9,8 @@ router
     .get((req, res)=> {
         Film.find({})
         .sort({episode: 'ascending'})
-        // .populate('characters')
-        // .select({ name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1 })
+        .populate('characters', { name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1  })
+        // .select({ name: 1, })
         .then(films => {
             res.status(200).json(films);
         })
