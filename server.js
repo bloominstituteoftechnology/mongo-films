@@ -1,5 +1,6 @@
 const express = require('express');
 const helmet = require('helmet');
+const logger = require('morgan');
 
 const db = require('./data/db.js');
 const charactersRouter = require('./characters/charactersRouter.js');
@@ -16,6 +17,7 @@ db
   .then(() => console.log('\n... API Connected to Database ...\n'))
   .catch(err => console.log('\n*** ERROR Connecting to Database ***\n', err));
 
+server.use(logger('dev'));
 server.use(helmet());
 server.use(express.json());
 
