@@ -9,6 +9,8 @@ const router = express.Router();
 router
   .route('/')
   .get((req, res) => {
+    const { producer, released } = req.query;
+
     Film.find()
       .sort('episode')
       .populate(
@@ -17,6 +19,16 @@ router
       )
       .populate('planets', `name climate terrain gravity diameter`)
       .then(films => {
+        if (producer) {
+          films = films.filter(film =>
+            film.producer.toLowerCase().includes(producer.toLowerCase())
+          );
+        }
+        if (released) {
+          films = films.filter(
+            film => film.release_date.slice(0, 4) === released
+          );
+        }
         res.json(films);
       })
       .catch(error => {
