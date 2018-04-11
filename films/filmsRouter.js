@@ -6,7 +6,16 @@ const router = express.Router();
 
 // add endpoints here
 router.route("/").get((req, res) => {
+  let { producer, released } = req.query;
+  let producerR, releasedR;
+  if (producer) {
+    producerR = new RegExp(producer, "i");
+  }
+  if (released) {
+    releasedR = new RegExp(released, "i");
+  }
   Film.find({})
+    .where({ $or: [{ producer: producerR }, { release_date: releasedR }] })
     .sort({ episode: -1 })
     .populate("characters", {
       _id: 1,
@@ -24,7 +33,9 @@ router.route("/").get((req, res) => {
       gravity: 1,
       diameter: 1
     })
-    .then(films => res.status(200).json(films));
+    .then(films => {
+      res.status(200).json(films);
+    });
 });
 
 module.exports = router;
