@@ -15,6 +15,7 @@ router
             .populate('homeworld')
             .then(movieList => {
                 let key = movieList.key;
+                
                 Film
                     .find({ character_ids: key})
                     .then(films => {
@@ -40,7 +41,9 @@ router
             .findById(req.params.id)
             .then(vehicleList => {
                 let key = vehicleList.key;
-                Vehicle.find({ pilot_keys: key })
+
+                Vehicle
+                    .find({ pilot_keys: key })
                     .then(vehicles => {
                         res.status(200).json(vehicles)
                     })
