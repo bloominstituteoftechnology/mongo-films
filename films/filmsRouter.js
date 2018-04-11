@@ -8,7 +8,7 @@ const router = express.Router();
 router
   .route('/')
   .get((req, res) => {
-    Film.find({})
+    let query = Film.find({})
       .sort({ key: 1 })
       .populate('characters', {
         _id: 1,
@@ -25,13 +25,28 @@ router
         terrain: 1,
         gravity: 1,
         diameter: 1,
-      })
-      .then(films => {
-        res.status(200).json(films);
-      })
-      .catch(err => {
-        res.status(500).json(err);
       });
+
+    const { producer } = req.query;
+    console.log('producer', producer);
+
+    if (producer) {
+      const regex = new RegExp(producer, 'i');
+      query
+        .where({ producer: regex })
+        .then(films => {
+          res.status(200).json(films);
+        })
+        .catch(err => res.status(500).json(err));
+    } else {
+      query
+        .then(films => {
+          res.status(200).json(films);
+        })
+        .catch(err => {
+          res.status(500).json(err);
+        });
+    }
   })
   .post((req, res) => {
     const film = new Film(req.body);
