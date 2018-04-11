@@ -15,7 +15,8 @@ router
             .populate('homeworld')
             .then(movieList => {
                 let key = movieList.key;
-                Film.find({ character_ids: key})
+                Film
+                    .find({ character_ids: key})
                     .then(films => {
                         movieList.movies = films;
                     })
@@ -63,9 +64,11 @@ router
             .find({})
 
             if (heightQuery) {
-                query.find({ height: { $gt: Number(heightQuery) }, gender: 'female' })
+                query
+                    .find({ height: { $gt: Number(heightQuery) }, gender: 'female' })
             }
-            query.then(characters => {
+            query
+                .then(characters => {
                 res.status(200).json(characters);
             })
             .catch(err => {
