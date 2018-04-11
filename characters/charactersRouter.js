@@ -19,6 +19,13 @@ router
       })
       .catch(serverError);
   })
-  .post();
+  .post((req, res) => {
+    const { body } = req;
+    Character.create(body)
+      .then(response => {
+        res.json(response);
+      })
+      .catch(err => res.status(500).json(err));
+  });
 
 module.exports = router;
