@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Planet = require('../planets/Planet');
+const Film = require('../films/Film');
 
 const Character = mongoose.Schema({
   name: { type: String, required: true },
@@ -18,6 +19,10 @@ const Character = mongoose.Schema({
   homeworld: [{
     type: ObjectId,
     ref: 'Planet'
+  }],
+  movies: [{
+    type: ObjectId,
+    ref: 'Film'
   }]
 });
 
