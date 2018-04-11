@@ -22,7 +22,7 @@ router
   .route('/:id')
   .get((req, res) => {
     Character.findById(req.params.id)
-      .populate('roles', { name: 1, _id: 0 })
+      .populate('homeworld',  'name climate surface_water diameter rotation_period terrain gravity orbital_period ')
       .then(user => {
         res.status(200).json(user);
       })
