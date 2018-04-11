@@ -1,17 +1,19 @@
 const mongoose = require('mongoose');
-
-const Planet = new mongoose.Schema({
-  edited: { type: Date, default: Date.now },
-  climate: String,
-  surface_water: String,
-  name: { type: String, required: true, index: true },
-  diameter: String,
-  rotation_period: String,
-  created: { type: Date, default: Date.now },
-  terrain: String,
-  gravity: String,
-  orbital_period: String,
+const ObjectId = mongoose.Schema.Types.ObjectId;
+const Planets = require('../planets/Planet');
+const Character = mongoose.Schema({
+  name: { type: String, required: true },
+  edited: Date,
+  created: Date,
+  gender: String,
+  height: String,
+  hair_color: String,
+  skin_color: String,
+  eye_color: String,
+  birth_year: String,
   key: { type: Number, unique: true },
+  homeworld_key: Number,
+  // add homeworld field that links the character to it's planet
+  homeworld: [{ type: ObjectId, ref: 'Planet' }],
 });
-
-module.exports = mongoose.model('Planet', Planet);
+module.exports = mongoose.model('Character', Character);
