@@ -19,10 +19,7 @@ router
                 Character
                     .find({ homeworld_key: key})
                     .then(actors => {
-                        characterList.characters = actors;
-                    })
-                    .then(() => {
-                        res.status(200).json(characterList)
+                        res.status(200).json(actors)
                     })
                     .catch(err => {
                         res.status(500).json(err);
@@ -34,10 +31,7 @@ router
                 Specie
                     .find({ homeworld_key: key })
                     .then(species => {
-                        speciesList.species = species;
-                    })
-                    .then(() => {
-                        res.status(200).json(speciesList)
+                        res.status(200).json(species)
                     })
                     .catch(err => {
                         res.status(500).json(err)
