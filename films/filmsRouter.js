@@ -23,24 +23,38 @@ router
 
         if (producer) {
             const person = new RegExp(producer, 'i');
-            console.log("Finding movies with producer " + producer)
+            console.log("Finding movies with producer " + producer + ".")
             queryByProducer.where({ producer: person });
-            
+
             Promise.all([queryByProducer])
-            .then(films =>{
-                res.status(200).json(films);
-            })
+                .then(films => {
+                    res.status(200).json(films);
+                })
+            return;
         }
 
         if (release_date) {
             const date = new RegExp(release_date)
-            console.log("Finding movies with release date of " + release_date)
+            console.log("Finding movies with release date of " + date + ".")
             queryByDate.where({ release_date: date });
 
-            Promise.all([release_date])
-            .then(films =>{
-                res.status(200).json(films);
-            })
+            Promise.all([queryByDate])
+                .then(films => {
+                    res.status(200).json(films);
+                })
+            return;
+        }
+        else {
+            console.log("Finding all movies.");
+            Film.find({})
+                .then(item => {
+                    res.status(200).json(item)
+                })
+                .catch(err => {
+                    console.log(err)
+                    res.status(500).json(err);
+                })
+            return;
         }
     });
 
