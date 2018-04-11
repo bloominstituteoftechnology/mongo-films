@@ -29,7 +29,7 @@ router
     //! Debug *** Query Testing
     const { producer, released } = req.query;
     console.log('producer', producer);
-
+    //TODO Is There A Better Way?
     if (producer) {
       const regex = new RegExp(producer, 'i');
       query
