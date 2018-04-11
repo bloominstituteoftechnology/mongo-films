@@ -19,14 +19,15 @@ router
 router
     .route('/:id')
     .get((req, res)=> {
+      const id = req.params.id;
         Film.find({})
         .where({ key: `${id}` })
         .then(film => {
             res.status(200).json(film);
         })
+        .catch(err => {
+          res.status(500).json(err);
+        })
     })
-    // .catch(err => {
-    //     res.status(500).json(err);
-    // })    
 
 module.exports = router;
