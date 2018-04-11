@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
+const CharacterModel = mongoose.model('Character');
 
 const Film = new mongoose.Schema({
   created: { type: Date, default: Date.now },
@@ -16,6 +17,9 @@ const Film = new mongoose.Schema({
   key: { type: Number, unique: true },
   starship_ids: [Number],
   vehicle_ids: [Number],
+
+  characters: [{type: mongoose.Schema.Types.ObjectId, ref: 'Character'}]
+  
   // add fields for starships, vehicles, planets, characters and species
   // to link them to the corresponding model
 });
