@@ -19,20 +19,22 @@ router
                 .sort('episode')
                 .populate('characters', 'name gender height skin_color hair_color eye_color')
                 .populate('planets', 'name climate terrain gravity diameter')
-                .select('title producer')
+                .select('title producer release_date')
 
         if (producerFilter) {
             query
                 .where({ producer: /gary kurtz/i })
-        } else if (releasedFilter) {
+        } 
+        
+        if (releasedFilter) {
             query
                 .where({ release_date: /2005/i })
-        } else {
-            query
-                .then(films => {
-                    res.json(films)
-                })
-        }
+        } 
+
+        query
+            .then(films => {
+                res.json(films)
+            })
     })
 
 
