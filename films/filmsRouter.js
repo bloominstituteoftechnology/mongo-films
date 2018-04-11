@@ -6,7 +6,18 @@ const router = express.Router();
 
 // add endpoints here
 router.route('/').get((req, res) => {
-  Film.find()
+  const { producer, released } = req.query;
+  let pattern;
+  let obj = {};
+  if (producer) {
+    pattern = new RegExp(producer, 'i');
+    obj = { producer: pattern };
+  }
+  if (released) {
+    pattern = new RegExp(released);
+    obj = { release_date: pattern };
+  }
+  Film.find(obj)
     .sort({ episode: 1 })
     .populate('characters', {
       _id: 1,
