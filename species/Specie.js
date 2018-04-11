@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Planet = require('../planets/Planet');
+const Character = require('../characters/Character');
 
 const Specie = new mongoose.Schema({
   edited: { type: Date, default: Date.now },
@@ -21,6 +22,10 @@ const Specie = new mongoose.Schema({
   homeworld: [{
     type: ObjectId,
     ref: "Planet"
+  }],
+  characters: [{
+    type: ObjectId,
+    ref: "Character"
   }]
 });
 

@@ -15,7 +15,7 @@ router
             .populate('homeworld')
             .then(movieList => {
                 let key = movieList.key;
-                
+
                 Film
                     .find({ character_ids: key})
                     .then(films => {

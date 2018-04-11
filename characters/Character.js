@@ -3,6 +3,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Planet = require('../planets/Planet');
 const Film = require('../films/Film');
+const Vehicle = require('../vehicles/Vehicle');
 
 const Character = mongoose.Schema({
   name: { type: String, required: true },
@@ -23,6 +24,10 @@ const Character = mongoose.Schema({
   movies: [{
     type: ObjectId,
     ref: 'Film'
+  }],
+  vehicles: [{
+    type: ObjectId,
+    ref: 'Vehicle'
   }]
 });
 
