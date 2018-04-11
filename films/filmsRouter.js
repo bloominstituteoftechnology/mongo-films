@@ -26,14 +26,22 @@ router
         gravity: 1,
         diameter: 1,
       });
-
-    const { producer } = req.query;
+    //! Debug *** Query Testing
+    const { producer, released } = req.query;
     console.log('producer', producer);
 
     if (producer) {
       const regex = new RegExp(producer, 'i');
       query
         .where({ producer: regex })
+        .then(films => {
+          res.status(200).json(films);
+        })
+        .catch(err => res.status(500).json(err));
+    } else if (released) {
+      const regex = new RegExp(released, 'i');
+      query
+        .where({ release_date: regex })
         .then(films => {
           res.status(200).json(films);
         })
