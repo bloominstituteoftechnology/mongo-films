@@ -8,14 +8,14 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {    
-      Film.find({})   
-        .then(films => {
-          res.send(films);
+      Vehicle.find({})   
+        .then(vehicles => {
+          res.send(vehicles);
         })
         .catch(err => {
           res.status(500).send({ error: err });
         });
     
     });
-    
+
 module.exports = router;
