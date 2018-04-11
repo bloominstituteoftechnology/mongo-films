@@ -20,7 +20,7 @@ const Film = new mongoose.Schema({
   // to link them to the corresponding model
   starships: [{ type: ObjectId, ref: 'Starship' }],
   vehicles: [{ type: ObjectId, ref: 'Vehicle' }],
-  planet: [{ type: ObjectId, ref: 'Planet' }],
+  planets: [{ type: ObjectId, ref: 'Planet' }],
   characters: [{ type: ObjectId, ref: 'Character' }],
   pilots: [{ type: ObjectId, ref: 'Pilot' }]
 });
