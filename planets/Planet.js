@@ -13,10 +13,6 @@ const Planet = new mongoose.Schema({
   gravity: String,
   orbital_period: String,
   key: { type: Number, unique: true },
-  characters: [{ type: ObjectId, ref: 'Character' }],
-  species: [{ type: ObjectId, ref: 'Specie' }],
-  character_ids: [Number],
-  specie_ids: [Number],
 });
 
 module.exports = mongoose.model('Planet', Planet);

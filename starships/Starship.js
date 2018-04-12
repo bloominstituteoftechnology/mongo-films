@@ -9,7 +9,6 @@ const Starship = new mongoose.Schema({
   key: { type: Number, unique: true },
   // add pilots field to lik the ship to the characters model
   pilots: [{ type: ObjectId, ref: 'Character' }],
-  pilot_ids: [Number],
 });
 
 module.exports = mongoose.model('Starship', Starship);
