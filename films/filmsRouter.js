@@ -7,9 +7,9 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {
-        const { producer, release_date } = req.query;
+        const { producer, released } = req.query;
         const producerReg = new RegExp(producer, 'i');
-        const releasedReg = new RegExp(release_date, 'i');
+        const releasedReg = new RegExp(released, 'i');
         Film.find({})
         .sort('episode')
         .populate('characters', '_id name gender height skin_color hair_color eye_color')

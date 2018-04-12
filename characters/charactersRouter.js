@@ -7,8 +7,11 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {
+        //const { minheight } = req.query
+        //const heightReg = new RegExp(minheight, 'i')
         Character.find({})
         .sort('episode')
+       //.where({ height: heightReg, }
         .then(character => {
             res.status(200).json(character);
         })
