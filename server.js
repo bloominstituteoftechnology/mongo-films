@@ -1,5 +1,8 @@
 const express = require('express');
 const helmet = require('helmet');
+const cors = require('cors');
+
+const mongoose = require('mongoose');
 
 const db = require('./data/db.js');
 const charactersRouter = require('./characters/charactersRouter.js');
@@ -17,6 +20,7 @@ db
   .catch(err => console.log('\n*** ERROR Connecting to Database ***\n', err));
 
 server.use(helmet());
+server.use(cors());
 server.use(express.json());
 
 server.use('/api/characters', charactersRouter);
