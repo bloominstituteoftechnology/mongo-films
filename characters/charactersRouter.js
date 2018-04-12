@@ -6,7 +6,7 @@ const router = express.Router();
 
 router
     .route('/')
-    .get((req, res)=> {
+    .get((req, res) => {
         Character.find({})
         .then(characters => {
             res.status(200).json(characters);
@@ -18,11 +18,12 @@ router
 
 router
     .route('/:id')
-    .get((req, res)=> {
+    .get((req, res) => {
       const id = req.params.id;
-      
+
         Character.find({})
         .where({ key: `${id}` })
+        .populate('homeworld')
         .then(character => {
             res.status(200).json(character);
         })

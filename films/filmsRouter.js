@@ -8,10 +8,10 @@ router
     .route('/')
     .get((req, res) => {
 
-      if (Object.keys(req.query).length > 0) {
+      if (Object.keys(req.query).length > 0) {    // check if query object is empty or not
         let { producer, released } = req.query;
 
-        if (!released) {
+        if (!released) {    // if released is undefined, filter by producer
           const regex = new RegExp(producer, 'i');
 
           Film.find({})
@@ -25,7 +25,7 @@ router
               .catch(err => {
                 res.status(500).json(err);
               })
-            } else {
+            } else {    // released is defined, filter by that instead
               const regex = new RegExp(released, 'i');
 
               Film.find({})
@@ -41,7 +41,7 @@ router
                 res.status(500).json(err);
               })
             }
-          } else {
+          } else {  // otherwise, grab all the films
 
         Film.find({})
         .sort({ episode: 'ascending' })
