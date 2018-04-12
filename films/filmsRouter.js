@@ -9,7 +9,7 @@ router
     .get((req, res) => {
 
       if (Object.keys(req.query).length > 0) {        // check if query object is empty or not
-        let { producer, released } = req.query;  // { query: value } - ?query=value
+        let { producer, released } = req.query;       // { query: value } - ?query=value
         let query = req.query;
 
         if (!released) {                              // if released is undefined, filter by producer
@@ -17,7 +17,7 @@ router
           query.producer = regex;
         } else {                                      // released is defined, filter by that instead
           const regex = new RegExp(released, 'i');
-          query.released = regex;
+          query = { release_date: regex };
         }
 
           Film.find({})
@@ -53,7 +53,7 @@ router
     .route('/:id')
     .get((req, res) => {
       let id = req.params.id;
-      id++; 
+      id++;
         Film.find({})
         .where({ key: `${id}` })
         .then(film => {
