@@ -8,7 +8,23 @@ const router = express.Router();
 router
   .route('/')
   .get((req, res) => {
-    Film.find({}).populate('starships vehicles')
+    const producer = req.query.producer;
+    const date = req.query.date;
+
+    let filter = {};
+    let filtered;
+
+    if(producer) {
+      filtered = new RegExp(producer, 'i');
+      filter = { producer: filtered };
+    }
+
+    if (date) {
+      filtered = new RegExp(date, 'i');
+      filter = { release_date: filtered };
+    }
+
+    Film.find(filter).populate('starships vehicles')
       .populate({ path: 'characters', select: 'hair_color name gender height skin_color eye_color'})
       .populate({ path: 'planets', select: 'name climate terrain gravity diameter' })
       .then(films => {
@@ -18,12 +34,12 @@ router
         res.status(500).json({ error: err});
       });
   })
-  
+
 router
   .route('/:id')
   .get((req, res) => {
     const { id } = req.params;
-    
+
     Film.findById(id)
     .then(film => {
       res.status(200).json(film);
@@ -32,20 +48,23 @@ router
       res.status(500).json(err);
     })
   })
-  
-let gary = new RegExp('../films?producer=gary+kurtz')
 
+// let gary = new RegExp('../films?producer=gary+kurtz')
+//localhost:5000/api/films?producer=gary+kurtz
+// localhost:5000/api/films?producer=gary+kurtz
 router
-  .route(gary)
+  .route('/')
   .get((req, res) => {
-    Film.find({}).where({producer: { $regex: /Gary Kurtz/ } })
+    const producer = req.query.producer;
+    const filtered = new RegExp(producer, i);
+    Film.find({}).where({ producer: filtered })
     .then(response => {
       res.status(200).json(response);
     })
     .catch(err => {
       res.status(500).json(err);
     })
-    
   })
+
 
 module.exports = router;
