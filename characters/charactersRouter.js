@@ -12,13 +12,32 @@ const router = express.Router();
 router
 .route('/')
 .get( (req,res)=>{
-  Character.find({})
-  .then( characters=>{
-    res.status(200).json(characters);
-  })
-  .catch( err=>{
-    res.status(500).json(err);
-  });
+  if( Object.keys(req.query).length > 0){
+    if(req.query.minheight){
+      Character.find({})
+      .then(response=>{
+        let characters = response.filter(e=>{
+          return (parseInt(e.height) >= parseInt(req.query.minheight) && e.gender === "female")
+        });
+        res.status(200).json(characters);
+      })
+      .catch(err=>{
+        res.status(500).json(err);
+      });
+    }
+    else{
+      res.status(500).send("invalid request");
+    }
+  }
+  else{
+    Character.find({})
+    .then( characters=>{
+      res.status(200).json(characters);
+    })
+    .catch( err=>{
+      res.status(500).json(err);
+    });
+  }
 })
 .post( (req,res)=>{
   const person = new Character(req.body);
