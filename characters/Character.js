@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require(`mongoose`);
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Character = mongoose.Schema({
@@ -16,4 +16,4 @@ const Character = mongoose.Schema({
   // add homeworld field that links the character to it's planet
 });
 
-module.exports = mongoose.model('Character', Character);
+module.exports = mongoose.model(`Character`, Character);

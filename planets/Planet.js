@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require(`mongoose`);
 
 const Planet = new mongoose.Schema({
   edited: { type: Date, default: Date.now },
@@ -14,4 +14,4 @@ const Planet = new mongoose.Schema({
   key: { type: Number, unique: true },
 });
 
-module.exports = mongoose.model('Planet', Planet);
+module.exports = mongoose.model(`Planet`, Planet);

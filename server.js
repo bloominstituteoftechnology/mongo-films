@@ -1,32 +1,45 @@
-const express = require('express');
-const helmet = require('helmet');
+const express = require(`express`);
+const morgan = require(`morgan`);
+const helmet = require(`helmet`);
+const cors = require(`cors`);
 
-const db = require('./data/db.js');
-const charactersRouter = require('./characters/charactersRouter.js');
-const filmsRouter = require('./films/filmsRouter.js');
-const speciesRouter = require('./species/speciesRouter.js');
-const starshipsRouter = require('./starships/starshipsRouter.js');
-const vehiclesRouter = require('./vehicles/vehiclesRouter.js');
-const planetsRouter = require('./planets/planetsRouter.js');
+const db = require(`./data/db.js`);
+const charactersRouter = require(`./characters/charactersRouter.js`);
+const filmsRouter = require(`./films/filmsRouter.js`);
+const speciesRouter = require(`./species/speciesRouter.js`);
+const starshipsRouter = require(`./starships/starshipsRouter.js`);
+const vehiclesRouter = require(`./vehicles/vehiclesRouter.js`);
+const planetsRouter = require(`./planets/planetsRouter.js`);
 
 const server = express();
 
 db
-  .connectTo('starwars')
-  .then(() => console.log('\n... API Connected to Database ...\n'))
-  .catch(err => console.log('\n*** ERROR Connecting to Database ***\n', err));
+  .connectTo(`starwars`)
+  .then(() => console.log(`\n... API Connected to Database ...\n`))
+  .catch(err => console.log(`\n*** ERROR Connecting to Database ***\n`, err));
 
+server.use(morgan(`dev`));
 server.use(helmet());
 server.use(express.json());
 
-server.use('/api/characters', charactersRouter);
-server.use('/api/films', filmsRouter);
-server.use('/api/species', speciesRouter);
-server.use('/api/starships', starshipsRouter);
-server.use('/api/vehicles', vehiclesRouter);
-server.use('/api/planets', planetsRouter);
+//cross origin request sharing permissions
+const corsOptions = {
+  origin: `*`,
+  //methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
+  methods: `GET`,
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+server.use(cors(corsOptions));
 
-server.get('/', (req, res) => res.send('API Running...'));
+server.use(`/api/characters`, charactersRouter);
+server.use(`/api/films`, filmsRouter);
+server.use(`/api/species`, speciesRouter);
+server.use(`/api/starships`, starshipsRouter);
+server.use(`/api/vehicles`, vehiclesRouter);
+server.use(`/api/planets`, planetsRouter);
+
+server.get(`/`, (req, res) => res.send(`API Running...`));
 
 const port = process.env.PORT || 5000;
 server.listen(port, () =>
