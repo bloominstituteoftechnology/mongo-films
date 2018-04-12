@@ -1,5 +1,6 @@
 const express = require('express');
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 const Character = require('./Character.js');
 
 const router = express.Router();
@@ -30,7 +31,16 @@ router
 router
 .route('/:id')
 .get( (req,res)=>{
-  Character.findById(req.params.id,req.body)
+  Character.findById(req.params.id)
+  .then(response=>{
+    res.status(200).json(response);
+  })
+  .catch(err=>{
+    res.status(500).json(err);
+  });
+})
+.delete( (req,res)=>{
+  Character.findById(req.params.id).remove()
   .then(response=>{
     res.status(200).json(response);
   })
@@ -39,8 +49,12 @@ router
   });
 })
 .put((req,res)=>{
-  Character.findOneAndUpdate(req.params.id,req.body)
-  .then(response=>res.status(201).json(response))
-  .catch(err=>{res.status(500).json(err);});
+  Character.findOneAndUpdate(new ObjectId(req.params.id),req.body,{upsert:false})
+  .then(response=>{
+    res.status(200).json(response);
+  })
+  .catch(err=>{
+    res.status(500).json(err);
+  });
 });
 module.exports = router;
