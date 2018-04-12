@@ -7,7 +7,7 @@ const router = express.Router();
 // /api/films
 
 router.route("/").get((req, res) => {
-    let query;
+    // let query;
     const { producer, released } = req.query;
     if (producer) {
         const regex = new RegExp(producer, "i");

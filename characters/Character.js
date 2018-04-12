@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const Planets = require("../planets/Planet");
+const Films = require("../films/Film");
 
 const Character = mongoose.Schema({
     name: { type: String, required: true },
