@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
+const Character = require('../characters/Character');
+const Starship = require('../starships/Starship');
+const Vehicle = require('../vehicles/Vehicles');
+const Planet = require('../planets/Planet');
+const Specie = require('../species/Specie');
+
 const Film = new mongoose.Schema({
   created: { type: Date, default: Date.now },
   episode: Number,
