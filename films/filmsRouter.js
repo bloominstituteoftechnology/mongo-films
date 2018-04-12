@@ -7,10 +7,13 @@ const router = express.Router();
 // add endpoints here
 
 // READ Films
-
 router.route('/').get((req, res) => {
+  const { producer, release_date } = req.query;
+  const producerRegex = new RegExp(producer, 'i');
+  const releasedRegex = new RegExp(release_date, 'i');
+
   Film.find({})
-    .sort('episode')
+    .sort({ episode: 1 })
     .populate('characters', {
       _id: 1,
       name: 1,
@@ -27,6 +30,8 @@ router.route('/').get((req, res) => {
       diameter: 1,
       _id: 0
     })
+    .where({ producer: producerRegex })
+    .where({ release_date: releasedRegex })
     .then(films => {
       res.status(200).json(films);
     })
