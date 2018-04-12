@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const Character = require('./Character.js');
+const Vehicle = require('../vehicles/Vehicle.js');
 
 const router = express.Router();
 
@@ -51,6 +52,18 @@ router
 })
 .put((req,res)=>{
   Character.findOneAndUpdate(new ObjectId(req.params.id),req.body,{upsert:false})
+  .then(response=>{
+    res.status(200).json(response);
+  })
+  .catch(err=>{
+    res.status(500).json(err);
+  });
+});
+router
+.route('/:id/vehicles')
+.get( (req,res)=>{
+  const id = new ObjectId(req.params.id);
+  Vehicle.find({pilots:id})
   .then(response=>{
     res.status(200).json(response);
   })
