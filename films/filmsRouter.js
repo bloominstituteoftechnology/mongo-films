@@ -5,9 +5,10 @@ const Film = require('./Film.js');
 const router = express.Router();
 
 router
-    .route('/')
+    .route('/:id?')
     .get((req, res) => {
-        if(Object.keys(req.query).length > 0) {
+      const { id } = req.params;
+        if (Object.keys(req.query).length > 0) {
             let { producer, released } = req.query;
             if (!released) {
               const regex = new RegExp(producer, 'i');
@@ -54,24 +55,5 @@ router
         })
       }
     });
-
-router
-    .route('/:id')
-    .get((req, res) => {
-      const id = req.params.id;
-
-        Film.find({})
-        .where({ key: `${id}` })
-        .then(film => {
-            res.status(200).json(film);
-        })
-        .catch(err => {
-          res.status(500).json(err);
-        })
-    })
-
-
-
-
-
+    
 module.exports = router;
