@@ -5,7 +5,7 @@ const Vehicle = new mongoose.Schema({
   vehicle_class: String,
   pilot_keys: [Number],
   key: { type: Number, unique: true },
-  pilot: { type: ObjectId, refs: 'Character'}
+  pilots: { type: ObjectId, refs: 'Character'}
 });
 
 module.exports = mongoose.model('Vehicle', Vehicle);

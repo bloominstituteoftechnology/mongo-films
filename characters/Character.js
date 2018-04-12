@@ -13,10 +13,10 @@ const Character = mongoose.Schema({
   birth_year: String,
   key: { type: Number, unique: true },
   homeworld_key: Number,
-  homeworld: {type: ObjectId, refs: 'Planet'},
+  homeworld: [{type: ObjectId, refs: 'Planet'}],
   film_key: Number,
-  film: {type: ObjectId, refs: 'Film'},
-  vehicle: {type: ObjectId, refs: 'Vehicle'}
+  movies: [{type: ObjectId, refs: 'Film'}],
+  vehicle: [{type: ObjectId, refs: 'Vehicle'}]
   // add homeworld field that links the character to it's planet
 });
 
