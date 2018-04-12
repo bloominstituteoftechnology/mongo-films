@@ -9,7 +9,7 @@ router
     .get((req, res) => {
 
       if (Object.keys(req.query).length > 0) {        // check if query object is empty or not
-        let { producer, released } = req.query;
+        let { producer, released } = req.query;  // { query: value } - ?query=value
         let query = req.query;
 
         if (!released) {                              // if released is undefined, filter by producer
@@ -32,6 +32,7 @@ router
                 res.status(500).json(err);
               })
             }
+
         else {  // otherwise, grab all the films
 
         Film.find({})
@@ -51,8 +52,8 @@ router
 router
     .route('/:id')
     .get((req, res) => {
-      const id = req.params.id;
-
+      let id = req.params.id;
+      id++; 
         Film.find({})
         .where({ key: `${id}` })
         .then(film => {
