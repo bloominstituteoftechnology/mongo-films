@@ -9,8 +9,11 @@ const router = express.Router();
 router.route("/populate/characters").put((req, res) => {
   Specie.find({}).then(species => {
     species.map(specie => {
-      let characters = specie.character_keys.map(key => {
-        Character.find({ key: key }).then(char => console.log(char.name));
+      specie.character_keys.map(key => {
+        Character.find({ key: key }).then(char =>
+          specie.characters.push(char[0]._id)
+        );
+        Specie.save();
       });
     });
   });
