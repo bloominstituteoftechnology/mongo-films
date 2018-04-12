@@ -32,7 +32,7 @@ router
   .route('/:id')
   .get((req, res) => {
     Vehicle.findById(req.params.id)
-      // .populate('roles', { name: 1, _id: 0 })
+      // like .populate('roles', { name: 1, _id: 0 })
       .then(vehicle => {
         res.status(200).json(vehicle);
       })
