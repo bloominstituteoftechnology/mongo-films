@@ -1,7 +1,8 @@
 const express = require('express');
 
 const Character = require('./Character.js');
-const Film = require('../films/Film.js')
+const Film = require('../films/Film.js');
+const Vehicle = require('../vehicles/Vehicle');
 
 const router = express.Router();
 
@@ -23,5 +24,19 @@ router
       }).catch(err => res.status(500).json(err));
     })
 
+router
+    .route('/:id/vehicles')
+    .get((req, res) => {
+      const { id } = req.params;
+      Character
+        .findById(id)
+        .then(char => {
+          Vehicle
+            .find({pilot_keys: char.key})
+            .then(vehicles => {
+              res.status(200).json(vehicles);
+            }).catch(err => res.status(500).json(err));
+        }).catch(err => res.status(500).json(err));
+      })
 
 module.exports = router;
