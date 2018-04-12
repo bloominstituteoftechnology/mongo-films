@@ -2,6 +2,8 @@ const express = require('express');
 
 const Character = require('./Character.js');
 
+const Film = require('../films/Film.js');
+
 const router = express.Router();
 
 router
@@ -18,17 +20,15 @@ router
     })
 
 router
-    .route('/:id')
+    .route('/:name')
     .get((req, res) => {
-        let name = req.params.id;
-     
-
-        const regex = new RegExp(name, 'i');
-        
+        let name = req.params.name;
+        const regex = new RegExp(name, 'i');      
 
         Character.find({})
-        .populate('homeworld')
+        .populate('homeworld movies')
         .where({name: regex})
+    
         .then(character => {
             res.status(200).json(character);
         })
