@@ -73,4 +73,9 @@ router
       .catch(err => res.status(500).json(error));
   });
 
+router.route('/populate/characters').put((req, res) => {
+  // species.character_keys === character_key
+  // add character to species ??
+});
+
 module.exports = router;
