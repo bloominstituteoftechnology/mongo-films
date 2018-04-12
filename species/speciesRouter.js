@@ -4,7 +4,6 @@ const Specie = require('./Specie');
 
 const router = express.Router();
 
-// add endpoints here
 router.route('/').get((req, res) => {
   Specie.find({})
     .then(species => {

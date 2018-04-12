@@ -4,7 +4,6 @@ const Starship = require('./Starship');
 
 const router = express.Router();
 
-// add endpoints here
 router.route('/').get((req, res) => {
   Starship.find({})
     .then(starships => {

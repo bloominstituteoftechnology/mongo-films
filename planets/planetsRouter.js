@@ -6,7 +6,6 @@ const Specie = require('../species/Specie');
 
 const router = express.Router();
 
-// add endpoints here
 router.route('/').get((req, res) => {
   Planet.find({})
     .then(planets => {

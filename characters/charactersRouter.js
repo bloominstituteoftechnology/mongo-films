@@ -6,7 +6,6 @@ const Vehicle = require('../vehicles/Vehicle');
 
 const router = express.Router();
 
-// add endpoints here
 router.route('/').get((req, res) => {
   const { minheight } = req.query;
 
