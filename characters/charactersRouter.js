@@ -36,7 +36,7 @@ router
   .route('/:id/vehicles')
   .get((req, res) => {
     Vehicles.find( {pilots:req.params.id})
-      .populate('pilots')
+      .populate('pilots',{name:1, _id:0})
       .then(vehicles => {
         res.status(200).json(vehicles);
       })
@@ -44,24 +44,5 @@ router
         res.status(500).json(err);
       });
   })
-
-  // router
-  // .route('/:id/vehicles')
-  // .get((req, res) => {
-  //   Character.findById(req.params.id)
-  //   .then(vehicleList => {
-  //     let key = vehicleList.key;
-  //     Vehicles.find({pilot_keys: key})
-  //     .then(vehicles => {
-  //       res.status(200).json(vehicles);
-  //     })
-  //     .catch(err => {
-  //       res.status(500).json({err: "There was an error getting the vehicles from the database"});
-  //     });
-  //   })
-  //   .catch(error => {
-  //     res.status(500).json({err: "There was an error connecting to the database"});
-  //   })
-  // })
 
 module.exports = router;
