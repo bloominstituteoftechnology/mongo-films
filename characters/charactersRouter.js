@@ -2,7 +2,7 @@ const express = require("express");
 
 const mongoose = require("mongoose");
 const Character = require("./Character.js");
-const Film = require("../films/Film");
+const Films = require("../films/Film");
 const Vehicles = require("../vehicles/Vehicle");
 
 const router = express.Router();
@@ -12,7 +12,7 @@ const router = express.Router();
 router.route("/:id").get((req, res) => {
     let charFilms;
 
-    Film.find({
+    Films.find({
         characters: mongoose.Types.ObjectId(req.params.id),
     }).then(films => {
         charFilms = films.map(film => film.title);
@@ -21,9 +21,7 @@ router.route("/:id").get((req, res) => {
     Character.findById(req.params.id)
         .populate("homeworld")
         .then(character => {
-            res
-                .status(200)
-                .json({ character, movies: charFilms });
+            res.status(200).json({ character, movies: charFilms });
         })
         .catch(err => res.status(500).json(err));
 });
@@ -33,14 +31,8 @@ router.route("/:id/vehicles").get((req, res) => {
         pilots: mongoose.Types.ObjectId(req.params.id),
     })
         .then(vehicles => {
-            // console.log("+++", vehicles);
-            let vehicleClass = vehicles.map(
-                vehicle => vehicle.vehicle_class,
-            );
-            // console.log(vehicleClass);
-            res
-                .status(200)
-                .json({ vehicles: vehicleClass });
+            let vehicleClass = vehicles.map(vehicle => vehicle.vehicle_class);
+            res.status(200).json({ vehicles: vehicleClass });
         })
         .catch(err => res.status(500).json(err));
 });

@@ -10,7 +10,6 @@ const router = express.Router();
 // /api/planets/
 
 router.route("/:id").get((req, res) => {
-    // planet and all native species. (/api/planet/:id)
     let charsNames;
     let nativeSpecies;
 
