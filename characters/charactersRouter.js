@@ -20,8 +20,8 @@ router
 router
     .route('/:id')
     .get((req, res) => {
-      Character.findById(req.params.id)
-      .populate('homeworld')
+        Character.findById(req.params.id)
+        .populate('homeworld')
         .then(character => {
           res.status(200).json(character);
         })
@@ -29,5 +29,17 @@ router
           res.status(500).json({errorMessage: 'The character information could not be retrieved.'})
         })
       })
+
+router
+    .route('/:id/vehicles')
+    .get((req, res) => {
+        Character.findById(req.params.id)
+          .then(character => {
+            res.status(200).json(character);
+          })
+          .catch(err => {
+            res.status(500).json({errorMessage: 'The character information could not be retrieved.'})
+          })
+        })
 
 module.exports = router;

@@ -7,10 +7,15 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {
+        const { producer, release_date } = req.query;
+        const producerReg = new RegExp(producer, 'i');
+        const releasedReg = new RegExp(release_date, 'i');
         Film.find({})
         .sort('episode')
         .populate('characters', '_id name gender height skin_color hair_color eye_color')
         .populate('planets', 'name climate terrain gravity diameter')
+        .where({ producer: producerReg })
+        .where({ release_date: releasedReg})
         .then(films => {
             res.status(200).json(films);
         })
