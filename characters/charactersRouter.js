@@ -12,27 +12,35 @@ const router = express.Router();
 router.route("/:id").get((req, res) => {
     let charFilms;
 
-    Film.find({ characters: mongoose.Types.ObjectId(req.params.id) }).then(
-        films => {
-            charFilms = films.map(film => film.title);
-        },
-    );
+    Film.find({
+        characters: mongoose.Types.ObjectId(req.params.id),
+    }).then(films => {
+        charFilms = films.map(film => film.title);
+    });
 
     Character.findById(req.params.id)
         .populate("homeworld")
         .then(character => {
-            res.status(200).json({ character, movies: charFilms });
+            res
+                .status(200)
+                .json({ character, movies: charFilms });
         })
         .catch(err => res.status(500).json(err));
 });
 
 router.route("/:id/vehicles").get((req, res) => {
-    Vehicles.find({ pilots: mongoose.Types.ObjectId(req.params.id) })
+    Vehicles.find({
+        pilots: mongoose.Types.ObjectId(req.params.id),
+    })
         .then(vehicles => {
             // console.log("+++", vehicles);
-            let vehicleClass = vehicles.map(vehicle => vehicle.vehicle_class);
+            let vehicleClass = vehicles.map(
+                vehicle => vehicle.vehicle_class,
+            );
             // console.log(vehicleClass);
-            res.status(200).json({ vehicles: vehicleClass });
+            res
+                .status(200)
+                .json({ vehicles: vehicleClass });
         })
         .catch(err => res.status(500).json(err));
 });
