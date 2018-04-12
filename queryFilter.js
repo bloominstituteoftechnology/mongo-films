@@ -7,11 +7,15 @@ const queryFilter = (arr, query) => {
     const key = queryKeys[i];
     const value = String(query[key]).toLowerCase();
 
-    filteredArr = filteredArr.filter(item =>
-      String(item[key])
+    filteredArr = filteredArr.filter(item => {
+      if (key === 'minheight') {
+        return Number(item.height) >= Number(query[key]);
+      }
+
+      return String(item[key])
         .toLowerCase()
-        .includes(value)
-    );
+        .includes(value);
+    });
   }
   return filteredArr;
 };

@@ -17,9 +17,10 @@ router
       .sort('episode')
       .populate(
         'characters',
-        '_id name gender height skin_color hair_color eye_color'
+        '_id name gender height skin_color hair_color eye_color species'
       )
       .populate('planets', `name climate terrain gravity diameter`)
+      .populate('species')
       .then(films => {
         // if (producer) {
         //   films = films.filter(film =>

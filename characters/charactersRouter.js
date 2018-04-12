@@ -4,6 +4,8 @@ const Character = require('./Character.js');
 
 const router = express.Router();
 
+const queryFilter = require('../queryFilter.js');
+
 // add endpoints here
 
 router
@@ -12,7 +14,7 @@ router
     Character.find()
       .populate('homeworld')
       .then(characters => {
-        res.json(characters);
+        res.json(queryFilter(characters, req.query));
       })
       .catch(error => {
         res.status(500).json(error);
