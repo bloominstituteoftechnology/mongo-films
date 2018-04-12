@@ -6,7 +6,7 @@ const router = express.Router();
 
 router
     .route('/')
-    .get((req, res)=> {
+    .get((req, res) => {
         Planet.find({})
         .then(planets => {
             res.status(200).json(planets);
@@ -18,13 +18,11 @@ router
 
 router
     .route('/:id')
-    .get((req, res)=> {
-      const id = req.params.id;
-      
+    .get((req, res) => {
+      const id = req.params.id;    
         Planet.find({})
-        .where({ key: `${id}` })
-        .then(planet => {
-            res.status(200).json(planet);
+        .then(planets => {
+            res.status(200).json(planets[`${id}`]);
         })
         .catch(err => {
           res.status(500).json(err);

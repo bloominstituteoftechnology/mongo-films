@@ -8,32 +8,23 @@ router
     .route('/')
     .get((req, res) => {
 
-      if (Object.keys(req.query).length > 0) {    // check if query object is empty or not
+      if (Object.keys(req.query).length > 0) {        // check if query object is empty or not
         let { producer, released } = req.query;
+        let query = req.query;
 
-        if (!released) {    // if released is undefined, filter by producer
+        if (!released) {                              // if released is undefined, filter by producer
           const regex = new RegExp(producer, 'i');
+          query.producer = regex;
+        } else {                                      // released is defined, filter by that instead
+          const regex = new RegExp(released, 'i');
+          query.released = regex;
+        }
 
           Film.find({})
-              .where({ producer: regex })
+              .where(query)
               .sort({ episode: 'ascending' })
               .populate('characters', { name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1  })
               .populate('planets', { name: 1, climate: 1, terrain: 1, gravity: 1, diameter: 1 })
-              .then(films => {
-                res.status(200).json(films);
-              })
-              .catch(err => {
-                res.status(500).json(err);
-              })
-            } else {    // released is defined, filter by that instead
-              const regex = new RegExp(released, 'i');
-
-              Film.find({})
-              .where({ release_date: regex })
-              .sort({ episode: 'ascending' })
-              .populate('characters', { name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1  })
-              .populate('planets', { name: 1, climate: 1, terrain: 1, gravity: 1, diameter: 1 })
-
               .then(films => {
                 res.status(200).json(films);
               })
@@ -41,7 +32,7 @@ router
                 res.status(500).json(err);
               })
             }
-          } else {  // otherwise, grab all the films
+        else {  // otherwise, grab all the films
 
         Film.find({})
         .sort({ episode: 'ascending' })

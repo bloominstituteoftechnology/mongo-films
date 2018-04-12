@@ -6,7 +6,7 @@ const router = express.Router();
 
 router
     .route('/')
-    .get((req, res)=> {
+    .get((req, res) => {
         Vehicle.find({})
         .populate('pilots')
         .then(vehicles => {
@@ -19,14 +19,12 @@ router
 
 router
     .route('/:id')
-    .get((req, res)=> {
+    .get((req, res) => {
       const id = req.params.id;
-
         Vehicle.find({})
-        .where({ key: `${id}` })
         .populate('pilots')
-        .then(vehicle => {
-            res.status(200).json(vehicle);
+        .then(vehicles => {
+            res.status(200).json(vehicles[`${id}`]);
         })
         .catch(err => {
           res.status(500).json(err);
