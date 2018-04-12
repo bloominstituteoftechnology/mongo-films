@@ -5,27 +5,40 @@ const Film = require('./Film.js');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	const parameters = req.query;
-	console.log(parameters);
-	if (parameters.producer) {
+	if (req.query.producer) {
+		const regex = new RegExp(req.query.producer, 'i');
 		Film.find({})
-			.select({ producer: parameters.producer })
+			.where({ producer: regex })
 			.then(films => {
 				res.status(200).json(films);
 			})
 			.catch(err => {
 				console.log(err);
 			});
-	} else {
+	} else if (req.query.released) {
+		const regex = new RegExp(req.query.released);
+		Film.find({})
+			.where({ release_date: regex })
+			.then(films => {
+				res.status(200).json(films);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	} else
 		Film.find({})
 			.sort({ episode: 'asc' })
+			.populate(
+				'characters',
+				'_id name gender height skin_color hair_color eye_color'
+			)
+			.populate('planets', 'name climate terrain gravity diameter')
 			.then(films => {
 				res.status(200).json(films);
 			})
 			.catch(err => {
 				console.log(err);
 			});
-	}
 });
 
 module.exports = router;
