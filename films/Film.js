@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Film = new mongoose.Schema({
+  _id: ObjectId,
   created: { type: Date, default: Date.now },
   episode: Number,
   edited: { type: Date, default: Date.now },

@@ -15,7 +15,7 @@ router.route("/").get((req, res) => {
     releasedR = new RegExp(released, "i");
   }
   Film.find({})
-    .where({ $or: [{ producer: producerR }, { release_date: releasedR }] })
+    .where({ $or: [{ producer: producerR }, { release_date: releasedR }, {}] })
     .sort({ episode: -1 })
     .populate("characters", {
       _id: 1,
