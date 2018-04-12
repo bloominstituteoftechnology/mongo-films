@@ -18,14 +18,19 @@ const router = express.Router();
 //         res.status(500).json(err);
 //       });
 //   })
+
 router
   .route('/')
   .get((req, res) => {
     //console.log(regex);
-    const minHeightFilter = req.query.gender;
+    const minGenderFilter = req.query.gender;
+    //const minHeightFilter = req.query.minheight;
     const query = Character.find({})
+    // .where('height')
+    // .gte(minHeightFilter)
+    .where({gender: minGenderFilter})
     .sort('gender')
-    .where({gender: minHeightFilter})
+
       query.then(characters => {
         res.status(200).json(characters);
         console.log(query.females);
@@ -41,8 +46,8 @@ router
   .get((req, res) => {
     Character.findById(req.params.id)
       .populate('homeworld',  'name climate surface_water diameter rotation_period terrain gravity orbital_period ')
-      Films.find({characters: id})
-      .populate('movies')
+      // Films.find({characters: id})
+      // .populate('movies')
       .then(character => {
         res.status(200).json(character);
       })
