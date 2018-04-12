@@ -1,20 +1,33 @@
 const express = require("express");
 
 const Character = require("./Character.js");
-const Vehicle = require("./Vehicle.js");
+// const Vehicle = require("./Vehicle.js");
 
 const router = express.Router();
 
+router
+	.route("/")
+	.get((req, res) => {
+		Character.find({})
+			.then(characters => {
+				res.status(200).json(characters);
+			})
+			.catch(err => {
+				res.status(500).json(err);
+			});
+	})
 
-router.route("/").get((req, res) => {
-	Character.find({})
-		.then(characters => {
-			res.status(200).json(characters);
-		})
-		.catch(err => {
-			res.status(500).json(err);
-		});
-});
+	.post((req, res) => {
+		const char = new Character(req.body);
+		char
+			.save()
+			.then(savedChar => {
+				res.status(201).json(savedChar);
+			})
+			.catch(err => {
+				res.status(500).json(err);
+			});
+	});
 
 router.route("/:id").get((req, res) => {
 	const id = req.params.id;
@@ -30,6 +43,7 @@ router.route("/:id").get((req, res) => {
 			gravity: 1,
 			orbital_period: 1
 		})
+		.populate("movies")
 		.then(character => {
 			res.status(200).json(character);
 		})
@@ -41,8 +55,8 @@ router.route("/:id").get((req, res) => {
 router.route("/:id/vehicles").get((req, res) => {
 	const id = req.params.id;
 
-	Vehicles.find({ pilots: id })
-		.populate("pilots", { name: 1, _id: 0 })
+	Character.findById(id)
+		.populate("vehicles", { pilots: 1, _id: 0 })
 		.then(vehicles => {
 			res.status(200).json(vehicles);
 		})

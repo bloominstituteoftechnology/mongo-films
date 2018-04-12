@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Film = new mongoose.Schema({
@@ -16,26 +16,36 @@ const Film = new mongoose.Schema({
   key: { type: Number, unique: true },
   starship_ids: [Number],
   vehicle_ids: [Number],
-  starships: [{
-    type: ObjectId,
-    ref: 'Starship'
-  }],
-  vehicles: [{
-    type: ObjectId,
-    ref: 'Vehicle'
-  }],
-  characters: [{
-    type: ObjectId,
-    ref: 'Character'
-  }],
-  planets: [{
-    type: ObjectId,
-    ref: 'Planet'
-  }],
-  species: [{
-    type: ObjectId,
-    ref: 'Specie'
-  }],
+  starships: [
+    {
+      type: ObjectId,
+      ref: "Starship"
+    }
+  ],
+  vehicles: [
+    {
+      type: ObjectId,
+      ref: "Vehicle"
+    }
+  ],
+  characters: [
+    {
+      type: ObjectId,
+      ref: "Character"
+    }
+  ],
+  planets: [
+    {
+      type: ObjectId,
+      ref: "Planet"
+    }
+  ],
+  species: [
+    {
+      type: ObjectId,
+      ref: "Specie"
+    }
+  ]
 });
 
-module.exports = mongoose.model('Film', Film);
+module.exports = mongoose.model("Film", Film);

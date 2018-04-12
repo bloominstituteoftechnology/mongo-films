@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Character = mongoose.Schema({
@@ -13,7 +13,9 @@ const Character = mongoose.Schema({
   birth_year: String,
   key: { type: Number, unique: true },
   homeworld_key: Number,
-  homeworld: [{ type: ObjectId, ref: 'Planet' }],
+  homeworld: [{ type: ObjectId, ref: "Planet" }],
+  movies: [{ type: ObjectId, ref: "Film" }],
+  vehicles: [{ type: ObjectId, ref: "Vehicle" }]
 });
 
-module.exports = mongoose.model('Character', Character);
+module.exports = mongoose.model("Character", Character);
