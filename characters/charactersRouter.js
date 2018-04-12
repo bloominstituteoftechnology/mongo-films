@@ -32,6 +32,7 @@ router
 .route('/:id')
 .get( (req,res)=>{
   Character.findById(req.params.id)
+  .populate('homeworld')
   .then(response=>{
     res.status(200).json(response);
   })
