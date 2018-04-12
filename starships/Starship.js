@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require(`mongoose`);
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Starship = new mongoose.Schema({
@@ -10,4 +10,4 @@ const Starship = new mongoose.Schema({
   // add pilots field to lik the ship to the characters model
 });
 
-module.exports = mongoose.model('Starship', Starship);
+module.exports = mongoose.model(`Starship`, Starship);
