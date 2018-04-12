@@ -8,6 +8,7 @@ router
     .route('/')
     .get((req, res)=> {
         Starship.find({})
+        .populate('pilots')
         .then(starships => {
             res.status(200).json(starships);
         })
@@ -20,9 +21,10 @@ router
     .route('/:id')
     .get((req, res)=> {
       const id = req.params.id;
-      
+
         Starship.find({})
         .where({ key: `${id}` })
+        .populate('pilots')
         .then(starship => {
             res.status(200).json(starship);
         })

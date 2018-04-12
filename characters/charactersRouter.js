@@ -8,6 +8,7 @@ router
     .route('/')
     .get((req, res) => {
         Character.find({})
+        .populate('homeworld')
         .then(characters => {
             res.status(200).json(characters);
         })

@@ -8,6 +8,7 @@ router
     .route('/')
     .get((req, res)=> {
         Specie.find({})
+        .populate('homeworld')
         .then(species => {
             res.status(200).json(species);
         })
@@ -20,8 +21,9 @@ router
     .route('/:id')
     .get((req, res)=> {
       const id = req.params.id;
-      
+
         Specie.find({})
+        .populate('homeworld')
         .where({ key: `${id}` })
         .then(specie => {
             res.status(200).json(specie);
