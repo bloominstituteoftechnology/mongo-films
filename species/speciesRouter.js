@@ -1,21 +1,34 @@
-const express = require('express');
+const router = require('express').Router();
 
-const Specie = require('./Specie.js');
+const Species = require('./Specie.js');
+const Character = require('../characters/Character');
 
-const router = express.Router();
+router.get('/', async (req, res) => {
+  try {
+    const species = await Species.find({});
+    res.status(200).json(species);
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+});
 
-// add endpoints here
-router
-  .route('/')
-  .get(async (req, res) => {
-    try {
-      const species = await Specie.find({});
-      res.status(200).json(species);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  })
+router.put('/populate/characters', async (req, res) => {
+  try {
+    const species = await Species.find();
+    species.map(async (specie) => {
+      const chars = await Character.find()
+        .where('key')
+        .in(specie.character_keys);
+      specie.people = chars.map((char) => char._id);
+      await specie.save();
+    });
+    res.json(species);
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+});
 
+/*
   .post(async (req, res) => {
     try {
       const specie = new Specie(req.body);
@@ -81,4 +94,5 @@ router
       }
     }
   });
+  */
 module.exports = router;

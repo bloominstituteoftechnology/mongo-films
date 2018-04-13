@@ -1,21 +1,24 @@
-const express = require('express');
-
+const router = require('express').Router();
 const Planet = require('./Planet.js');
+const Character = require('../characters/Character.js');
+const Specie = require('../species/Specie.js');
 
-const router = express.Router();
-
-// add endpoints here
-router
-  .route('/')
-  .get(async (req, res) => {
-    try {
+router.get('/:id?', async (req, res) => {
+  const { id } = req.params;
+  try {
+    if (!id) {
       const planets = await Planet.find({});
-      res.status(200).json(planets);
-    } catch (err) {
-      res.status(500).json(err);
+      return res.json(planets);
     }
-  })
+    const chars = await Character.find({ homeworld: id }).select('name');
+    const spec = await Specie.find({ homeworld: id }).select('name');
+    res.json({ chars, spec });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+});
 
+/*
   .post(async (req, res) => {
     try {
       const planet = new Planet(req.body);
@@ -81,5 +84,6 @@ router
       }
     }
   });
+*/
 
 module.exports = router;
