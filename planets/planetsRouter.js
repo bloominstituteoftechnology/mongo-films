@@ -30,8 +30,8 @@ router.route('/:id').get((req, res) => {
   });
 
   Promise.all([findCharacters, findSpecies])
-    .then(results => {
-      res.status(200).json({ characters: results[0], species: results[1] });
+    .then(data => {
+      res.status(200).json({ characters: data[0], species: data[1] });
     })
     .catch(err => {
       res.status(500).json(err);
