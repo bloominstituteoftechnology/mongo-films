@@ -1,9 +1,9 @@
 const express = require('express');
 
-const Specie = require('./Specie.js');
+const Species = require('./Species.js');
+const Character = require('../characters/Character.js');
 
 const router = express.Router();
-const Character = require('../characters/Character');
 
 // add endpoints here
 router.put('/populate/characters', function(req, res) {
@@ -14,13 +14,14 @@ router.put('/populate/characters', function(req, res) {
         .in(doc.character_keys)
         .then(chars => {
           doc.characters = chars.map(char => char._id);
+
           return doc.save();
         });
     });
 
     Promise.all(updates)
-      .then(results => res.json({ updated: results.length }))
-      .catch(err => res.status(500).json({ err }));
+      .then(results => res.status(200).json({ updated: results.length }))
+      .catch(error => res.status(500).json({ error }));
   });
 });
 

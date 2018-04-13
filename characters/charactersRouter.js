@@ -1,49 +1,54 @@
 const express = require('express');
 
 const Character = require('./Character.js');
-const Vehicle = require('../vehicles/Vehicle');
-const Film = require('../films/Film');
+const Film = require('../films/Film.js');
+const Vehicle = require('../vehicles/Vehicle.js');
 
 const router = express.Router();
 
 // add endpoints here
+
 router.get('/', function(req, res) {
-  const heightCheck = parseInt(req.query.minheight);
+  const { minheight } = req.query;
+  let query = Character.find({ gender: 'female' });
 
-  const query = Character.find({});
-  if (req.query.minheight) {
-    query.find({ height: { $gt: Number(heightCheck) }, gender: 'female' });
+  // run this in mongo shell first:
+  db.characters.find().forEach(function(c) {
+    c.height = NumberInt(c.height);
+    db.characters.save(c);
+  });
+
+  if (minheight) {
+    query.where('height').gt(Number(minheight));
   }
+  query.then(chars => {
+    res.send(chars);
+  });
+});
 
-  query
-    .then(characters => {
-      res.json(characters);
-    })
-    .catch(err => res.status(500).json(err));
+router.get('/:id/vehicles', function(req, res) {
+  // test id: 5aa995a3b97194b732c167ab
+  Vehicle.find({ pilots: req.params.id })
+    .select('vehicle_class')
+    .populate('pilots', 'name')
+    .then(vehicles => res.send(vehicles));
 });
 
 router.get('/:id', function(req, res) {
   const { id } = req.params;
 
-  Character.findOne({ key: id })
+  Character.findById(id)
     .select('name gender skin_color hair_color eye_color height')
     .populate('homeworld', 'name terrain climate diameter gravity')
     .then(char => {
-      Film.find({ character_ids: id })
-        .select('title producer director')
+      Film.find({ characters: id })
+        .select('title producer director episode release_date')
         .then(films => {
           const character = { ...char._doc, movies: films };
-          res.json(character);
+
+          res.send(character);
         });
     });
-});
-
-router.get('/:id/vehicles', function(req, res) {
-  const { id } = req.params;
-
-  Vehicle.where({ pilot_keys: id })
-    .then(vehicle => res.json(vehicle))
-    .catch(err => res.status(500).json(err));
 });
 
 module.exports = router;
