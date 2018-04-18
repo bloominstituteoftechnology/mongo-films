@@ -8,6 +8,7 @@ const speciesRouter = require('./species/speciesRouter.js');
 const starshipsRouter = require('./starships/starshipsRouter.js');
 const vehiclesRouter = require('./vehicles/vehiclesRouter.js');
 const planetsRouter = require('./planets/planetsRouter.js');
+const cors = require('cors');
 
 const server = express();
 
@@ -18,6 +19,7 @@ db
 
 server.use(helmet());
 server.use(express.json());
+server.use(cors());
 
 server.use('/api/characters', charactersRouter);
 server.use('/api/films', filmsRouter);
@@ -26,7 +28,7 @@ server.use('/api/starships', starshipsRouter);
 server.use('/api/vehicles', vehiclesRouter);
 server.use('/api/planets', planetsRouter);
 
-server.get('/', (req, res) => res.send('API Running...'));
+server.get('/', (req, res) => res.send('API Runnin...'));
 
 const port = process.env.PORT || 5000;
 server.listen(port, () =>
