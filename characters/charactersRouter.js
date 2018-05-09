@@ -4,6 +4,7 @@ const Character = require("./Character.js");
 
 const router = express.Router();
 
+// add endpoints here
 router.get("/", (req, res) => {
   Character.find()
     .then(character => {
@@ -13,6 +14,5 @@ router.get("/", (req, res) => {
       res.status(500).json(err);
     });
 });
-// add endpoints here
 
 module.exports = router;
