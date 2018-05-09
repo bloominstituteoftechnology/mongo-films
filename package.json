@@ -10,7 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/LambdaSchool/mongo-films.git"
   },
-  "keywords": ["mongo"],
+  "keywords": [
+    "mongo"
+  ],
   "author": "Lambda School",
   "license": "ISC",
   "bugs": {
@@ -18,7 +20,7 @@
   },
   "homepage": "https://github.com/LambdaSchool/mongo-films#readme",
   "devDependencies": {
-    "nodemon": "^1.17.3"
+    "nodemon": "^1.17.4"
   },
   "dependencies": {
     "express": "^4.16.3",
