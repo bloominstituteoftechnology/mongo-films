@@ -32,4 +32,7 @@ router.route("/:id").get((req, res) => {
     });
 });
 
+// GET /:id ; find all females taller than 100cm
+
+
 module.exports = router;
