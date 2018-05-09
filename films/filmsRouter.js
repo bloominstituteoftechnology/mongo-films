@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 
-const Film = require('./Film.js');
+const Film = require("./Film.js");
 
 const router = express.Router();
 
@@ -8,13 +8,14 @@ const router = express.Router();
 
 // GET / ; get all films
 router.route("/").get((req, res) => {
-    Film.find({})
-      .then(films => {
-        res.status(200).json(films);
-      })
-      .catch(error => {
-        res.status(500).json(error);
-      });
-  });
+  Film.find({})
+    .sort({ episode: 1 })
+    .then(films => {
+      res.status(200).json(films);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
 
 module.exports = router;

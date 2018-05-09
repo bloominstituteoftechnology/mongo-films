@@ -17,7 +17,7 @@ router.route("/").get((req, res) => {
     });
 });
 
-// GET /:id ; get character by id
+// GET /:id ; get character by id ; populate films
 router.route("/:id").get((req, res) => {
   const { id } = req.params;
 
