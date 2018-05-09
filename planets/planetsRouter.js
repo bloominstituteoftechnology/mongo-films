@@ -8,10 +8,18 @@ const router = express.Router();
 
 // add endpoints here
 router.get("/:id", async (req, res) => {
-  const chars = await Character.find({ homeworld: req.params.id });
-  const species = await Specie.find({ homeworld: req.params.id });
+  try {
+    const chars = await Character.find({ homeworld: req.params.id }).select(
+      "name"
+    );
+    const species = await Specie.find({ homeworld: req.params.id }).select(
+      "name"
+    );
 
-  res.status(200).json({ chars, species });
+    res.status(200).json({ chars, species });
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
 module.exports = router;
