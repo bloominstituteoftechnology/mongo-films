@@ -16,6 +16,7 @@ const Specie = new mongoose.Schema({
   average_height: String,
   key: { type: Number, unique: true },
   homeworld_key: Number,
+  homeworld: { type: ObjectId, ref: 'Planet' }
   // add homeworld field that links the specie to it's native planet
 });
 
