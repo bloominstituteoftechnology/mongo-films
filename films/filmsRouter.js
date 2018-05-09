@@ -5,7 +5,11 @@ const Film = require("./Film.js");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  const { producer, release_date } = req.query;
+  let { producer, release_date } = req.query;
+  if (producer) {
+    producer = producer.toLowerCase();
+  }
+  // producer = producer.toLowerCase();
   Film.find()
     .sort("episode")
     .populate(
@@ -17,8 +21,8 @@ router.get("/", (req, res) => {
       const filteredFilms = films.filter(film => {
         if (producer !== undefined || release_date !== undefined) {
           return (
-            film.producer.includes(req.query.producer) ||
-            film.release_date.includes(req.query.release_date)
+            film.producer.toLowerCase().includes(producer) ||
+            film.release_date.includes(release_date)
           );
         } else return film;
       });
