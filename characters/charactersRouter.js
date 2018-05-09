@@ -1,7 +1,8 @@
 const express = require('express');
 
 const Character = require('./Character.js');
-
+const Film = require('../films/Film');
+const Planet = require('../planets/Planet');
 
 const Vehicle = require('../vehicles/Vehicle');
 
@@ -21,18 +22,24 @@ router
 
 function getid(req, res) {
     const id = req.params.id;
-  Character
-  .findById(id)
+    const query = Character.findById(id);
+    query.populate('homeworld');
     // if(character) query.where({producer: new RegExp(producer, 'i')})
-    .then(character => {
-        if (character.length === 0) {
-            res.status(404).json({ message: "The character with the specified ID does not exist." })
-        }
-        res.status(200).json(character);
-    })
+    query.then(character => {
+      let key = character.key;
+      Film.find({character_ids: key})
+      .select('episode')
+      .then(films =>{
+        const person = {...character._doc, movie: films};
+        res.status(200).json(person)
+    })   
     .catch(err => {
         res.status(500).json({ errorMessage: "The character information could not be retrieved." })
-    });
+    })
+})
+.catch(err => {
+    res.status(404).json(err);
+});
 }
 
 function getvehicle(req, res) {
@@ -40,18 +47,19 @@ function getvehicle(req, res) {
     Character
     .findById(id)
     .then(character => {
-        let key = character.key;    
+        let key = character.key;
+        
     Vehicle.find({pilot_keys: key })
     .then(character => {
         res.status(200).json(character);
     })
     .catch(err => {
         res.status(500).json({ errorMessage: "The character information could not be retrieved." })
-    })
-    .catch(err => {
-        res.status(404).json(err);
-    })
+    })   
 })
+.catch(err => {
+    res.status(404).json(err);
+});
 }
 
 function ihategenders(req, res) {

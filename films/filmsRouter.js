@@ -1,6 +1,7 @@
 const express = require('express');
 
 const Film = require('./Film.js');
+const Planet = require('../planets/Planet.js');
 const Character = require('../characters/Character');
 const router = express.Router();
 
@@ -17,6 +18,7 @@ function get(req, res) {
     if (producer) query.where({producer: new RegExp(producer, 'i')});
     if (release_date) query.where({release_date: new RegExp(release_date, 'i')});
     query.populate('characters', 'name gender _id height skin_color hair_color eye_color');
+    query.populate('planets', 'name climate terrain gravity diameter')
     query.then(films => {
 
         res.status(200).json(films);
