@@ -4,10 +4,10 @@ const helmet = require('helmet');
 const db = require('./data/db.js');
 const charactersRouter = require('./characters/charactersRouter.js');
 const filmsRouter = require('./films/filmsRouter.js');
+const planetsRouter = require('./planets/planetsRouter.js');
 const speciesRouter = require('./species/speciesRouter.js');
 const starshipsRouter = require('./starships/starshipsRouter.js');
 const vehiclesRouter = require('./vehicles/vehiclesRouter.js');
-const planetsRouter = require('./planets/planetsRouter.js');
 
 const server = express();
 
@@ -21,10 +21,10 @@ server.use(express.json());
 
 server.use('/api/characters', charactersRouter);
 server.use('/api/films', filmsRouter);
+server.use('/api/planets', planetsRouter);
 server.use('/api/species', speciesRouter);
 server.use('/api/starships', starshipsRouter);
 server.use('/api/vehicles', vehiclesRouter);
-server.use('/api/planets', planetsRouter);
 
 server.get('/', (req, res) => res.send('API Running...'));
 
