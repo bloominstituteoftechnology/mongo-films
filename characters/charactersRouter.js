@@ -1,6 +1,7 @@
 const express = require("express");
 
 const Character = require("./Character.js");
+const Vehicle = require("../vehicles/Vehicle.js");
 
 const router = express.Router();
 
@@ -41,6 +42,17 @@ router.route("/").get((req, res) => {
         res.status(500).json(error);
       });
   }
+});
+
+router.route("/:id/vehicles").get((req, res) => {
+  Vehicle.find({ pilots: req.params.id })
+    .populate("pilots", "name")
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
 });
 
 module.exports = router;
