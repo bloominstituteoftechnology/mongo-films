@@ -5,30 +5,23 @@ const Film = require("./Film.js");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  const producer = req.query.producer;
-  const release_date = req.query.release_date;
+  const { producer, release_date } = req.query;
   Film.find()
+    .sort("episode")
+    .populate(
+      "characters",
+      "name gender height skin_color hair_color eye_color"
+    )
+    .populate("planets", "name climate terrain gravity diameter")
     .then(films => {
-      const filteredFilms = films
-        .filter(film => {
-          if (producer !== undefined || release_date !== undefined) {
-            return (
-              film.producer.includes(req.query.producer) ||
-              film.release_date.includes(req.query.release_date)
-            );
-          } else return film;
-        })
-        .sort(function(a, b) {
-          let episodeA = a.episode;
-          let episodeB = b.episode;
-          if (episodeA < episodeB) {
-            return -1;
-          }
-          if (episodeA > episodeB) {
-            return 1;
-          }
-          return 0;
-        });
+      const filteredFilms = films.filter(film => {
+        if (producer !== undefined || release_date !== undefined) {
+          return (
+            film.producer.includes(req.query.producer) ||
+            film.release_date.includes(req.query.release_date)
+          );
+        } else return film;
+      });
       res.status(200).json(filteredFilms);
     })
     .catch(err => {
