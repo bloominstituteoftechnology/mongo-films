@@ -8,10 +8,8 @@ const router = express.Router()
 
 router.get('/', (req, res, next) => {
   const { minheight } = req.query
-  Character.find({ gender: 'female' })
-    .then(tallgirls => {
-      res.json(tallgirls.filter(girl => girl.height > minheight))
-    })
+  Character.find({ gender: 'female', height: { $gt: minheight }})
+    .then(tallGirls => res.send(tallGirls))
     .catch(err => next(err))
 })
 
