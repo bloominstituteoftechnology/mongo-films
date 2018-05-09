@@ -16,7 +16,9 @@ function get(req, res) {
     query.sort('episode')
 
     query
+    //Find all films produced by Gary Kurtz (/api/films?producer=gary+kurtz)
     if (producer) query.where({ producer: new RegExp(producer, 'i') });
+    //Find all films released in 2005. (/api/films?released=2005)
     if (release_date) query.where({ release_date: new RegExp(release_date, 'i') });
     
     //populate character information. only include: _id, name, gender, height, skin_color, hair_color and eye_color

@@ -1,5 +1,5 @@
 const express = require('express');
-
+const Vehicle = require('../vehicles/Vehicle.js');
 const Character = require('./Character.js');
 const router = express.Router();
 
@@ -13,9 +13,17 @@ router
     .route('/')
     .get(femaletall)
 
-//GET by ID
+//vehicles
+router
+    .route('/:id/vehicles')
+    .get(fetchvehicle)
+
+
+//GET by ID - Given a character id, (/api/characters/:id)
 function getid(req, res) {
     const id = req.params.id;
+    const query = Character.findById(id);
+    // query.populate('Homeworld', 'name');
 
     Character
     .findById(id)
@@ -44,6 +52,26 @@ function femaletall(req, res) {
     .catch(err => {
         res.status(500).json({ errorMsg: 'Info Not Found.' })
     });
+}
+
+//Find all vehicles driven by a given character. (/api/characters/:id/vehicles)
+function fetchvehicle(req, res) {
+    const id = req.params.id;
+    Character
+    .findById(id)
+    .then(character => {
+        let key = character.key;
+    Vehicle.find({ pilot_keys: key })
+    .then(character => {
+        res.status(200).json(character);
+    })
+    .catch(err => {
+        res.status(500).json({ errorMsg: 'Char info not found.' })
+    })
+    .catch(err => {
+        res.status(404).json(err);
+    })
+})
 }
 
 module.exports = router;
