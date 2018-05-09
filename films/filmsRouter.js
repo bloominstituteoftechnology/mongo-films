@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
       "characters",
       "_id name gender height skin_color hair_color eye_color"
     )
-    .populate("planets", "name, climate, terrain, gravity, diameter")
+    .populate("planets", "name climate terrain gravity diameter")
     .then(film => {
       res.status(201).json(film);
     })
