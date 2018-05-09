@@ -36,7 +36,7 @@ const Film = new mongoose.Schema({
   }],
   species: [{
     type: ObjectId,
-    ref: 'Species'
+    ref: 'Specie'
   }]
 });
 
