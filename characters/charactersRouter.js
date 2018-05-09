@@ -24,6 +24,7 @@ router.route("/:id").get((req, res) => {
   Character.findById(id);
   Character.findById(id)
     .populate("homeworld")
+    .populate("movies")
     .then(characters => {
       res.status(200).json(characters);
     })
