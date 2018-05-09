@@ -29,10 +29,9 @@ router.route("/").get((req, res) => {
       .catch(error => {
         res.status(500).json(error);
       });
-  }
-  if (req.query.released) {
+  } else if (req.query.released) {
     Film.find()
-      .where({ producer: new RegExp(req.query.released, "i") })
+      .where({ release_date: new RegExp(req.query.released, "i") })
       .populate("characters", "name")
       .then(response => {
         res.status(200).json(response);
@@ -66,7 +65,6 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-// /api/films/1234
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
 
