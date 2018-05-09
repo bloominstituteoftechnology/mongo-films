@@ -1,20 +1,18 @@
-const express = require('express');
+const express = require("express");
 
-const Character = require('./Character.js');
-
+const Character = require("./Character.js");
+const Film = require("../films/Film.js");
 const router = express.Router();
 
-router
-    .route("/:id")
-    .get((req, res) => {
-      const id = req.params.id
-      Character.findById(id)
-      .then(character => {
-            res.status(200).json(character);
-      })
-      .catch(error => {
-        res.status(500).json("Error finding that character");
-      })
+router.use('/:id', (req, res, next) => {
+  Character.findById(req.params.id)
+    .populate('homeworld')
+    .then(char => {
+      Film.find({ characters: req.params.id })
+        .then(films => res.send(Object.assign({}, char, { movies: films })))
+        .catch(err => next(err))
     })
+    .catch(err => next(err))
+})
 
 module.exports = router;
