@@ -7,9 +7,9 @@ const router = express.Router();
 // add endpoints here
 router.use('/', (req, res, next) => {
   const { producer, released } = req.query
-  const query = (producer || released)
-    ? Film.find({ $text: { $search: producer || released } })
-    : Film.find()  
+  const query = Film.find()
+  if (producer) { query.find({ $text: { $search: producer } }) }
+  if (released) { query.find({ $text: { $search: released } }) }
   
   query
     .sort('episode')  
