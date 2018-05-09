@@ -20,9 +20,8 @@ const Film = new mongoose.Schema({
   starships: [{ type: ObjectId, ref: 'Starship' }],
   vehicles: [{ type: ObjectId, ref: 'Vehicle' }],
   characters: [{ type: ObjectId, ref: 'Character' }],
-  species: [{ type: ObjectId, ref: 'Specie' }]
-  // add fields for starships, vehicles, planets, characters and species
-  // to link them to the corresponding model
+  species: [{ type: ObjectId, ref: 'Specie' }],
+  planets: [{ type: ObjectId, ref: 'Planet' }]
 });
 
 Film.index({ producer: 'text', release_date: 'text' })
