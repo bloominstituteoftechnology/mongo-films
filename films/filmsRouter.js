@@ -6,7 +6,7 @@ const router = express.Router();
 
 // add endpoints here
 router.get("/", (req, res) => {
-  Film.find()
+  Film.find().sort('episode')
     .then(film => {
       res.status(201).json(film);
     })
