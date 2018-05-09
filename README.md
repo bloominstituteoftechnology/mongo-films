@@ -27,7 +27,7 @@ Use Node.js, Express.js and Mongoose.js to build an API that queries data persis
 * In a _terminal_ or _command prompt_ window, **navigate to the data folder** and run the following command for each _JSON_ file.
 
 ```shell
-  mongoimport --db starwars --collection characters --file characters.json
+    mongoimport --db starwars --collection characters --file characters.json
 ```
 
 This code imports the _characters_ data into the _characters_ collection of the _starwars_ database. **Modify the command, changing the collection name and the file name** to import the other JSON files.
