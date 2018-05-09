@@ -11,10 +11,12 @@ router.get("/", (req, res) => {
     .then(films => {
       const filteredFilms = films
         .filter(film => {
-          return (
-            film.producer.includes(req.query.producer) ||
-            film.release_date.includes(req.query.release_date)
-          );
+          if (producer !== undefined || release_date !== undefined) {
+            return (
+              film.producer.includes(req.query.producer) ||
+              film.release_date.includes(req.query.release_date)
+            );
+          } else return film;
         })
         .sort(function(a, b) {
           let episodeA = a.episode;
