@@ -22,17 +22,32 @@ router.route("/").get((req, res) => {
   if (req.query.producer) {
     Film.find()
       .where({ producer: new RegExp(req.query.producer, "i") })
+      .populate("characters", "name")
       .then(response => {
         res.status(200).json(response);
+      })
+      .catch(error => {
+        res.status(500).json(error);
+      });
+  }
+  if (req.query.released) {
+    Film.find()
+      .where({ producer: new RegExp(req.query.released, "i") })
+      .populate("characters", "name")
+      .then(response => {
+        res.status(200).json(response);
+      })
+      .catch(error => {
+        res.status(500).json(error);
       });
   } else {
     Film.find()
       .sort("episode")
       .populate(
         "characters",
-        "_id, name, gender, height, skin_color, hair_color and eye_color"
+        "_id name gender height skin_color hair_color eye_color"
       )
-      .populate("planets", "name, climate, terrain, gravity and diameter")
+      .populate("planets", "name climate terrain gravity diameter")
       .then(response => {
         res.status(200).json(response);
       })
