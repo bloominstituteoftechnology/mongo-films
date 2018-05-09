@@ -12,7 +12,7 @@ router.route("/").get((req, res) => {
 		})
 		.catch(err => {
 			res.status(500).json({
-				err: "Films cannot be retrieved"
+				err: "Planets cannot be retrieved"
 			});
 		});
 });
