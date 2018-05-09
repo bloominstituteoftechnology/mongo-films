@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
+const options = {
+  timestamp: true,
+  strict: false,
+};
+
 const Character = mongoose.Schema({
   name: { type: String, required: true },
   edited: Date,
