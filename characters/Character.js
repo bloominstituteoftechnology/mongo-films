@@ -13,7 +13,9 @@ const Character = mongoose.Schema({
   birth_year: String,
   key: { type: Number, unique: true },
   homeworld_key: Number,
+  // homeworldId: ObjectId,
   // add homeworld field that links the character to it's planet
+  //THere is no data in characsters for the name of the planet, only homeworld (objectId) and _key
 });
 
 module.exports = mongoose.model('Character', Character);
