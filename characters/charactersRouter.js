@@ -4,7 +4,7 @@ const Character = require('./Character.js');
 
 const router = express.Router();
   
-  router.get("/", (req, res) => {
+  router.get("/", (req, res, next) => {
     Character.find().then(characters => {
       res.status(200).json(characters)
     }).catch(err => {
@@ -15,7 +15,7 @@ const router = express.Router();
   
   router.get("/:id", (req, res) => {
     const id = req.params.id
-    Character.findById(id).then(character => {
+    Character.findById(id).populate("homeworld").then(character => {
       res.status(200).json(character)
     }).catch(err => {
       res.status(404).json({
