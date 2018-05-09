@@ -18,21 +18,28 @@ router.post("/", function post(req, res) {
     });
 });
 
-router.get("/", function get(req, res) {
+router.route("/").get((req, res) => {
   if (req.query.producer) {
     Film.find()
       .where({ producer: new RegExp(req.query.producer, "i") })
-      .then(films => {
-        res.status(200).json(films);
+      .then(response => {
+        res.status(200).json(response);
+      });
+  } else {
+    Film.find()
+      .sort("episode")
+      .populate(
+        "characters",
+        "_id, name, gender, height, skin_color, hair_color and eye_color"
+      )
+      .populate("planets", "name, climate, terrain, gravity and diameter")
+      .then(response => {
+        res.status(200).json(response);
       })
-      .catch(err => res.status(500).json(err));
+      .catch(error => {
+        res.status(500).json(error);
+      });
   }
-
-  Film.find()
-    .then(films => {
-      res.status(200).json(films);
-    })
-    .catch(err => res.status(500).json(err));
 });
 
 router.get("/:id", (req, res) => {
