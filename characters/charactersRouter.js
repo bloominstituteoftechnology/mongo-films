@@ -9,4 +9,12 @@ router.route('/')
       .catch(err => res.json("Error fetching characters."))
   })
 
+router.route('/:id')
+  .get((req, res) => {
+    const { id } = req.params;
+    Character.findById(id)
+      .then(char => res.json(char))
+      .catch(err => res.status(500).json("Cannot fetch character with the provided ID."))
+  })
+  
 module.exports = router;
