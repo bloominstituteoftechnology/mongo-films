@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
+const Planet = require('../planets/Planet');
+const Character = require('../characters/Character');
+
 const Specie = new mongoose.Schema({
   edited: { type: Date, default: Date.now },
   classification: String,
@@ -16,7 +19,14 @@ const Specie = new mongoose.Schema({
   average_height: String,
   key: { type: Number, unique: true },
   homeworld_key: Number,
-  // add homeworld field that links the specie to it's native planet
+  homeworld: [{
+    type: ObjectId,
+    ref: "Planet"
+  }],
+  characters: [{
+    type: ObjectId,
+    ref: "Character"
+  }]
 });
 
 module.exports = mongoose.model('Specie', Specie);
