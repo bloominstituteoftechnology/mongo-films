@@ -1,28 +1,28 @@
 {
-  "name": "mongo4",
+  "name": "mongo-films",
   "version": "1.0.0",
-  "description": "MongoDB 4 Project",
+  "description": "MongoDB Films Project",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LambdaSchool/mongo-iv.git"
+    "url": "git+https://github.com/LambdaSchool/mongo-films.git"
   },
   "keywords": ["mongo"],
   "author": "Lambda School",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LambdaSchool/mongo-iv/issues"
+    "url": "https://github.com/LambdaSchool/mongo-films/issues"
   },
-  "homepage": "https://github.com/LambdaSchool/mongo-iv#readme",
+  "homepage": "https://github.com/LambdaSchool/mongo-films#readme",
   "devDependencies": {
-    "nodemon": "^1.17.2"
+    "nodemon": "^1.17.3"
   },
   "dependencies": {
     "express": "^4.16.3",
     "helmet": "^3.12.0",
-    "mongoose": "^5.0.10"
+    "mongoose": "^5.0.17"
   }
 }
