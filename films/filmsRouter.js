@@ -1,9 +1,22 @@
-const express = require('express');
+const router = require('express').Router();
 
 const Film = require('./Film.js');
 
-const router = express.Router();
+router.get('/', (req, res) => {
+  try {
+    const { producer, released } = req.query;
+    const films = Film.find({})
+      .sort('episode')
+      .select('title producer release_date')
+      .populate('characters', 'name gender height skin_color hair_color eye_color')
+      .populate('planets', 'name climate terrain gravity diameter');
 
-// add endpoints here
+    if (producer) films.where({ producer: new RegExp(producer, 'i') });
+    if (released) films.where({ release_date: new RegEp(release_date, 'i') });
+    films.then((film) => res.json(film));
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+});
 
 module.exports = router;
