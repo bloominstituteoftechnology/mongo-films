@@ -7,28 +7,29 @@ const router = express.Router();
 // /api/characters
 
 // GET / ; get all characters
-router.get("/"),
-  (req, res) => {
-    Character.find({})
-      .then(characters => {
-        res.status(200).json(characters);
-      })
-      .catch(error => {
-        res.status(500).json(error);
-      });
-  };
+router.route("/").get((req, res) => {
+  Character.find({})
+    .then(characters => {
+      res.status(200).json(characters);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
 
 // GET /:id ; get character by id
-router.get("/:id"),
-  (req, res) => {
-    const { id } = req.params;
+router.route("/:id").get((req, res) => {
+  const { id } = req.params;
 
-    Character.findById(id);
-    Character.findById(id)
-      .populate("homeworld")
-      .then(characters => {
-        res.status(200).json(characters);
-      });
-  };
+  Character.findById(id);
+  Character.findById(id)
+    .populate("homeworld")
+    .then(characters => {
+      res.status(200).json(characters);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
 
 module.exports = router;
