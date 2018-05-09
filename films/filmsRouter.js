@@ -1,9 +1,21 @@
-const express = require('express');
+const express = require("express");
 
-const Film = require('./Film.js');
+const Film = require("./Film.js");
 
 const router = express.Router();
-
-// add endpoints here
+// let query =
+router.route("/").get((req, res) => {
+  Film.find()
+    .sort({
+      episode: "asc"
+    })
+    .then(films => {
+      console.log(films);
+      res.status(200).json(films);
+    })
+    .catch(error => {
+      res.status(500).json("Error getting film");
+    });
+});
 
 module.exports = router;
