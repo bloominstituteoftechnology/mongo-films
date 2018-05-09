@@ -31,4 +31,16 @@ router.get('/?producer=gary+kurtz', (req, res) => {
         res.json(err)
     })
 })
+
+router.get('/?released=2005', (req, res) => {
+    
+    query
+    .find({ release_date: { regex: /2005/ }})
+    .then(release => {
+        res.json(release)
+    })
+    .catch(err => {
+        res.json(err)
+    })
+})
 module.exports = router;
