@@ -1,9 +1,34 @@
-const express = require('express');
+const express = require("express");
 
-const Character = require('./Character.js');
+const Character = require("./Character.js");
 
 const router = express.Router();
 
-// add endpoints here
+// /api/characters
+
+// GET / ; get all characters
+router.get("/"),
+  (req, res) => {
+    Character.find({})
+      .then(characters => {
+        res.status(200).json(characters);
+      })
+      .catch(error => {
+        res.status(500).json(error);
+      });
+  };
+
+// GET /:id ; get character by id
+router.get("/:id"),
+  (req, res) => {
+    const { id } = req.params;
+
+    Character.findById(id);
+    Character.findById(id)
+      .populate("homeworld")
+      .then(characters => {
+        res.status(200).json(characters);
+      });
+  };
 
 module.exports = router;
