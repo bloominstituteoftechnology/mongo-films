@@ -1,24 +1,26 @@
 const express = require('express');
 const Film = require('./Film.js');
+const Character = require('../characters/Character');
 const router = express.Router();
 
 router.route('/')
   .get((req, res) => {
     const { producer, released } = req.query;
-
-    // /api/films?producer=gary+kurtz
-    if (producer) Film.find({}).where({ producer: new RegExp(producer, 'i') })
+    const query = Film.find();
+    
+    query.populate('characters', 'name gender _id height skin_color hair_color eye_color');
+    
+    // api/films?producer=gary+kurtz
+    if (producer) query.where({ producer: new RegExp(producer, 'i') })
       .then(films => res.json(films))
       .catch(err => res.json(`Cannot find and films produced by ${producer}`));
     
-    // /api/films?released=2005
-    if (released) Film.find({}).where({ release_date: new RegExp(released, 'i') })
+    // api/films?released=2005
+    if (released) query.where({ release_date: new RegExp(released, 'i') })
       .then(films => res.json(films))
       .catch(err => res.json(`Cannot find any films released in ${released}`));
-
-    Film.find()
-      .then(films => res.json(films))
-      .catch(err => res.json("There was an error."))
+    
+    query.then(films => res.json(films)).catch(err => res.json("There was an error."))
   })
 
 
