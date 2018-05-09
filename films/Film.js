@@ -18,11 +18,26 @@ const Film = new mongoose.Schema({
   vehicle_ids: [Number],
   // add fields for starships, vehicles, planets, characters and species
   // to link them to the corresponding model
-  characters: [ObjectId],
-  planets: [ObjectId],
-  species: [ObjectId],
-  vehicles: [ObjectId],
-  starships: [ObjectId],
+  characters: {
+    type: [ObjectId],
+    ref: 'Character',
+  },
+  planets: {
+    type: [ObjectId],
+    ref: 'Planet',
+  },
+  species: {
+    type: [ObjectId],
+    ref: 'Species',
+  },
+  vehicles: {
+    type: [ObjectId],
+    ref: 'Vehicle',
+  },
+  starships: {
+    type: [ObjectId], 
+    ref: 'Starship',
+  },
 });
 
 module.exports = mongoose.model('Film', Film);
