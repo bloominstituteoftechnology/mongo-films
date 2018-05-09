@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
+const charPlanet = require('../planets/Planet');
+const char = require('../characters/Character');
+
 const Specie = new mongoose.Schema({
   edited: { type: Date, default: Date.now },
   classification: String,
@@ -8,7 +11,8 @@ const Specie = new mongoose.Schema({
   designation: String,
   created: { type: Date, default: Date.now },
   eye_colors: String,
-  people: [Number], // use this to populate the characters link as per readme
+  people: [Number],
+  characters: { type: ObjectId, ref: 'Character' },
   skin_colors: String,
   language: String,
   hair_colors: String,
@@ -16,7 +20,7 @@ const Specie = new mongoose.Schema({
   average_height: String,
   key: { type: Number, unique: true },
   homeworld_key: Number,
-  // add homeworld field that links the specie to it's native planet
+  homeworld: { type: ObjectId, ref: 'Planet' },
 });
 
 module.exports = mongoose.model('Specie', Specie);
