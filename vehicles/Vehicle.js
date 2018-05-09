@@ -6,6 +6,10 @@ const Vehicle = new mongoose.Schema({
   pilot_keys: [Number],
   key: { type: Number, unique: true },
   // add pilots field to link it to the Character model
+  pilot: {
+    type: ObjectId,
+    ref: 'Character',
+  },
 });
 
 module.exports = mongoose.model('Vehicle', Vehicle);
