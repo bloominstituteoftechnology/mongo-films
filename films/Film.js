@@ -25,4 +25,6 @@ const Film = new mongoose.Schema({
   // to link them to the corresponding model
 });
 
+Film.index({ producer: 'text', release_date: 'text' })
+
 module.exports = mongoose.model('Film', Film);
