@@ -4,14 +4,20 @@ const Film = require('./Film.js');
 
 const router = express.Router();
 
+
+
+
 router.get("/", (req, res) => {
-    Film.find().then(films => {
+    Film.find().populate("characters planets", 
+    "_id name gender height skin_color hair_color eye_color climate terrain gravity diameter")
+    .sort("key").then(films => {
       res.status(200).json(films)
     }).catch(err => {
       res.status(500).json({
         errorMessage: "The film information could not be retrieved."})
     })
   })
+
   
   router.get("/:id", (req, res) => {
     const id = req.params.id
