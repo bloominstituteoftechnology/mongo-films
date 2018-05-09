@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
                             { new: true }
                         );
                     });
-                });
+                })
                 .then(() => {
                     Promise.all(addMovies).then(() => {
                         Character.findById(id)
