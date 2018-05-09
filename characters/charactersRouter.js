@@ -41,9 +41,11 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.get('/:id/vehicles')
-
-
-    
+router.get('/:id/vehicles', (req, res) => {
+    const { id } = req.params;
+    Vehicle.find({ pilots: id }).select('vehicle_class'),then(vehicles => {
+        res.send(vehicles);
+    });
+});
 
 module.exports = router;
