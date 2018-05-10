@@ -10,11 +10,8 @@ router.route("/").get((req, res) => {
 		.then(starships => {
 			res.status(200).json(starships);
 		})
-		.catch(err => {
-			res.status(500).json({
-				err: "Starships cannot be retrieved"
-			});
-		});
+		.catch(err => res.send(err));
 });
+
 
 module.exports = router;
