@@ -7,12 +7,55 @@ const router = express.Router();
 // add endpoints here
 router.get("/", (req, res) => {
   Character.find()
-    .then(character => {
-      res.status(201).json(character);
+    .then(char => {
+      res.status(201).json(char);
     })
     .catch(err => {
       res.status(500).json(err);
     });
 });
+
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+
+  Character.findById(id)
+    .populate("homeworld", "name climate -_id")
+    .then(char => {
+      Film.find({ characters: id })
+        .select("title")
+        .then(films => {
+          const character = { ...char._doc, movies: films }; // grab the document info or char
+          res.status(201).json(char);
+        });
+      // res.status(201).json(char);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
+
+// router.use("/:id", (req, res, next) => {
+//   Character.findById(req.params.id)
+//     .populate("homeworld")
+//     .then(char => {
+//       Film.find({ characters: id })
+//         .then(films => res.send(Object.assign({}, char, { movies: films })))
+//         .catch(err => next(err));
+//     })
+//     .catch(err => next(err));
+// });
+
+// router.get("/:id/vehicles", (req, res) => {
+//   const { id } = req.params;
+
+//   Character.findById(id)
+//     .select("vehicles")
+//     .then(char => {
+//       res.status(201).json(char);
+//     })
+//     .catch(err => {
+//       res.status(500).json(err);
+//     });
+// });
 
 module.exports = router;

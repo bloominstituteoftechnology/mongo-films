@@ -6,7 +6,7 @@ const router = express.Router();
 
 // add endpoints here
 router.get("/", (req, res) => {
-  Film.find()
+  Starship.find()
     .then(starship => {
       res.status(201).json(starship);
     })
