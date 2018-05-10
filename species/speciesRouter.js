@@ -1,20 +1,28 @@
-const express = require('express');
-const Specie = require('./Specie.js');
-const Character = require('../characters/Character.js');
+const express = require("express");
+const Specie = require("./Specie.js");
 const router = express.Router();
 
-// add endpoints here
-router.route("/populate/characters").put((req, res) => {
-    Specie.find({}).then(species => {
-      species.map(specie => {
-        specie.character_keys.map(key => {
-          Character.find({ key: key }).then(char =>
-            specie.characters.push(char[0]._id)
-          );
-          Specie.save();
-        });
-      });
+router.get("/", (req, res) => {
+  Specie.find()
+    .select("-character_keys -homeworld_key")
+    .populate("homeworld", "name climate terrain gravity diameter")
+    .then(species => {
+      res.status(200).json(species);
+    })
+    .catch(err => {
+      res.status(500).json({ errorMessage: "Not Found Are Species" });
     });
-  });
-  
+});
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  Specie.findById(id)
+    .populate("homeworld", "name climate terrain gravity diameter")
+    .then(specie => {
+      res.status(200).json(specie);
+    })
+    .catch(err => {
+      res.status(500).json({ errorMessage: "Not Found Are Species" });
+    });
+});
+
 module.exports = router;
