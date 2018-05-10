@@ -31,6 +31,7 @@ class App extends Component {
         
             <h2>Episode Number:   {junk.episode}</h2>
             <h2>{junk.title}</h2>
+            <h4>Directed by: {junk.director}</h4>
             <p>{junk.opening_crawl}</p>
             </div>
         )
