@@ -41,8 +41,9 @@ router.get('/:id/vehicles', (req, res) => {
             if(vehicles) {
                 const vehicle = { ...char._doc, vehicles: vehicles}
                 res.json(vehicle)
+            } else {
+                res.json(char)
             }
-            res.json(char)
         })
     })
     .catch(err => {
