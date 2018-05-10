@@ -23,6 +23,16 @@ function get(req, res) {
     });
 }
 
+function getById(req, res) {
+    const { id } = req.params;
+
+    Specie
+        .findById(id)
+        .then(specie => {
+        res.status(200).json(specie);
+    });
+}
+
 function post(req, res) {
     const specieInfo = req.body;
 
@@ -38,16 +48,6 @@ function post(req, res) {
         .catch(err => {
             res.status(500).json(err);
         });
-}
-
-function getById(req, res) {
-    const { id } = req.params;
-
-    Specie
-        .findById(id)
-        .then(specie => {
-        res.status(200).json(specie);
-    });
 }
 
 function put(req, res) {

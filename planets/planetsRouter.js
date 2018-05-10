@@ -1,6 +1,8 @@
 const express = require('express');
 
 const Planet = require('./Planet.js');
+const Character = require('../characters/Character');
+const Species = require('../species/Specie');
 
 const router = express.Router();
 
@@ -16,11 +18,26 @@ router
     .get(getById)
     .put(put)
     .delete(destroy)
-    
+
 function get(req, res) {
     Planet.find().then(planet => {
         res.status(200).json(planet);
     });
+}
+
+function getById(req, res) {
+    const { id } = req.params;
+
+    const chars = Character.find({ homeworld: id });
+    const species = Species.find({ homeworld: id });
+
+    Promise.all([chars, species])
+        .then(results => {
+            const [characters, species] = results;
+
+            res.status(200).json({ characters, species });
+        })
+        .catch(err => res.send(err));
 }
 
 function post(req, res) {
@@ -40,16 +57,6 @@ function post(req, res) {
         });
 }
 
-function getById(req, res) {
-    const { id } = req.params;
-
-    Planet
-        .findById(id)
-        .then(planet => {
-        res.status(200).json(planet);
-    });
-}
-
 function put(req, res) {
     const { id } = req.params;
     const update = req.body;
@@ -60,19 +67,19 @@ function put(req, res) {
             Planet.find().then(planet => {
                 res.status(200).json(planet);
             });
-    });
+        });
 }
 
 function destroy(req, res) {
     const { id } = req.params;
-    
+
     Planet
         .findByIdAndRemove(id)
         .then(planet => {
             Planet.find().then(planet => {
                 res.status(200).json(planet);
             });
-    });
+        });
 }
 
 module.exports = router;

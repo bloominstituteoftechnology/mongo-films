@@ -23,6 +23,16 @@ function get(req, res) {
     });
 }
 
+function getById(req, res) {
+    const { id } = req.params;
+
+    Vehicle
+        .findById(id)
+        .then(vehicle => {
+        res.status(200).json(vehicle);
+    });
+}
+
 function post(req, res) {
     const vehicleInfo = req.body;
 
@@ -38,16 +48,6 @@ function post(req, res) {
         .catch(err => {
             res.status(500).json(err);
         });
-}
-
-function getById(req, res) {
-    const { id } = req.params;
-
-    Vehicle
-        .findById(id)
-        .then(vehicle => {
-        res.status(200).json(vehicle);
-    });
 }
 
 function put(req, res) {

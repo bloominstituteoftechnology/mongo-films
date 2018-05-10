@@ -23,6 +23,16 @@ function get(req, res) {
     });
 }
 
+function getById(req, res) {
+    const { id } = req.params;
+
+    Starship
+        .findById(id)
+        .then(starship => {
+        res.status(200).json(starship);
+    });
+}
+
 function post(req, res) {
     const starshipInfo = req.body;
 
@@ -38,16 +48,6 @@ function post(req, res) {
         .catch(err => {
             res.status(500).json(err);
         });
-}
-
-function getById(req, res) {
-    const { id } = req.params;
-
-    Starship
-        .findById(id)
-        .then(starship => {
-        res.status(200).json(starship);
-    });
 }
 
 function put(req, res) {
