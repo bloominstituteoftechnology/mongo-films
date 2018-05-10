@@ -13,7 +13,7 @@ class FilmList extends React.Component {
     componentDidMount() {
         axios.get('http://localhost:5000/api/films')
             .then(film => {
-                console.log(film);
+                // console.log(film);
                 this.setState({films: film.data});
             })
     }
@@ -23,7 +23,7 @@ class FilmList extends React.Component {
           <div className='FilmCard__list'>
 
                   {this.state.films.map((film) => {
-                      return <Film film={film}/>
+                      return <Film film={film} chars={film.characters} key={film._id}/>
                   })}
 
           </div>

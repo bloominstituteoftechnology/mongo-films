@@ -5,9 +5,12 @@ const film = props => {
 
     return (
         <div className='FilmCard'>
-            <Card>
+            <Card key={props.film._id}>
                 <CardHeader>{props.film.title}</CardHeader>
-                <CardBody>body</CardBody>
+                {console.log(props.film.characters)}
+
+                <CardBody>{props.chars.map((c) => c.name)}</CardBody>
+
             </Card>
         </div>
     );
