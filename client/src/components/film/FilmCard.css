@@ -8,3 +8,12 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.FilmCard_body {
+    padding: 2px;
+
+}
+
+ul {
+    list-style: none;
+}

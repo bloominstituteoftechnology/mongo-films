@@ -9,7 +9,10 @@ const film = props => {
                 <CardHeader>{props.film.title}</CardHeader>
                 {console.log(props.film.characters)}
 
-                <CardBody>{props.chars.map((c) => c.name)}</CardBody>
+                <CardBody  className='FilmCard_body'>
+                    <ul>
+                        {props.chars.map((c) => {return <li>{c.name} </li>})}
+                    </ul></CardBody>
 
             </Card>
         </div>
