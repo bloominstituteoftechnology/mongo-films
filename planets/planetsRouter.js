@@ -30,7 +30,10 @@ router.get("/:id", (req, res) => {
     .catch(err => {
       res
         .status(500)
-        .json({ errorMessage: "Could not get characters/species." });
+        .json({
+          errorMessage:
+            "Could not get the native characters/species of this planet."
+        });
     });
 
   // Planet.findById(id)

@@ -8,13 +8,18 @@ const Starship = require("../starships/Starship.js");
 const router = express.Router();
 
 router.get("/", (req, res) => {
+  const gender = req.query.gender;
   const minheight = Number(req.query.minheight);
   Character.find()
+    .select("-homeworld_key")
     .populate("homeworld", "name climate terrain gravity diameter")
     .then(chars => {
       const filteredChars = chars.filter(char => {
-        if (minheight) {
-          return char.height > minheight;
+        if (minheight && gender) {
+          return char.height > minheight && char.gender === gender;
+        }
+        if (minheight || gender) {
+          return char.height > minheight || char.gender === gender;
         } else return char;
       });
       const promises = filteredChars.map(char => {
@@ -52,7 +57,6 @@ router.get("/:id/vehicles", (req, res) => {
   const id = req.params.id;
   const vehicles = Vehicle.find({ pilots: id }).select("vehicle_class");
   const starships = Starship.find({ pilots: id }).select("starship_class");
-
   Promise.all([vehicles, starships])
     .then(results => {
       const [vehicles, starships] = results;

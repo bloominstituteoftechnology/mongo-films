@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   Starship.find()
+    .select("-pilot_keys")
     .populate("pilots", "name gender height skin_color hair_color eye_color")
     .then(starships => {
       res.status(200).json(starships);

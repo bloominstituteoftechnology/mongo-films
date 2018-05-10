@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   Specie.find()
+    .select("-character_keys -homeworld_key")
     .populate("homeworld", "name climate terrain gravity diameter")
     .then(species => {
       res.status(200).json(species);
