@@ -6,13 +6,21 @@ const router = express.Router();
 
 // add endpoints here
 router.get('/', (req, res) => {
-  Film.find()
-    .then(response => {
-      res.json(response);
-    })
-    .catch(err => {
-      res.status(500).json({msg: 'uh oh, this should not have happened'});
-    })
+  let producer = req.query.producer === undefined ? null : req.query.producer;
+  let release = req.query.producer === undefined ? null : req.query.released;
+  let query = Film.find();
+  if (producer) {
+    query.where('producer').equals(producer);
+  }
+  if (release) {
+    query.where('release_date').equals(release);
+  }
+  query.sort('episode').then(response => {
+    res.json(response)
+  })
+  .catch(err => {
+    res.status(500).json({msg: 'uh oh this should not have happened'})
+  })
 })
 
 router.get('/:id', (req, res) => {
