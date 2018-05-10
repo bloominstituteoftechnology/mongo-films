@@ -7,7 +7,7 @@ const router = express.Router();
 // add endpoints here
 router.route("/").get((req, res) => {
   Vehicle.find()
-    .populate('pilots')
+    .populate('pilots', 'name')
 		.then(vehicles => {
 			res.status(200).json(vehicles);
 		})

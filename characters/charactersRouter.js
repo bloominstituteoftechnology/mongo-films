@@ -51,12 +51,12 @@ router.route('/:id')
 
       query
         .then(char => {
-          Vehicle.find()
+          Vehicle.find({ pilots: id })
             .select('vehicle_class')
             .then(vehicles => {
               res.status(200).json({
                 ...char._doc,
-                movies: films
+                vehicles: vehicles
               });
             })
         })
