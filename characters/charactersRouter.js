@@ -1,7 +1,9 @@
 const express = require('express');
 const Vehicle = require('../vehicles/Vehicle.js');
 const Character = require('./Character.js');
+const Planet = require('../planets/Planet.js');
 const router = express.Router();
+
 
 // add endpoints here
 router
@@ -18,16 +20,24 @@ router
     .route('/:id/vehicles')
     .get(fetchvehicle)
 
+//GET ALL CHARACTERS - http://localhost:5000/api/characters
+router.get('/', function(req, res) {
+    Character.find()
+    .then(chars => res.status(200).json(chars))
+    .catch(err => {
+        res.status(500).json(err);
+    });
+});
 
 //GET by ID - Given a character id, (/api/characters/:id)
 //Postman GET test ok! http://localhost:5000/api/characters/5aa995a3b97194b732c167b8 (showing Princess Leia by ID)
 function getid(req, res) {
     const id = req.params.id;
     const query = Character.findById(id);
-    // query.populate('Homeworld', 'name');
+    //populate the character's homeworld.
+    query.populate('homeworld');
 
-    Character
-    .findById(id)
+    query
     .then(character => {
         if (character.length === 0) {
             res.status(404).json({ errorMsg: 'Character ID does not exist.' })
