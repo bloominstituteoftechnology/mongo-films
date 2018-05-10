@@ -19,6 +19,17 @@ router.route("/").get((req, res) => {
 		)
 		// replace planet ObjectIds with planet data
 		.populate("planets", "name climate terrain gravity diameter");
+	// Find all films produced by Gary Kurtz (/api/films?producer=gary+kurtz)
+	// Find all films released in 2005. (/api/films?released=2005)
+	const { producer, released } = req.query;
+	// validate producer and released
+	if (producer) {
+		query.where({ producer: RegExp(producer, "i") });
+	}
+
+	if (released) {
+		query.where({ release_date: RegExp(released, "i") });
+	}
 
 	query
 		.then(films => {
@@ -30,5 +41,7 @@ router.route("/").get((req, res) => {
 			});
 		});
 });
+
+router.route("/:id", (req, res) => {});
 
 module.exports = router;
