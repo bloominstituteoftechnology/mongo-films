@@ -1,6 +1,7 @@
 const express = require('express');
 
 const Character = require('./Character.js');
+const Vehicle = require('../vehicles/Vehicle.js')
 
 const router = express.Router();
 
@@ -21,6 +22,7 @@ router
   .route('/:id')
   .get((req, res) => {
     Character.find({ _id: req.params.id })
+      .populate('homeworld', 'name climate -_id')
       .then(char => {
         if(char.length > 0) {
           res.status(201).json({ char });
@@ -33,19 +35,19 @@ router
       })
   })
 
-  router
-  .route('/:id/vehicle')
+router
+  .route('/:id/vehicles')
   .get((req, res) => {
-    Character.find({ _id: req.params.id })
-      .then(char => {
-        if(char.length > 0) {
-          res.status(201).json({ char });
+    Vehicle.find({ "pilots": req.params.id })
+      .then(vehicle => {
+        if(vehicle.length > 0) {
+          res.status(201).json({ vehicle });
         } else {
-          res.status(404).json({ errorMessage: "The character with the specified ID does not exist." });
+          res.status(404).json({ errorMessage: "This character has no vehicles associated with them in this database." });
         }
       })
       .catch(err => {
-        res.status(500).json({ errorMessage: "Character information could not be retreived." });
+        res.status(500).json({ errorMessage: "Vehicle information could not be retreived." });
       })
   })
 
