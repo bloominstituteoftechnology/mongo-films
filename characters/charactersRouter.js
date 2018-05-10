@@ -60,4 +60,37 @@ router.get("/:id/vehicles", (req, res) => {
     });
 });
 
+// the below way will show the whole character plus films vehicles and starships
+// router.get("/:id/vehicles", (req, res) => {
+//   const id = req.params.id;
+//   Character.findById(id)
+//     .populate("homeworld", "name climate terrain gravity diameter")
+//     .then(char => {
+//       const films = Film.find({ characters: id }).select("title");
+//       const vehicles = Vehicle.find({ pilots: id }).select("vehicle_class");
+//       const starships = Starship.find({ pilots: id }).select("starship_class");
+
+//       Promise.all([films, vehicles, starships])
+//         .then(results => {
+//           const [films, vehicles, starships] = results;
+//           const character = {
+//             ...char._doc,
+//             films: films,
+//             vehicles: vehicles,
+//             starships: starships
+//           };
+//           res.status(200).json(character);
+//         })
+//         .catch(err => {
+//           res.status(500).json({
+//             errorMessage:
+//               "Could not get the vehicles/starships this character piloted."
+//           });
+//         });
+//     })
+//     .catch(err => {
+//       res.status(500).json({ errorMessage: "Could not get character." });
+//     });
+// });
+
 module.exports = router;
