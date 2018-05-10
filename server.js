@@ -1,5 +1,6 @@
 const express = require('express');
 const helmet = require('helmet');
+const cors = require('cors');
 
 const db = require('./data/db.js');
 const charactersRouter = require('./characters/charactersRouter.js');
@@ -10,6 +11,7 @@ const vehiclesRouter = require('./vehicles/vehiclesRouter.js');
 const planetsRouter = require('./planets/planetsRouter.js');
 
 const server = express();
+server.use(cors());
 
 db
   .connectTo('starwars')
