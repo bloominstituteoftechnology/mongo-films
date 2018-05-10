@@ -18,7 +18,11 @@ router
     .delete(destroy)
     
 function get(req, res) {
-    Vehicle.find().then(vehicle => {
+    Vehicle
+    .find()
+    .select('vehicle_class _id')
+    // .populate('pilot_keys', 'name gender birth_year -_id' )
+    .then(vehicle => {
         res.status(200).json(vehicle);
     });
 }

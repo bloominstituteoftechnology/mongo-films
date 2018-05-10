@@ -2,6 +2,7 @@ const express = require('express');
 
 const Character = require('./Character.js');
 const Film = require('../films/Film');
+const Vehicle = require('../vehicles/Vehicle');
 
 const router = express.Router();
 
@@ -18,10 +19,16 @@ router
     .put(put)
     .delete(destroy)
 
+router
+    .route('/:id/vehicles')
+    .get(getVehicles)
+
 function get(req, res) {
-    Character.find().populate('homeworld', 'climate terrain name -_id').then(character => {
-        res.status(200).json(character);
-    });
+    Character.find()
+        .populate('homeworld', 'climate terrain name -_id')
+        .then(character => {
+            res.status(200).json(character);
+        });
 }
 
 function getById(req, res) {
@@ -42,6 +49,28 @@ function getById(req, res) {
                 .select('title -_id')
                 .then(films => {
                     const character = { ...char._doc, movies: films };
+
+                    res.status(200).json(character);
+                });
+        })
+        .catch(err => {
+            res.status(500).json(err);
+        });
+}
+
+function getVehicles(req, res) {
+    const { id } = req.params;
+
+    Character.findById(id)
+    .select('name gender -_id')
+        .populate('homeworld', 'name climate -_id')
+        .then(char => {
+            const key = char.key;
+            Vehicle.find({ pilots: id })
+                .select('vehicle_class -_id')
+                .then(response => {
+                    const character = { ...char._doc, vehicles: response };
+
                     res.status(200).json(character);
                 });
         })

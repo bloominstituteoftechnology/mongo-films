@@ -55,6 +55,7 @@ function getById(req, res) {
 
     Film
         .findById(id)
+        .select('episode producer title director release_date opening_crawl')
         .populate('starships', 'starship_class -_id')
         .populate('vehicles', 'vehicle_class -_id')
         .populate('planets', 'climate name -_id')
