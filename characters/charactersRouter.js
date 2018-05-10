@@ -6,15 +6,6 @@ const Film = require('../films/Film');
 
 const router = express.Router();
 
-//GET ALL CHARACTERS - http://localhost:5000/api/characters
-router.get('/', function(req, res) {
-    Character.find()
-    .then(chars => res.status(200).json(chars))
-    .catch(err => {
-        res.status(500).json(err);
-    });
-});
-
 //GET Character by ID - show films/homeworld
 router.get('/:id', function(req, res) {
     const { id } = req.params;
@@ -38,37 +29,35 @@ router.get('/:id', function(req, res) {
     });
 });
 
+//OTHER SYNTAX vs what was used above
 
-//-----------------------------------
-// add endpoints here
-//-----------------------------------
-
-//gender by height
-router
-    .route('/')
-    .get(femaletall)
 
 //vehicles
 router
     .route('/:id/vehicles')
     .get(fetchvehicle)
 
+//gender by height
+router
+    .route('/')
+    .get(femaletall)
+
 //Find all female characters taller than 100cm (/api/characters?minheight=100)
-//Postman GET Test ok! http://localhost:5000/api/characters?minheight=100 
+// http://localhost:5000/api/characters?minheight=100 
 function femaletall(req, res) {
     const minheight = req.query.minheight;
-    let query = Character.find();
-    if(Character.height > 100) {
-        query.where({height: minheight});
-    }
-    Character.find({gender: 'female'}).sort('height').select('name')
+    let query = Character.find({});
+    if(minheight) {
+    Character.find({gender: 'female', height: {$exists: true}, $where: `this.height >= ${minheight}`}) 
     .then(friends => {
         res.status(200).json(friends);
     })
     .catch(err => {
         res.status(500).json({ errorMsg: 'Info Not Found.' })
     });
+    }
 }
+
 
 //Find all vehicles driven by a given character. (/api/characters/:id/vehicles)
 //Postman GET Test ok! http://localhost:5000/api/characters/5aa995a3b97194b732c167b8/vehicles (Showing vehiles piloted by Princess Leia)
@@ -120,3 +109,12 @@ module.exports = router;
 //         res.status(500).json({ errorMsg: 'Character Info Not Found.' })
 //     });
 // }
+
+// GET ALL CHARACTERS - http://localhost:5000/api/characters
+// router.get('/', function(req, res) {
+//     Character.find()
+//     .then(chars => res.status(200).json(chars))
+//     .catch(err => {
+//         res.status(500).json(err);
+//     });
+// });
