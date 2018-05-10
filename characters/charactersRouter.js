@@ -18,4 +18,14 @@ router.route('/')
       })
   })
 
+router.route('/:id')
+  .get((req, res) => {
+    const { id } = req.params;
+    Character.findById(id)
+      .then(char => {
+        res.status(200).json(char);
+      })
+      .catch();
+  });
+
 module.exports = router;
