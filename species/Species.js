@@ -8,7 +8,7 @@ const Species = new mongoose.Schema({
   designation: String,
   created: { type: Date, default: Date.now },
   eye_colors: String,
-  people: [Number], // use this to populate the characters link as per readme
+  character_keys: [Number], // use this to populate the characters link as per readme
   skin_colors: String,
   language: String,
   hair_colors: String,
@@ -20,7 +20,11 @@ const Species = new mongoose.Schema({
   homeworld: {
     type: ObjectId,
     ref: 'Planet',
-  }
+  },
+  characters: [{
+    type: ObjectId,
+    ref: 'Character',
+  }],
 });
 
 module.exports = mongoose.model('Species', Species);
