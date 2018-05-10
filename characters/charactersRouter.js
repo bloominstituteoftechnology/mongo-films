@@ -31,7 +31,6 @@ router.get('/:id', function(req, res) {
 
 //OTHER SYNTAX vs what was used above
 
-
 //vehicles
 router
     .route('/:id/vehicles')
