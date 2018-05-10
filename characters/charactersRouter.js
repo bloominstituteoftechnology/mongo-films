@@ -1,7 +1,8 @@
 const express = require('express');
 
 const Character = require('./Character.js');
-
+const Vehicle = require('../vehicles/Vehicle')
+const Film = require('../films/Film.js');
 const router = express.Router();
 
 router
@@ -11,20 +12,23 @@ router
 
 router
   .route('/:id')
-    .get((req, res) => {
-        const {id} = req.params
-    Character
-    .findById(id)
-    .populate('homeworld', 'climate name')
-    .then(Character=>{
-      Film.find({character: id}).elect('title').then(films=>{
-        const character = {...char._doc, movies: films}
-        res.status(202).json(character);
-      })      
-    })
-    .catch(err=>{
-        res.status(500).json({errorMessage: "The Characters information could not be retrieved."})
-    })
+  .get((req, res) => {
+    const { id } = req.params;
+
+  let query = Character.findById(id).populate('homeworld');
+
+  query.then(char => {
+    Film.find({ characters: id })
+      .select({ title: 1, _id: 0 })
+      .then(films => {
+        const character = { ...char._doc, movies: films };
+        res.status(200).json(character);
+      })
+      .catch(err => {
+        res.status(500).json(err);
+      });
+  });
+    
   })
   .delete((req, res) => {
     const {id} = req.params
@@ -48,12 +52,27 @@ router
   });
 
 function get(req, res) {
-  Character.find().then(Characters => {
-    res.status(200).json(Characters);
-  })
-  .catch(err=>{
-      res.status(500).json({errorMessage: "The Characters information could not be retrieved."})
-  })
+  const { minheight } = req.query;
+
+  let query = Character.find({})
+
+  
+
+  if (minheight) {
+    query
+      .where({ gender: 'female' })
+      .where('height')
+      .gte(Number(minheight));
+  }
+
+  query
+    .then(chars => {
+ 
+      res.status(200).json(chars);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
 }
 
 function post(req, res) {
@@ -69,5 +88,15 @@ function post(req, res) {
       res.status(500).json({ errorMessage: err });
     });
 }
+router.route('/:id/vehicles')
+.get((req, res) => {
+  const { id } = req.params;
+
+  Vehicle.find({ pilots: id })
+    .select({ vehicle_class: 1, _id: 0 })
+    .then(vehicles => {
+      res.status(200).json(vehicles);
+    });
+})
 
 module.exports = router;

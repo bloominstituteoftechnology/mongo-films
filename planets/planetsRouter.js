@@ -2,7 +2,7 @@ const express = require('express');
 
 const Planet = require('./Planet.js');
 const Character = require('../characters/Character.js');
-const Species = require('../species/species.js');
+const Specie = require('../species/Specie.js');
 const router = express.Router();
 
 // add endpoints here
@@ -17,7 +17,7 @@ router
         const {id} = req.params
         
         const chars = Character.find({homworld: id})
-        const species = Species.find({homworld: id})
+        const species = Specie.find({homworld: id})
 
         promise.all([chars, species]).then(resaults=>{
           const [characters,species] = resaults
