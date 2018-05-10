@@ -7,6 +7,23 @@ const router = express.Router();
 
 // add endpoints here
 
+router
+    .route('/')
+    .get((req, res) => {
+        const heightQuery = req.query.minheight;
+        const query = Character.find({})
+
+            if (heightQuery) {
+                query.find({ height: { $gt: Number(heightQuery) }, gender: 'female' })
+            }
+            query.then(characters => {
+                res.status(200).json(characters);
+            })
+            .catch(err => {
+                res.status(500).json(err);
+            })
+    })
+
 router.get('/:id', (req, res) => {
     const id = req.params.id;
     
