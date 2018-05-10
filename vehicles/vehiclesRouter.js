@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   Vehicle.find()
+    .populate("pilots", "name")
     .then(p => {
       res.status(200).json(p);
     })

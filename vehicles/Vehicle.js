@@ -6,7 +6,7 @@ const Vehicle = new mongoose.Schema({
   pilot_keys: [Number],
   key: { type: Number, unique: true },
   // add pilots field to link it to the Character model
-  pilot: [
+  pilots: [
     {
       type: ObjectId,
       ref: "Character"

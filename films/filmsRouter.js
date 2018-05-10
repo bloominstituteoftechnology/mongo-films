@@ -20,8 +20,6 @@ router.get("/", (req, res) => {
 
     .then(films => {
       const filteredFilms = films.filter(film => {
-        console.log("hilal", film.producer);
-
         if (producer !== undefined && release_date !== undefined) {
           return (
             film.producer.toLowerCase().includes(producer) &&
