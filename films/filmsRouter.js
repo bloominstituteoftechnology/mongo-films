@@ -24,7 +24,9 @@ router.get('/', (req, res) => {
 			});
 	} else
 		Film.find({})
-			.sort({ episode: 'asc' })
+			.sort({ episode: '' })
+			.populate( 
+				'films', '_id episode title producer')
 			.populate(
 				'characters', '_id name gender height skin_color hair_color eye_color')
 			.populate('planets', 'name climate terrain gravity diameter')
