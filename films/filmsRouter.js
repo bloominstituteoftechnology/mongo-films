@@ -6,17 +6,51 @@ const router = express.Router();
 
 
 
-
 router.get("/", (req, res) => {
-    Film.find().populate("characters planets", 
-    "_id name gender height skin_color hair_color eye_color climate terrain gravity diameter")
-    .sort("key").then(films => {
+  const query = Film.find().select('producer release_date');
+  const {producer, released} = req.query;
+
+  if(producer) {
+    const filter = new RegExp(producer, 'i');
+    query.where({producer: filter});
+  }
+
+  if (released) {
+    query.where({release_date: new RegExp(released, 'i')});
+  }
+
+    query
+    .select('producer release_date')
+    .populate("characters planets", 
+    "-_id name gender height skin_color hair_color eye_color climate terrain gravity diameter")
+    .sort("key")
+    
+    
+    .then(films => {
       res.status(200).json(films)
     }).catch(err => {
       res.status(500).json({
         errorMessage: "The film information could not be retrieved."})
     })
   })
+
+// WORKING HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // router.get("/", (req, res) => {
+  //   let query = Film.find().select('producer release_date');
+  //   const {producer, released} = req.query;
+
+  //   if(producer) {
+  //     const filter = new RegExp(producer, 'i');
+  //     query.where({producer: filter});
+  //   }
+
+  //   if (released) {
+  //     query.where({release_date: new RegExp(released, 'i')});
+  //   }
+    
+  //   query.then(films => res.status(200).json({films}))
+  // })
+
 
   
   router.get("/:id", (req, res) => {
