@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
         res.status(200).json(vehicles);
       })
       .catch(err => {
-        res.status(500).json({ errorMessage: "No Such Vehicle" });
+        res.status(500).json({ errorMessage: "Not Found Are Vehicle" });
       });
   });
   router.get("/:id", (req, res) => {
@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
         res.status(200).json(vehicle);
       })
       .catch(err => {
-        res.status(500).json({ errorMessage: "No Such Vehicle" });
+        res.status(500).json({ errorMessage: "No Found Are Vehicle" });
       });
   });
 module.exports = router;

@@ -30,9 +30,7 @@ router.get("/:id", (req, res) => {
       res
         .status(500)
         .json({
-          errorMessage:
-            "Not Found Are Characters"
-        });
+          errorMessage: "Not Found Are Characters/Species"});
     });
 });
 
