@@ -2,23 +2,9 @@ const express = require('express');
 const Vehicle = require('../vehicles/Vehicle.js');
 const Character = require('./Character.js');
 const Planet = require('../planets/Planet.js');
+const Film = require('../films/Film');
+
 const router = express.Router();
-
-
-// add endpoints here
-router
-    .route('/:id')
-    .get(getid)
-
-//gender by height
-router
-    .route('/')
-    .get(femaletall)
-
-//vehicles
-router
-    .route('/:id/vehicles')
-    .get(fetchvehicle)
 
 //GET ALL CHARACTERS - http://localhost:5000/api/characters
 router.get('/', function(req, res) {
@@ -29,25 +15,43 @@ router.get('/', function(req, res) {
     });
 });
 
-//GET by ID - Given a character id, (/api/characters/:id)
-//Postman GET test ok! http://localhost:5000/api/characters/5aa995a3b97194b732c167b8 (showing Princess Leia by ID)
-function getid(req, res) {
-    const id = req.params.id;
-    const query = Character.findById(id);
-    //populate the character's homeworld.
-    query.populate('homeworld');
+//GET Character by ID - show films/homeworld
+router.get('/:id', function(req, res) {
+    const { id } = req.params;
+    //add a movies property that should be an array of all the movies where the character appeared.
+    //Postman Test ok! http://localhost:5000/api/characters/5aa995a3b97194b732c167ab 
+    //(Luke Skywalker data/homeworld/films)
+    Character.findById(id)
+    .populate('homeworld', 'climate -_id')
+    .then(char => {
+        Film.find({ characters: id })
+        .select('title -_id episode release_date')
+        
+        .then(films => {
+            const character = { ...char._doc, movies: films };
 
-    query
-    .then(character => {
-        if (character.length === 0) {
-            res.status(404).json({ errorMsg: 'Character ID does not exist.' })
-        }
-        res.status(200).json(character);
+            res.status(200).json(character);
+        });
     })
     .catch(err => {
-        res.status(500).json({ errorMsg: 'Character Info Not Found.' })
+        res.status(500).json(err);
     });
-}
+});
+
+
+//-----------------------------------
+// add endpoints here
+//-----------------------------------
+
+//gender by height
+router
+    .route('/')
+    .get(femaletall)
+
+//vehicles
+router
+    .route('/:id/vehicles')
+    .get(fetchvehicle)
 
 //Find all female characters taller than 100cm (/api/characters?minheight=100)
 //Postman GET Test ok! http://localhost:5000/api/characters?minheight=100 
@@ -88,3 +92,31 @@ function fetchvehicle(req, res) {
 }
 
 module.exports = router;
+
+
+
+//OTHER SYNTAX
+
+// router
+//     .route('/:id')
+//     .get(getid)
+
+//GET by ID - Given a character id, (/api/characters/:id)
+//Postman GET test ok! http://localhost:5000/api/characters/5aa995a3b97194b732c167b8 (showing Princess Leia by ID)
+// function getid(req, res) {
+//     const id = req.params.id;
+//     const query = Character.findById(id);
+//     //populate the character's homeworld.
+//     query.populate('homeworld');
+
+//     query
+//     .then(character => {
+//         if (character.length === 0) {
+//             res.status(404).json({ errorMsg: 'Character ID does not exist.' })
+//         }
+//         res.status(200).json(character);
+//     })
+//     .catch(err => {
+//         res.status(500).json({ errorMsg: 'Character Info Not Found.' })
+//     });
+// }

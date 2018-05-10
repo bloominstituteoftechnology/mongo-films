@@ -17,12 +17,14 @@ router.get('/', function(req, res) {
     //order by episode from 1-6
     query.sort('episode')
 
-    //Find all films produced by Gary Kurtz - Postman Test ok! http://localhost:5000/api/films?producer=gary+kurtz
+    //Find all films produced by Gary Kurtz
+    //Postman Test ok! http://localhost:5000/api/films?producer=gary+kurtz
     if (producer) {
         const filter = new RegExp(producer, 'i');
         query.where({ producer: filter})
     }
-    //Find all films released in 2005. (/api/films?released=2005) - Postman Test ok! http://localhost:5000/api/films?released=2005 
+    //Find all films released in 2005
+    //Postman Test ok! http://localhost:5000/api/films?released=2005 
     if (released) {
         query.where({ release_date: {$regex: released, $options: 'i' } });
     }
