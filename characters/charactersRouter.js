@@ -15,4 +15,13 @@ router.get('/', (req, res) => {
   })
 })
 
+router.get('/:id', (req, res) => {
+  Character.findById(req.params.id)
+  .populate('homeworld')
+  .then(character => res.status(200).json(character))
+  .catch(error => {
+    res.status(500).json(error);
+  });
+});
+
 module.exports = router;
