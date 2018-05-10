@@ -13,6 +13,16 @@ router.get('/', (req, res) => {
         .populate('characters', 'name gender height skin_color hair_color eye_color')
         .populate('planets', 'name climate terrain gravity diameter');
 
+    if (producerFilter) {
+        const producerRegx = new RegExp(producerFilter, 'i');
+        query.where({ producer: producerRegx });
+    }
+
+    if (filmReleased) {
+        const filmRegx = new RegExp(filmReleased);
+        query.where({ release_date: filmRegx });
+    }
+    
     query.then(films => {
         res.json(films);
     })
