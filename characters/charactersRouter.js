@@ -65,8 +65,10 @@ function getvehicle(req, res) {
 function ihategenders(req, res) {
     const {minheight} = req.query;
     let query = Character.find();
-    if(minheight == 100) {
-Character.find({gender: 'female', height: {$exists: true}, $where: "this.height > 100"})
+    if(minheight ) {
+        // query.where({ height: { $regex: minheight, $options: 'i' } });
+
+Character.find({gender: 'female', height: {$exists: true}, $where: "this.height >= 100"})
        .sort('-height')
        .then(friends => {
         res.status(200).json(friends);
