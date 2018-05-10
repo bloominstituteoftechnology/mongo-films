@@ -6,10 +6,7 @@ const router = express.Router();
 
 // add endpoints here
 router.get('/', (req, res) => {
-    const producer = req.query.producer;
-    const released = req.query.released;
-
-    
+    const { producer, release_date } = req.query;
     let query = Film.find().sort({ episode: 1 }).populate('characters', '_id name gender height skin_color hair_color eye_color').populate('planets', 'name climate terrain gravity diameter');
 
     if (producer) {
@@ -17,9 +14,9 @@ router.get('/', (req, res) => {
         query.where({ producer: regex });
     }
 
-    if (released) {
-        const regex = new RegExp(released, 'i');
-        query.where({ released: regex });
+    if (release_date) {
+        const regex = new RegExp(release_date, 'i');
+        query.where({ release_date: regex });
     }
     
     query.then(films => {
