@@ -20,6 +20,7 @@ router
 
 
 //GET by ID - Given a character id, (/api/characters/:id)
+//Postman GET test ok! http://localhost:5000/api/characters/5aa995a3b97194b732c167b8 (showing Princess Leia by ID)
 function getid(req, res) {
     const id = req.params.id;
     const query = Character.findById(id);
@@ -39,6 +40,7 @@ function getid(req, res) {
 }
 
 //Find all female characters taller than 100cm (/api/characters?minheight=100)
+//Postman GET Test ok! http://localhost:5000/api/characters?minheight=100 
 function femaletall(req, res) {
     const minheight = req.query.minheight;
     let query = Character.find();
@@ -55,6 +57,7 @@ function femaletall(req, res) {
 }
 
 //Find all vehicles driven by a given character. (/api/characters/:id/vehicles)
+//Postman GET Test ok! http://localhost:5000/api/characters/5aa995a3b97194b732c167b8/vehicles (Showing vehiles piloted by Princess Leia)
 function fetchvehicle(req, res) {
     const id = req.params.id;
     Character

@@ -9,6 +9,7 @@ router
     .get(get)
 
 //Return a list of all films. (/api/films)
+//Postman Test ok! http://localhost:5000/api/films
 function get(req, res) {
     const {producer, release_date} = req.query;
     const query = Film.find({})
@@ -16,7 +17,8 @@ function get(req, res) {
     query.sort('episode')
 
     query
-    //Find all films produced by Gary Kurtz (/api/films?producer=gary+kurtz)
+    //Find all films produced by Gary Kurtz 
+    //Postman Test ok! http://localhost:5000/api/films?producer=gary+kurtz
     if (producer) query.where({ producer: new RegExp(producer, 'i') });
     //Find all films released in 2005. (/api/films?released=2005)
     if (release_date) query.where({ release_date: new RegExp(release_date, 'i') });
