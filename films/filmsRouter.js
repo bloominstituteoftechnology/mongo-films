@@ -7,7 +7,7 @@ const router = express.Router();
 router.route('/')
   .get((req, res) => {
     const { producer, released } = req.query;
-    const query = Film.find();
+    const query = Film.find().sort('episode');
     
     query.populate('characters', 'name gender _id height skin_color hair_color eye_color');
     query.populate('planets', 'name climate terrain gravity diameter');
