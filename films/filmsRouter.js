@@ -46,12 +46,16 @@ router
   });
 
 function get(req, res) {
-  Film.find().then(Films => {
-    res.status(200).json(Films);
-  })
-  .catch(err=>{
-      res.status(500).json({errorMessage: "The Films information could not be retrieved."})
-  })
+  const episodeSort = req.query.episode;
+  let query = Film.find().sort('episode')
+
+query.then(chars=>{
+  res.json(chars)
+})
+.catch(err=>{
+  console.log(err)
+})
+ 
 }
 
 function post(req, res) {
