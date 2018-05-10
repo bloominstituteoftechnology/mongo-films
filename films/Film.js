@@ -16,7 +16,7 @@ const Film = new mongoose.Schema({
   key: { type: Number, unique: true },
   starship_ids: [Number],
   vehicle_ids: [Number],
-  films: [{ type: ObjectId, ref: 'Films'}],
+  films: [{ type: ObjectId, ref: 'Film'}],
   characters: [{ type: ObjectId, ref: 'Character' }],
 	species: [{ type: ObjectId, ref: 'Specie' }],
 	planets: [{ type: ObjectId, ref: 'Planet' }],

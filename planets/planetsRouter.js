@@ -1,18 +1,36 @@
-const express = require('express');
-const Planet = require('./Planet.js');
-const Character = require('../characters/Character.js');
-const Specie = require('../species/Specie.js');
+
+const express = require("express");
+
+const Planet = require("./Planet.js");
+const Character = require("../characters/Character");
+const Species = require("../species/Specie");
+
 const router = express.Router();
 
-router.get('/:id', (req, res) => {
-	Character.find({ homeworld_key: req.params.id })
-		.then(chars => {
-			Specie.find({ homeworld_key: req.params.id }).then(species => {
-				const response = { ...chars, ...species };
-				res.status(200).json(response);
-			});
-		})
-		.catch(error => console.log(error));
+router.get("/", (req, res) => {
+  Planet.find()
+    .then(planets => {
+      res.status(200).json(planets);
+    })
+    .catch(err => {
+      res.status(500).json({ errorMessage: "Could not get planets." });
+    });
 });
 
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  const chars = Character.find({ homeworld: id });
+  const species = Species.find({ homeworld: id });
+
+  Promise.all([chars, species])
+    .then(results => {
+      const [characters, species] = results;
+      res.status(200).json({ characters, species });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ errorMessage: "Could not get characters/species." });
+    });
+});
 module.exports = router;
