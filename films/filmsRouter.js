@@ -8,7 +8,11 @@ router.get("/", (req, res) => {
   const producerFilter = req.query.producer;
   const releaseFilter = req.query.released;
 
-  let query = Film.find().sort({ episode: "asc" });
+  let query = Film.find()
+      .select('title')
+      .populate('characters', '_id name gender height skin_color hair_color eye_color')
+      .populate('planets', 'name climate terrain gravity diameter')
+      .sort({ episode: "asc" });
 
   if (producerFilter) {
     const filter = new RegExp(producerFilter, "i");
