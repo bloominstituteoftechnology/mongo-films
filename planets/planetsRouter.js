@@ -2,7 +2,7 @@ const express = require('express');
 
 const Planet = require('./Planet.js');
 const Species = require('../species/Species');
-const Character = require('..characters/Character');
+const Character = require('../characters/Character');
 
 const router = express.Router();
 
