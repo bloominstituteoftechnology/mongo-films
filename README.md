@@ -73,8 +73,8 @@ Find all vehicles driven by a given character. (/api/characters/:id/vehicles)
 Find all female characters taller than 100cm (/api/characters?minheight=100)
 
 Given a planet Id find all `characters` born in that planet and all native `species`. (/api/planet/:id)
-
-Write an endponint (PUT to /api/species/populate/charactes) that will go over the list of all species and using the list of `character_keys` add a `characters` field that references the character with the corresponding `key` in the characters collection. The `characters` field in species must be of type `ObjectId` and reference the `_id` on the `characters` collection.
+<!-- THIS WAS REMOVED BY LUIS
+Write an endponint (PUT to /api/species/populate/charactes) that will go over the list of all species and using the list of `character_keys` add a `characters` field that references the character with the corresponding `key` in the characters collection. The `characters` field in species must be of type `ObjectId` and reference the `_id` on the `characters` collection. -->
 
 ## Stretch Problems
 
