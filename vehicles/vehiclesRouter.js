@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   Vehicle.find()
+    // .populate("pilots", "name gender height skin_color hair_color eye_color")
     .then(vehicles => {
       res.status(200).json(vehicles);
     })
@@ -17,6 +18,7 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   Vehicle.findById(id)
+    // .populate("pilots", "name gender height skin_color hair_color eye_color")
     .then(vehicle => {
       res.status(200).json(vehicle);
     })

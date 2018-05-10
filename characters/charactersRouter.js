@@ -18,6 +18,7 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   Character.findById(id)
+    .populate("homeworld", "name climate terrain gravity diameter")
     .then(character => {
       res.status(200).json(character);
     })

@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   Specie.find()
+    .populate("homeworld", "name climate terrain gravity diameter")
     .then(species => {
       res.status(200).json(species);
     })
@@ -17,6 +18,7 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   Specie.findById(id)
+    .populate("homeworld", "name climate terrain gravity diameter")
     .then(specie => {
       res.status(200).json(specie);
     })
