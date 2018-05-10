@@ -6,4 +6,16 @@ const router = express.Router();
 
 // add endpoints here
 
+router
+  .route('/')
+  .get((req, res) => {
+    Specie.find({})
+      .then(specie => {
+        res.status(200).json(specie);
+      })
+      .catch(err => {
+        res.status(500).json(err);
+      });
+  })
+
 module.exports = router;
