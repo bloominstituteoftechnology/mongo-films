@@ -20,6 +20,7 @@ function get(req, res) {
 //returns a specific character
 router.route("/:id").get((req, res) => {
   Character.findById(req.params.id)
+    .populate("homeworld")
     .then(character => {
       if (!character) {
         res.status(404).json({
