@@ -22,18 +22,21 @@ router.get('/', (req, res) => {
 			.catch(err => {
 				console.log(err);
 			});
-	} else
+	} else {
 		Film.find({})
-			.sort({ episode: '' })
+			.sort({ episode: '1'})
 			.populate(
-				'characters', '_id name gender height skin_color hair_color eye_color')
-			.populate(
-				'planets', 'name climate terrain gravity diameter')
+				'characters', '_id name gender height skin_color hair_color eye_color'
+			)
+			.populate('planets', 'name climate terrain gravity diameter')
 			.then(films => {
 				res.status(200).json(films);
 			})
 			.catch(err => {
 				console.log(err);
-			});
+			})};
+		
+
 });
+
 module.exports = router;

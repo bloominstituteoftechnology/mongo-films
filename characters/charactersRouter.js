@@ -17,8 +17,15 @@ router.get('/', (req, res) => {
 			.catch(err => {
 				console.log(err);
 			});
-	} else res.status(404).json(' Not Found Is Character');
-});
+	} else  { 
+		Character.find({})
+	.then(characters => {
+		res.status(200).json(characters);
+	})
+	.catch(error => {
+		res.status(500).json(error);
+	});;
+}});
 
 router.get('/:id', (req, res) => {
 	const id = req.params.id;
