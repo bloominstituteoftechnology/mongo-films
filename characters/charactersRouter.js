@@ -7,12 +7,12 @@ const router = express.Router();
   
   router.get("/", (req, res, next) => {
     const query = Character.find().select();
-    const {gender} = req.query;
+    const {minheight} = req.query;
 
 
-    if(gender) {
-      const filter = new RegExp(gender, 'i')
-      query.where({gender: filter})
+    if(minheight) {
+      query.where("gender").equals("female")
+      .where("height").gt("100")
     }
 
 
