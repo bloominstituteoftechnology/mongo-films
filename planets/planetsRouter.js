@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
       res.status(200).json(planets);
     })
     .catch(err => {
-      res.status(500).json({ errorMessage: "Could not get planets." });
+      res.status(500).json({ errorMessage: "No Planets Maybe Destroyed By DeathStar" });
     });
 });
 
