@@ -5,6 +5,14 @@ const Film = require("../films/Film.js");
 const Vehicle = require('../vehicles/Vehicle');
 const router = express.Router();
 
+
+router.get('/', (req, res, next) => {
+    const { minheight } = req.query;
+    Character.find({ gender: 'female', height: { $gt: minheight }})
+        .then(tallGirls => res.send(tallGirls))
+        .catch(err => next(err))
+});
+
 router.get('/:id', (req, res) => {
     const {id} = req.params;
 
