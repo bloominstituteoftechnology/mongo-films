@@ -2,7 +2,7 @@ const express = require('express');
 
 const Film = require('../films/Film');
 const Character = require('./Character.js');
-const Vehicles = require('../vehicles/Vehicle');
+const Vehicle = require('../vehicles/Vehicle');
 
 const router = express.Router();
 
@@ -29,9 +29,11 @@ router.get('/:id', (req, res) => {
     const { id } = req.params;
     Character.findById(id).populate('homeworld')
     .then(character => {
-        Film.find({ characters: req.params.id }).select('title episode')
+        Film.find({ characters: id }).select('title episode')
         .then(films => {
-            res.status(200).send(Object.assign({}, character, { movies: films }))
+            const newCharacter = {...char._doc, movies: films};
+            res.status(200).json(newCharacter);
+            // res.status(200).send(Object.assign({}, character, { movies: films }))
         })
         .catch(err => {
             res.status(500).json(err);
@@ -44,10 +46,10 @@ router.get('/:id', (req, res) => {
 
 router.get('/:id/vehicles', (req, res) => {
     const { id } = req.params;
-    Vehicles.find({ pilots: id })
+    Vehicle.find({ pilots: id })
     .populate('pilots')
-    .then(vehicle => {
-        res.status(200).json(vehicle);
+    .then(vehicles => {
+        res.status(200).json(vehicles);
     })
     .catch(err => {
         res.status(500).json(err);
