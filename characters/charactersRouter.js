@@ -1,7 +1,8 @@
 const express = require('express');
 
-const Character = require('./Character.js');
-const Film = require('../films/Film.js');
+const Character = require('./Character');
+const Film = require('../films/Film');
+const Vehicle = require('../vehicles/Vehicle');
 
 const router = express.Router();
 
@@ -42,5 +43,28 @@ router.route('/:id')
         })
       });
   });
+
+  router.route('/:id/vehicles')
+    .get((req, res) => {
+      const { id } = req.params;
+      const query = Character.findById(id);
+
+      query
+        .then(char => {
+          Vehicle.find()
+            .select('vehicle_class')
+            .then(vehicles => {
+              res.status(200).json({
+                ...char._doc,
+                movies: films
+              });
+            })
+        })
+        .catch(err => {
+          res.status(500).json({
+            err: "Character cannot be retrieved"
+          })
+        });
+    });
 
 module.exports = router;
