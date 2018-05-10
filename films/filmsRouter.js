@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
   const releaseFilter = req.query.released;
 
   let query = Film.find()
-      .select('title')
+      .select('title producer')
       .populate('characters', '_id name gender height skin_color hair_color eye_color')
       .populate('planets', 'name climate terrain gravity diameter')
       .sort({ episode: "asc" });
