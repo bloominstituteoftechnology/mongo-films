@@ -18,11 +18,11 @@ router.get("/", (req, res) => {
   } else if (released) {
     const filterForReleaseYear = new RegExp(released, "g");
     Film.find({
-      released_date: { $regex: filterForReleaseYear, $options: "i" }
+      release_date: { $regex: filterForReleaseYear, $options: "i" }
     })
-      .then(docs => res.this.status(200).json(docs))
+      .then(docs => res.status(200).json(docs))
       .catch(err =>
-        res.this
+        res
           .status(404)
           .json({ error: "couldnt find films released in that year" })
       );
