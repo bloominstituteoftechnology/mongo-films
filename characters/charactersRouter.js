@@ -34,13 +34,13 @@ function get(req, res) {
     // }
 
     query.then(character => {
-        if(minheight){
+        if (minheight) {
             character = character.filter(char => {
                 return char.height >= minheight;
             })
         }
 
-        if(gender) {
+        if (gender) {
             character = character.filter(char => {
                 return char.gender == gender;
             })
@@ -61,10 +61,11 @@ function getById(req, res) {
     const { id } = req.params;
 
     Character.findById(id)
+        .select('name gender skin_color hair_color height eye_color birth_year -_id')
         .populate('homeworld', 'climate -_id')
         .then(char => {
             Film.find({ characters: id })
-                .select('title -_id')
+            .select('title -_id')
                 .then(films => {
                     const character = { ...char._doc, movies: films };
 
@@ -83,14 +84,18 @@ function getVehicles(req, res) {
         .select('name gender -_id')
         .populate('homeworld', 'name climate -_id')
         .then(char => {
-            const key = char.key;
-            Vehicle.find({ pilots: id })
-                .select('vehicle_class -_id')
-                .then(response => {
-                    const character = { ...char._doc, vehicles: response };
+            Film.find({ characters: id })
+            .select('title -_id')
+                .then(films => {
+                    // const character = { ...char._doc, movies: films };
+                    Vehicle.find({ pilots: id })
+                        .select('vehicle_class -_id')
+                        .then(response => {
+                            const character = { ...char._doc, movies: films, vehicles: response };
 
-                    res.status(200).json(character);
-                });
+                            res.status(200).json(character);
+                        });
+                })
         })
         .catch(err => {
             res.status(500).json(err);
