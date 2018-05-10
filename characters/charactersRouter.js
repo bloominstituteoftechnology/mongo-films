@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const Character = require('./Character.js');
 const Film = require('../films/Film');
+const Vehicle = require('../vehicles/Vehicle');
 
 const router = express.Router();
 
@@ -11,11 +12,9 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 router.get('/', (req, res) => {
   const minheight = req.query.minheight;
-  let query;
+  let query = Character.find()
   if (minheight) {
-    query = Character.find().where('height').gte(Number(minheight));
-  } else {
-    query = Character.find();
+    query.where('height').gte(Number(minheight));
   }
   query
     .then(chars => {
@@ -28,7 +27,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const id = req.params.id;
-  Character.findById(id)
+  Character.findById(id).populate('homeworld')
   .then(char => {
     Film.find({characters: id}).then(films => {
       const ret = {...char._doc, movies: films};
@@ -40,12 +39,9 @@ router.get('/:id', (req, res) => {
 
 router.get('/:id/vehicles', (req, res) => {
   const id = req.params.id;
-  Character.findById(id)
-  .then(char => {
-    Film.find({characters: id}).then(films => {
-      const ret = {...char._doc, movies: films};
-      res.status(200).json(ret);
-    })
+  Vehicle.find({ pilots: id })
+  .then(vehicles => {
+    res.status(200).json(vehicles);
   })
   .catch(err => req.status(500).json(err))
 })
