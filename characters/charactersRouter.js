@@ -1,5 +1,5 @@
 const express = require('express');
-
+const mongoose = require('mongoose');
 const Character = require('./Character.js');
 const Film = require('../films/Film');
 const Planet = require('../planets/Planet');
@@ -63,13 +63,23 @@ function getvehicle(req, res) {
 }
 
 function ihategenders(req, res) {
-    const minheight = req.query.minheight;
+    const {minheight} = req.query;
     let query = Character.find();
-    if(Character.height > 100) {
-        query.where({height: minheight});
-    }
-    Character.find({gender: 'female'}).sort('height').select('name')
-    .then(friends => {
+    if(minheight) {
+       Character.find({gender: 'female', height: {$exists: true}, $where: "this.height.length > 2"})
+    //    .where('height')
+    //    .gt('100')
+       .sort('-height')
+       .then(friends => {
+        res.status(200).json(friends);
+    })
+    .catch(err => {
+        res.status(500).json({ errorMessage: "The friends information could not be retrieved." })
+    });
+    } 
+    else
+
+    Character.find().then(friends => {
         res.status(200).json(friends);
     })
     .catch(err => {
