@@ -5,6 +5,9 @@ const Film = require("../films/Film.js");
 
 const router = express.Router();
 
+// query search by both minheight and gender:
+// ?=minheight='somenumber'&gender='gender'
+
 // add endpoints here
 router.get("/", (req, res) => {
   let query = Character.find();
@@ -49,6 +52,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
+// alternative way using Object.assign()
 // router.use("/:id", (req, res, next) => {
 //   Character.findById(req.params.id)
 //     .populate("homeworld")
@@ -60,6 +64,8 @@ router.get("/:id", (req, res) => {
 //     .catch(err => next(err));
 // });
 
+
+// no ids or anything to identify who rode what vehicles
 // router.get("/:id/vehicles", (req, res) => {
 //   const { id } = req.params;
 
