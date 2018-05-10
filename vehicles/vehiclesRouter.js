@@ -12,7 +12,6 @@ router.get("/", (req, res) => {
         res.status(500).json({ errorMessage: "No Such Vehicle" });
       });
   });
-  
   router.get("/:id", (req, res) => {
     const id = req.params.id;
     Vehicle.findById(id)
@@ -23,6 +22,4 @@ router.get("/", (req, res) => {
         res.status(500).json({ errorMessage: "No Such Vehicle" });
       });
   });
-  
-  module.exports = router;
 module.exports = router;
