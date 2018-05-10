@@ -1,6 +1,7 @@
 const express = require('express');
 
 const Character = require('./Character.js');
+const Films = require('../films/Film')
 
 const router = express.Router();
 
@@ -14,10 +15,16 @@ router.get('/', function(req, res) {
 });
 
 router.get('/', function(req, res) {
+    const { id } = req.params;
     Character.findById(req.params.id)
     .populate('homeworld', 'climate, -_id')
+    .then(chars => {
+        Film.find({ characters: id }).then(films => {
+            const character = { ...char, movies: film }
 
-    .then(chars => res.status(200).json(chars))
+        res.status(200).json(chars)
+        });
+    })
     .catch(err => {
         res.status(500).json(err);
     });
