@@ -7,7 +7,7 @@ const router = express.Router();
 
 // add endpoints here
 router.get('/:id', (req, res) => {
-    const { id } = req.params;
+    const id = req.params.id;
 
     const findCharacter = Character.find({ homeworld: id }).select('name');
     const findSpecies = Species.find({ homeworld: id }).select('name');

@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
         const filter = new regExp(producerFilter, 'i');
         query.where({ producer: filter });
     }
-    if (releaseFilter) {
+    if (releasedFilter) {
         const filter = new RegExp(releaseFilter, 'i');
         query.where({ release_date: filter });
     }
