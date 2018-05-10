@@ -12,8 +12,8 @@ router.get('/', (req, res) => {
 })
 router.post('/', (req, res) => {
     const userInput = req.body;
-    const specie = new specie( userInput )
-    Specie
+    const specie = new Specie( userInput )
+    specie
         .save()
         .then(specie => res.status(201).json(specie))
         .catch(err => res.status(500).json({ err: 'Unable to post new specie' }))

@@ -12,8 +12,8 @@ router.get('/', (req, res) => {
 })
 router.post('/', (req, res) => {
     const userInput = req.body;
-    const starship = new starship( userInput )
-    Starship
+    const starship = new Starship( userInput )
+    starship
         .save()
         .then(starship => res.status(201).json(starship))
         .catch(err => res.status(500).json({ err: 'Unable to post new starship' }))

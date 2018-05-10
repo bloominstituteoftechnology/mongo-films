@@ -12,8 +12,8 @@ router.get('/', (req, res) => {
 })
 router.post('/', (req, res) => {
     const userInput = req.body;
-    const vehicle = new vehicle( userInput )
-    Vehicle
+    const vehicle = new Vehicle( userInput )
+    vehicle
         .save()
         .then(vehicle => res.status(201).json(vehicle))
         .catch(err => res.status(500).json({ err: 'Unable to post new vehicle' }))
