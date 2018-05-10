@@ -25,18 +25,10 @@ router.route("/:id").get((req, res) => {
 
   Character.findById(id)
     .populate("homeworld", "climate -_id")
-    // .then(char => {
-    //   if (!char) {
-    //     res.status(404).json({
-    //       error: "The character with the specified ID does not exist."
-    //     });
-    //   }
-    // })
     .then(char => {
-      Film.find({ characters: id })
+      Film.find({ characters: { _id: id } })
         .select("title")
         .then(films => {
-          console.log(films);
           const character = { ...char._doc, movies: films };
           res.status(200).json(character);
         });

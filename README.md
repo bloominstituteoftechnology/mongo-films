@@ -64,9 +64,10 @@ Find all films released in _2005_. (/api/films?released=2005)
 
 Given a character id, (/api/characters/:id)
 
+<!--
 * find the character and return it.
 * populate the character's homeworld.
-* add a _movies_ property that should be an array of all the movies where the character appeared.
+* add a _movies_ property that should be an array of all the movies where the character appeared. -->
 
 Find all vehicles driven by a given character. (/api/characters/:id/vehicles)
 
