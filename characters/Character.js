@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const ObjectId = Schema.Types.ObjectId;
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const Character = mongoose.Schema({
+const Character = new mongoose.Schema;({
   name: { type: String, required: true },
   edited: Date,
   created: Date,
