@@ -18,7 +18,7 @@ router.route("/").get((req, res) => {
     });
 });
 
-// GET /planets/:id ; find all characters born in that planet and all native species
+// GET /:id ; find all characters born in that planet and all native species
 router.route("/:id").get((req, res) => {
   const { id } = req.params;
 
