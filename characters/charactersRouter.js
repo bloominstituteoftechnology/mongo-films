@@ -26,7 +26,20 @@ router.get("/", (req, res) => {
         return Film.find({ characters: char._id })
           .select("title")
           .then(films => {
-            return (char = { ...char._doc, movies: films });
+            return Vehicle.find({ pilots: char._id })
+              .select("vehicle_class")
+              .then(vehicles => {
+                return Starship.find({ pilots: char._id })
+                  .select("starship_class")
+                  .then(starships => {
+                    return (char = {
+                      ...char._doc,
+                      films: films,
+                      vehicles: vehicles,
+                      starships: starships
+                    });
+                  });
+              });
           });
       });
       Promise.all(promises).then(chars => res.status(200).json(chars));
@@ -44,8 +57,21 @@ router.get("/:id", (req, res) => {
       Film.find({ characters: id })
         .select("title")
         .then(films => {
-          const character = { ...char._doc, movies: films };
-          res.status(200).json(character);
+          Vehicle.find({ pilots: char._id })
+            .select("vehicle_class")
+            .then(vehicles => {
+              Starship.find({ pilots: char._id })
+                .select("starship_class")
+                .then(starships => {
+                  char = {
+                    ...char._doc,
+                    films: films,
+                    vehicles: vehicles,
+                    starships: starships
+                  };
+                  res.status(200).json(char);
+                });
+            });
         });
     })
     .catch(err => {
