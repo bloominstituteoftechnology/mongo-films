@@ -51,12 +51,13 @@ Each _Schema_ is configured to work with the data imported into the correspondin
 
 ### Write endpoints to perform the following queries.
 
-Return a list of all films. (/api/films)
+Return a list of all films. (/api/films) // done
 
 * order by episode.
 * populate character information.
   * only include: `_id, name, gender, height, skin_color, hair_color and eye_color`.
 * populate planets, include: `name, climate, terrain, gravity and diameter`.
+
 
 Find all films produced by _Gary Kurtz_ (/api/films?producer=gary+kurtz)
 

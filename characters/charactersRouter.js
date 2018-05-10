@@ -1,12 +1,28 @@
 const express = require("express");
 
 const Character = require("./Character.js");
+const Film = require("../films/Film.js");
 
 const router = express.Router();
 
 // add endpoints here
 router.get("/", (req, res) => {
-  Character.find()
+  let query = Character.find();
+
+  const heightFilter = req.query.height;
+  const genderFilter = req.query.gender;
+
+  if (heightFilter) {
+    const filterHt = new RegExp(heightFilter);
+    query.where({ height: filterHt });
+  }
+
+  if (genderFilter) {
+    const filterGen = new RegExp(genderFilter, "i");
+    query.where({ gender: filterGen });
+  }
+
+  query
     .then(char => {
       res.status(201).json(char);
     })
@@ -24,8 +40,8 @@ router.get("/:id", (req, res) => {
       Film.find({ characters: id })
         .select("title")
         .then(films => {
-          const character = { ...char._doc, movies: films }; // grab the document info or char
-          res.status(201).json(char);
+          const charInfo = { ...char._doc, movies: films }; // grab the document info or char
+          res.status(200).json(charInfo);
         });
       // res.status(201).json(char);
     })
