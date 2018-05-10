@@ -8,10 +8,16 @@ const Starship = require("../starships/Starship.js");
 const router = express.Router();
 
 router.get("/", (req, res) => {
+  const minheight = Number(req.query.minheight);
   Character.find()
     .populate("homeworld", "name climate terrain gravity diameter")
     .then(chars => {
-      const promises = chars.map(char => {
+      const filteredChars = chars.filter(char => {
+        if (minheight) {
+          return char.height > minheight;
+        } else return char;
+      });
+      const promises = filteredChars.map(char => {
         return Film.find({ characters: char._id })
           .select("title")
           .then(films => {
