@@ -10,6 +10,8 @@ router.get("/", (req, res) => {
     producer = producer.toLowerCase();
   }
   Film.find()
+    // .select('episode producer title director release_date')
+    .select("-specie_ids")
     .sort("episode")
     .populate(
       "characters",
@@ -47,5 +49,26 @@ router.get("/:id", (req, res) => {
       res.status(500).json({ errorMessage: "Could not get film." });
     });
 });
+
+// == Luis' way to filter by producer/release (I added the combo if) ==
+// router.get("/", (req, res) => {
+//   let query = Film.find()
+//   // .select will just show producer and release_date only
+//   // .select("producer release_date");
+//   const { producer, released } = req.query;
+//   if (producer && released) {
+//     const filter = new RegExp(producer, "i");
+//     query.where({
+//       producer: filter,
+//       release_date: { $regex: released, $options: "i" }
+//     });
+//   } else if (producer) {
+//     const filter = new RegExp(producer, "i");
+//     query.where({ producer: filter });
+//   } else if (released) {
+//     query.where({ release_date: { $regex: released, $options: "i" } });
+//   }
+//   query.then(films => res.status(200).json(films));
+// });
 
 module.exports = router;

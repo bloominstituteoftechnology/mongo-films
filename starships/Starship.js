@@ -7,7 +7,7 @@ const Starship = new mongoose.Schema({
   starship_class: String,
   hyperdrive_rating: String,
   key: { type: Number, unique: true },
-  pilots: [{ type: ObjectId, ref: "characters" }]
+  pilots: [{ type: ObjectId, ref: "Character" }]
 });
 
 module.exports = mongoose.model("Starship", Starship);
