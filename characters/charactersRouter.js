@@ -8,33 +8,15 @@ const router = express.Router();
 router.get("/", (req, res) => {
   Character.find()
     .populate("homeworld", "name climate terrain gravity diameter")
-    // .then(characters => {
-    //   // this version would need a map promise.all or something liek
-    //   res.status(200).json(characters);
-    // })
-    // below is the promise all version that works but only returns one
-    // .then(chars => {
-    //   const promises = chars.map(char => {
-    //     return Film.find({ characters: char._id })
-    //       .select("title")
-    //       .then(films => {
-    //         const character = { ...char._doc, movies: films };
-    //         // you can put return on bottom or remove the res status thing to change
-    //         res.status(200).json(character);
-    //       });
-    //   });
-    //   Promise.all(promises).then(chars => res.status(200).json(promises));
     .then(chars => {
       const promises = chars.map(char => {
         return Film.find({ characters: char._id })
           .select("title")
           .then(films => {
-            const character = { ...char._doc, movies: films };
-            // you can put return on bottom or remove the res status thing to change
-            res.status(200).json(character);
+            return (char = { ...char._doc, movies: films });
           });
       });
-      Promise.all(promises).then(chars => res.status(200).json(promises));
+      Promise.all(promises).then(chars => res.status(200).json(chars));
     })
     .catch(err => {
       res.status(500).json({ errorMessage: "Could not get characters." });

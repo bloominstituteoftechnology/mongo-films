@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
   }
   Film.find()
     // .select('episode producer title director release_date')
-    .select("-specie_ids")
+    .select("-specie_ids -character_ids -planet_ids -starship_ids -vehicle_ids")
     .sort("episode")
     .populate(
       "characters",
