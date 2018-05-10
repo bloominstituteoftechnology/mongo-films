@@ -1,9 +1,17 @@
-const express = require('express');
+const express = require("express");
 
-const Vehicle = require('./Vehicle.js');
+const Vehicle = require("./Vehicle.js");
 
 const router = express.Router();
 
-// add endpoints here
+router.get("/", (req, res) => {
+  Vehicle.find()
+    .then(p => {
+      res.status(200).json(p);
+    })
+    .catch(err => {
+      res.status(500).json({ msg: err });
+    });
+});
 
 module.exports = router;
