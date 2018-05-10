@@ -42,7 +42,7 @@ module.exports = router;
 //   'character_ids': {"$elemMatch": { $eq: character.key }}
 // })
 
-// Character.find({gender: 'female', $where: `this.height >= 200`})
+// Character.find({gender: 'female', height: {$exists: true}, $where: `this.height >= 200`})
 
 /*
  * https://stackoverflow.com/questions/30173606/how-to-query-nested-arrays-in-mongoose
