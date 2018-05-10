@@ -2,6 +2,8 @@ const express = require("express");
 
 const Character = require("./Character.js");
 const Film = require("../films/Film.js");
+const Vehicle = require("../vehicles/Vehicle.js");
+const Starship = require("../starships/Starship.js");
 
 const router = express.Router();
 
@@ -37,6 +39,24 @@ router.get("/:id", (req, res) => {
     })
     .catch(err => {
       res.status(500).json({ errorMessage: "Could not get character." });
+    });
+});
+
+router.get("/:id/vehicles", (req, res) => {
+  const id = req.params.id;
+  const vehicles = Vehicle.find({ pilots: id }).select("vehicle_class");
+  const starships = Starship.find({ pilots: id }).select("starship_class");
+
+  Promise.all([vehicles, starships])
+    .then(results => {
+      const [vehicles, starships] = results;
+      res.status(200).json({ vehicles, starships });
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage:
+          "Could not get the vehicles/starships this character piloted."
+      });
     });
 });
 
