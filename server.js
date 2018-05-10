@@ -26,9 +26,10 @@ server.use('/api/starships', starshipsRouter);
 server.use('/api/vehicles', vehiclesRouter);
 server.use('/api/planets', planetsRouter);
 
-server.get('/', (req, res) => res.send('API Running...'));
+server.get('/', (req, res) => res.send('API Running...are you there?'));
 
 const port = process.env.PORT || 5000;
 server.listen(port, () =>
   console.log(`\n\nAPI running on http://localhost:${port}`)
 );
+// initial commit secondary
