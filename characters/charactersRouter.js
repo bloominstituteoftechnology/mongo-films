@@ -1,62 +1,24 @@
 const express = require('express');
 
 const Character = require('./Character.js');
-const Film = require('../films/Film.js');
-const Vehicles = require('../vehicles/Vehicle.js');
 
 const router = express.Router();
 
 // add endpoints here
 router.get('/', (req, res) => {
-  const {minheight, gender} = req.query;
-  const query = Character.find();
-  if (minheight) {
-    query.where('height').gte(minheight);
-  }
-  if (gender) {
-    query.where('gender').equals(gender);
-  }
-  query.then(response => {
+  Character.find()
+    .then(response => {
       res.json(response);
     })
     .catch(err => {
       res.status(500).json({msg: 'uh oh, this should not have happened'});
     })
 })
-
 router.get('/:id', (req, res) => {
   const {id} = req.params;
   Character.findById(id)
-    .populate('homeworld')
-    .then(char => {
-      Film.find({ characters: id })
-        .select('title')
-        .then(films => {
-          res.status(200).json({ ...char._doc, movies: films });
-        });
-    })
-    .catch(err => {
-      res.status(500).json({msg: 'uh oh, this should not have happened'});
-    })
-})
-router.get('/:id/vehicles', (req, res) => {
-  const {id} = req.params;
-  Vehicles.find({pilots: id})
-  .select('pilots vehicle_class')
-  .then(response => {
-    res.json(response);
-  })
-})
-router.get('/:id', (req, res) => {
-  const {id} = req.params;
-  Character.findById(id)
-    .populate('homeworld')
-    .then(char => {
-      Film.find({ characters: id })
-        .select('title')
-        .then(films => {
-          res.status(200).json({ ...char._doc, movies: films });
-        });
+    .then(response => {
+      res.json(response);
     })
     .catch(err => {
       res.status(500).json({msg: 'uh oh, this should not have happened'});

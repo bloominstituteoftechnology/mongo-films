@@ -8,16 +8,12 @@ const router = express.Router();
 router.get('/', (req, res) => {
   let producer = req.query.producer === undefined ? null : req.query.producer;
   let release = req.query.producer === undefined ? null : req.query.released;
-  let query = Film.find().select('producer episode release_date title director')
-    .populate('characters', 'name gender height skin_color hair_color eye_color')
-    .populate('planets', 'name climate terrain gravity diameter')
+  let query = Film.find();
   if (producer) {
-    const filter = new RegExp(producer, 'i');
-    query.where({producer: filter})
+    query.where('producer').equals(producer);
   }
   if (release) {
-    const filter = new RegExp(released, 'i');
-    query.where({release_date: filter})
+    query.where('release_date').equals(release);
   }
   query.sort('episode').then(response => {
     res.json(response)
