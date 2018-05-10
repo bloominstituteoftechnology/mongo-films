@@ -46,10 +46,23 @@ router
   });
 
 function get(req, res) {
-  const episodeSort = req.query.episode;
-  let query = Film.find().sort('episode')
+
+  let query = Film.find().select('producer release_date').sort('episode')
+  .populate('planets', 'name climet tarrain gravity diameter')
+  .populate('characters', 'name gender height skin_color hair_color eye_color')
+
+const {producer, released} = req.query;
+  if(producer){
+    const filter= new RegExp(producer, 'i')
+    query.where({producer: filter})
+
+  }
+  if(released){
+    query.where({release_date: { $regex: released, $options: 'i'}})
+  }
 
 query.then(chars=>{
+  
   res.json(chars)
 })
 .catch(err=>{

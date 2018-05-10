@@ -15,8 +15,12 @@ router
         const {id} = req.params
     Character
     .findById(id)
+    .populate('homeworld', 'climate name')
     .then(Character=>{
-           res.status(202).json(Character);
+      Film.find({character: id}).elect('title').then(films=>{
+        const character = {...char._doc, movies: films}
+        res.status(202).json(character);
+      })      
     })
     .catch(err=>{
         res.status(500).json({errorMessage: "The Characters information could not be retrieved."})
@@ -62,7 +66,7 @@ function post(req, res) {
       res.status(201).json(c);
     })
     .catch(err => {
-      res.status(500).json({ errorMessage: `${character}` });
+      res.status(500).json({ errorMessage: err });
     });
 }
 
