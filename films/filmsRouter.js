@@ -3,6 +3,9 @@ const express = require('express');
 const Film = require('./Film.js');
 const Planet = require('../planets/Planet.js');
 const Character = require('../characters/Character');
+const Specie = require('../species/Specie');
+const Vehicle = require('../vehicles/Vehicle');
+const Starship = require('../starships/Starship');
 const router = express.Router();
 
 router
