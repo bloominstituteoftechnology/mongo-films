@@ -4,7 +4,7 @@ const Film = require('./Film.js');
 
 const router = express.Router();
 
-//--General---------------------------------------------------
+//--General Get---------------------------------------------------
 
 router.get('/', function(req, res) {
 
