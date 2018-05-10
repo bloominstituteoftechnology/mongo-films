@@ -24,11 +24,29 @@ router
     .get(getVehicles)
 
 function get(req, res) {
-    Character.find()
+    let query = Character.find()
         .populate('homeworld', 'climate terrain name -_id')
-        .then(character => {
-            res.status(200).json(character);
-        });
+
+    const { minheight, gender } = req.query;
+
+    // if (gender) {
+    //     query.where({ gender: { $regex: gender, $options: 'i' } });
+    // }
+
+    query.then(character => {
+        if(minheight){
+            character = character.filter(char => {
+                return char.height >= minheight;
+            })
+        }
+
+        if(gender) {
+            character = character.filter(char => {
+                return char.gender == gender;
+            })
+        }
+        res.status(200).json(character);
+    });
 }
 
 function getById(req, res) {
@@ -62,7 +80,7 @@ function getVehicles(req, res) {
     const { id } = req.params;
 
     Character.findById(id)
-    .select('name gender -_id')
+        .select('name gender -_id')
         .populate('homeworld', 'name climate -_id')
         .then(char => {
             const key = char.key;
