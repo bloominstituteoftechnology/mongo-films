@@ -5,11 +5,10 @@ const Film = require("./Film.js");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  let { producer, release_date } = req.query;
+  let { producer, released } = req.query;
   if (producer) {
     producer = producer.toLowerCase();
   }
-  // producer = producer.toLowerCase();
   Film.find()
     .sort("episode")
     .populate(
@@ -19,10 +18,15 @@ router.get("/", (req, res) => {
     .populate("planets", "name climate terrain gravity diameter")
     .then(films => {
       const filteredFilms = films.filter(film => {
-        if (producer !== undefined || release_date !== undefined) {
+        if (producer !== undefined && released !== undefined) {
+          return (
+            film.producer.toLowerCase().includes(producer) &&
+            film.release_date.includes(released)
+          );
+        } else if (producer !== undefined || released !== undefined) {
           return (
             film.producer.toLowerCase().includes(producer) ||
-            film.release_date.includes(release_date)
+            film.release_date.includes(released)
           );
         } else return film;
       });
