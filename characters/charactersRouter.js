@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.route("/").get(get);
 
+const Film = require("../films/Film");
+
 //returns a list of all characters
 function get(req, res) {
   Character.find()
@@ -19,21 +21,29 @@ function get(req, res) {
 
 //returns a specific character
 router.route("/:id").get((req, res) => {
-  Character.findById(req.params.id)
-    .populate("homeworld")
-    .then(character => {
-      if (!character) {
-        res.status(404).json({
-          error: "The character with the specified ID does not exist."
+  const { id } = req.params;
+
+  Character.findById(id)
+    .populate("homeworld", "climate -_id")
+    // .then(char => {
+    //   if (!char) {
+    //     res.status(404).json({
+    //       error: "The character with the specified ID does not exist."
+    //     });
+    //   }
+    // })
+    .then(char => {
+      Film.find({ characters: id })
+        .select("title")
+        .then(films => {
+          console.log(films);
+          const character = { ...char._doc, movies: films };
+          res.status(200).json(character);
         });
-      } else {
-        res.status(200).json(character);
-      }
     })
-    .catch(error => {
-      res.status(500).json({
-        errorMessage: "The character information could not be retrieved."
-      });
+    .catch(err => {
+      console.log("we have an error: ", err);
+      res.status(500).json(err);
     });
 });
 
