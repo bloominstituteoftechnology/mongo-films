@@ -1,6 +1,6 @@
 const express = require('express');
 const Planet = require('./Planet.js');
-const character = require('../characters/Character.js');
+const Character = require('../characters/Character.js');
 const Specie = require('../species/Specie.js');
 const router = express.Router();
 
