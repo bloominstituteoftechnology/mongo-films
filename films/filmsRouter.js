@@ -4,7 +4,6 @@ const Film = require("./Film.js");
 
 const router = express.Router();
 
-// add endpoints here
 router.route("/").get((req, res) => {
 	// define query - what we are searching for
 	let query = Film.find()

@@ -1,13 +1,12 @@
-const express = require('express');
+const express = require("express");
 
-const Vehicle = require('./Vehicle.js');
+const Vehicle = require("./Vehicle.js");
 
 const router = express.Router();
 
-// add endpoints here
 router.route("/").get((req, res) => {
-  Vehicle.find()
-    .populate('pilots', 'name')
+	Vehicle.find()
+		.populate("pilots", "name")
 		.then(vehicles => {
 			res.status(200).json(vehicles);
 		})
