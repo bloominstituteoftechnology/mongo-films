@@ -2,6 +2,7 @@ const express = require("express");
 
 const Character = require("./Character.js");
 const Vehicle = require("../vehicles/Vehicle.js");
+const Film = require("../films/Film.js");
 
 const router = express.Router();
 
@@ -36,19 +37,25 @@ router.route("/").get((req, res) => {
 // GET /:id ; get character by id ; populate films
 router.route("/:id").get((req, res) => {
   const { id } = req.params;
+  let charFilms;
 
-  Character.findById(id);
+  Film.find({})
+    .where({ characters: id })
+    .then(films => {
+      charFilms = films.map(film => film.title);
+    });
+
   Character.findById(id)
     .populate("homeworld")
     .then(character => {
-      res.status(200).json(character);
+      res.status(200).json({ character, movies: charFilms });
     })
     .catch(error => {
       res.status(500).json(error);
     });
 });
 
-// GET /:id ; find all vehicles driven by a given character
+// GET /:id/vehicles ; find all vehicles driven by a given character
 router.route("/:id/vehicles").get((req, res) => {
   const { id } = req.params;
 
