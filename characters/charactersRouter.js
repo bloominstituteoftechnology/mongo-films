@@ -64,12 +64,13 @@ function getvehicle(req, res) {
 // Character.find({gender: 'female', height: {$exists: true}, $where: "this.height.length > 2"})
 function ihategenders(req, res) {
     const {minheight} = req.query;
-    let query = Character.find();
-    if(minheight ) {
+    let query = Character.find({});
+    if(minheight) {
         // query.where({ height: { $regex: minheight, $options: 'i' } });
 
-Character.find({gender: 'female', height: {$exists: true}, $where: "this.height >= 100"})
-       .sort('-height')
+Character.find({gender: 'female', height: {$exists: true}, $where: `this.height >= ${minheight}`})
+// .find({ height: { $gte: minheight }, gender: 'female' });
+.sort('-height')
        .then(friends => {
         res.status(200).json(friends);
     })
