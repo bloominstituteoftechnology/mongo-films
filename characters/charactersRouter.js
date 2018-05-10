@@ -8,18 +8,12 @@ const Film = require('../films/Film.js')
 // add endpoints here
 router.get('/:id', (req, res) => {
     const id = req.params.id;
-    // let moviesArray;
 
-    // Film
-    // .find(id)
-    // .then(movies => {
-    //     moviesArray.push(movies)
-    // })
+    let query = Character.find({ _id: id } ).populate("homeworld")
 
-    Character
-    .find({ _id: id } )
+    query
     .then(chars => {
-        res.json(chars, moviesArray)
+        res.json(chars)
     })
     .catch(err => {
         res.json(err)
