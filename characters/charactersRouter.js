@@ -1,11 +1,22 @@
 const express = require('express');
 
 const Character = require('./Character.js');
+const Film = require("../films/Film")
 
 const router = express.Router();
   
   router.get("/", (req, res, next) => {
-    Character.find().then(characters => {
+    const query = Character.find().select();
+    const {gender} = req.query;
+
+
+    if(gender) {
+      const filter = new RegExp(gender, 'i')
+      query.where({gender: filter})
+    }
+
+
+    query.find().then(characters => {
       res.status(200).json(characters)
     }).catch(err => {
       res.status(500).json({
@@ -15,7 +26,25 @@ const router = express.Router();
   
   router.get("/:id", (req, res) => {
     const id = req.params.id
-    Character.findById(id).populate("homeworld").then(character => {
+    const filter = new RegExp(id, 'i');
+    const allFilms = [];
+
+
+    Film.find()
+    .select("title vehicles -_id")
+    .where("characters").equals(id)
+    .populate("vehicles")
+    .then(film => {
+      
+      allFilms.push(film)
+    })
+
+
+    Character.findById(id)
+    .populate("homeworld")
+    .then(character => {
+      // console.log(allFilms)
+      character.films = allFilms
       res.status(200).json(character)
     }).catch(err => {
       res.status(404).json({
