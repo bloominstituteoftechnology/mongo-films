@@ -9,7 +9,22 @@ const router = express.Router();
 // add endpoints here
 router.route('/')
   .get((req, res) => {
-    Character.find()
+    const { minheight } = req.query;
+    const query = Character.find();
+
+    if (minheight) {
+      query
+        .find({ gender: 'female' })
+        .where('height').gt(minheight)
+        .then(characters => {
+          res.status(200).json(characters);
+        })
+        .catch(err => {
+          err: "Characters cannot be retrieved"
+        });
+    }
+
+    query
       .then(characters => {
         res.status(200).json(characters);
       })
