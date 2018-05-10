@@ -53,14 +53,14 @@ Each _Schema_ is configured to work with the data imported into the correspondin
 
 Return a list of all films. (/api/films)
 
-* order by episode.
-* populate character information.
-  * only include: `_id, name, gender, height, skin_color, hair_color and eye_color`.
-* populate planets, include: `name, climate, terrain, gravity and diameter`.
+! order by episode.
+! populate character information.
+  ! only include: `_id, name, gender, height, skin_color, hair_color and eye_color`.
+! populate planets, include: `name, climate, terrain, gravity and diameter`.
 
-Find all films produced by _Gary Kurtz_ (/api/films?producer=gary+kurtz)
+! Find all films produced by _Gary Kurtz_ (/api/films?producer=gary+kurtz)
 
-Find all films released in _2005_. (/api/films?released=2005)
+! Find all films released in _2005_. (/api/films?released=2005)
 
 Given a character id, (/api/characters/:id)
 
