@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Film from './film';
+import './FilmCard.css'
 class FilmList extends React.Component {
     constructor(props) {
         super(props);
@@ -19,12 +20,12 @@ class FilmList extends React.Component {
 
     render() {
         return (
-          <div>
-              <ul>
+          <div className='FilmCard__list'>
+
                   {this.state.films.map((film) => {
-                      return <li><Film film={film}/></li>
+                      return <Film film={film}/>
                   })}
-              </ul>
+
           </div>
         );
     }
