@@ -20,6 +20,7 @@ router.route('/').get((req, res) => {
   }
 });
 
+// get character by id and add the films they appeared in
 router.route('/:id').get((req, res) => {
   const { id } = req.params;
 
@@ -38,6 +39,7 @@ router.route('/:id').get((req, res) => {
     });
 });
 
+// get character by id and show the vehicles associated with them
 router.route('/:id/vehicles').get((req, res) => {
   const { id } = req.params;
 
