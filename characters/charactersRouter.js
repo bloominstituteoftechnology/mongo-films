@@ -20,7 +20,7 @@ router.get('/:id', function(req, res) {
 
     Character
         .findById(id)
-        .populate('homeworld', 'climate -_id')
+        .populate('homeworld', 'name terrain climate -_id')
         .then(char => {
             Film.find({ characters: id })
                 .select('title')
