@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Route} from 'react-router-dom';
 import CharsList from './charsList'
 import Char from './char'
+import Links from '../Components/links'
 class CharIndex extends Component{
 
     state ={
@@ -31,7 +32,7 @@ render(){
 console.log(this.state)
     return(<div>
          {/* <CharsList chars={this.state.chars}/> */}
-        {<Route exact path ='/'
+        {<Route exact path ='/characters'
         render= {props => <CharsList {...props} chars={this.state.chars}/>}
       
         />

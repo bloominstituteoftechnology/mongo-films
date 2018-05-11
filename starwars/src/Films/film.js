@@ -4,9 +4,9 @@ import{Link} from 'react-router-dom'
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button,Row,Col } from 'reactstrap';
   
-class Char extends Component  {
+class Film extends Component  {
 state={
-    char:[]
+    film:[]
 }
 componentDidMount(){
     const {id} =this.props.match.params;
@@ -14,37 +14,34 @@ componentDidMount(){
 }
 grabById =id =>{
     axios
-    .get(`http://localhost:5000/characters/${id}`)
+    .get(`http://localhost:5000/films/${id}`)
     .then(response =>{
-        this.setState(()=> ({char: response.data}))
+        this.setState(()=> ({film: response.data}))
+    
     })
     .catch(err=>{
         console.log(err)
     })
 }
 render(){
-    console.log()
+    console.log(this.state)
     return (    <React.Fragment>
 
-         <Card>
+             <Card>
         <CardBody>
-          <CardTitle>{this.state.char.name}</CardTitle>
-          <CardSubtitle>Birth Year: {this.state.char.birth_year}</CardSubtitle>
-          <CardText>Gender: {this.state.char.gender}</CardText>
-          <Row><Col xs="6">
-          <CardText>Skin: {this.state.char.skin_color}</CardText>
+          <CardTitle>{this.state.film.title}</CardTitle>
+          <CardSubtitle>Episode {this.state.film.episode}</CardSubtitle>
+          <CardText>{this.state.film.release_date}</CardText>
+           <Col xs="12">
+          <CardText>{this.state.film.opening_crawl}</CardText>
           </Col>
-          <Col xs="6">
-          <CardText>Hair: {this.state.char.hair_color}</CardText>
+          <Row><Col xs="12">
+          <CardText>{this.state.film.director}</CardText>
           </Col>
-          <Col xs="6">
-          <CardText>Eye: {this.state.char.eye_color}</CardText>
-          </Col>
-          <Col xs="6">
-          <CardText>HGT: {this.state.char.height}</CardText>
-          </Col>   
+         
           </Row>
-          <Link to="/"style={{ textDecoration: 'none' }}><Button outline color="primary">home</Button></Link>
+                    <Link to="/"style={{ textDecoration: 'none' }}><Button outline color="primary">home</Button></Link>
+
         </CardBody>
       </Card>
 
@@ -54,4 +51,4 @@ render(){
 }
 }
 
-export default Char;
+export default Film;

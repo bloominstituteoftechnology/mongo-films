@@ -3,30 +3,25 @@ import{Link} from 'react-router-dom'
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button,Row,Col } from 'reactstrap';
   
-const CharsList = props => {
-console.log(props.chars)
+const FilmList = props => {
+console.log(props.film)
     return (    <React.Fragment>
 
-<div>{props.chars.map(char=>{
+<div>{props.film.map(film=>{
 return(
-<Link color="black" style={{ textDecoration: 'none' }}to={`/characters/${char._id}`}>
+<Link color="black" style={{ textDecoration: 'none' }}to={`/films/${film._id}`}>
          <Card>
         <CardBody>
-          <CardTitle>{char.name}</CardTitle>
-          <CardSubtitle>Birth Year: {char.birth_year}</CardSubtitle>
-          <CardText>Gender: {char.gender}</CardText>
-          <Row><Col xs="6">
-          <CardText>Skin: {char.skin_color}</CardText>
+          <CardTitle>{film.title}</CardTitle>
+          <CardSubtitle>Episode {film.episode}</CardSubtitle>
+          <CardText>{film.release_date}</CardText>
+           <Col xs="12">
+          <CardText>{film.opening_crawl}</CardText>
           </Col>
-          <Col xs="6">
-          <CardText>Hair: {char.hair_color}</CardText>
+          <Row><Col xs="12">
+          <CardText>{film.director}</CardText>
           </Col>
-          <Col xs="6">
-          <CardText>Eye: {char.eye_color}</CardText>
-          </Col>
-          <Col xs="6">
-          <CardText>HGT: {char.height}</CardText>
-          </Col>
+         
 
           </Row>
         </CardBody>
@@ -40,4 +35,4 @@ return(
 );
 }
 
-export default CharsList;
+export default FilmList;

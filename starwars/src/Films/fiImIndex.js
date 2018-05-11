@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Route} from 'react-router-dom';
-import CharsList from './filmList'
-import Char from './film'
+import FilmList from './filmList'
+import Film from './film'
 class FilmIndex extends Component{
 
     state ={
-        chars:[]
+        film:[]
     }
     componentDidMount(){
         
-        this.charsGet()
+        this.filmGet()
         }
 
-charsGet =() =>{
+filmGet =() =>{
     axios
-     .get('http://localhost:5000/characters')
+     .get('http://localhost:5000/films')
      
      .then(response => {
-       this.setState({chars: response.data})
+       this.setState({film: response.data})
      
      })
      .catch(err =>{
@@ -30,14 +30,13 @@ charsGet =() =>{
 render(){
 console.log(this.state)
     return(<div>
-         {/* <CharsList chars={this.state.chars}/> */}
-        {<Route exact path ='/'
-        render= {props => <CharsList {...props} chars={this.state.chars}/>}
+         {<Route  exact path ='/Films'
+        render= {props => <FilmList {...props} film={this.state.film}/>}
       
         />
     }
 
-      <Route path ='/characters/:id' component={Char}/>
+      <Route path ='/films/:id' component={Film}/> 
     </div>
     )
 }

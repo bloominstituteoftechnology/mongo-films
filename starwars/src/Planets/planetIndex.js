@@ -7,7 +7,7 @@ class PlanetIndex extends Component{
 render(){
 
     return(
-        <div>working?</div>
+        <div>placeholder for the planets Component</div>
     )
 }
 
