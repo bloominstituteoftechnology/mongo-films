@@ -11,7 +11,8 @@ const film = props => {
 
                 <CardBody  className='FilmCard_body'>
                     <ul>
-                        {props.chars.map((c) => {return <li>{c.name} </li>})}
+                        {/*{props.chars.map((c) => {return <li>{c.name} </li>})}*/}
+                        {<li>{props.chars}</li>}
                     </ul></CardBody>
 
             </Card>

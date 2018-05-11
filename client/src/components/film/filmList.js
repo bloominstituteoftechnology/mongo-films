@@ -23,7 +23,9 @@ class FilmList extends React.Component {
           <div className='FilmCard__list'>
 
                   {this.state.films.map((film) => {
-                      return <Film film={film} chars={film.characters} key={film._id}/>
+
+                      let names = film.characters.map((c) => c.name);
+                      return <Film film={film} chars={names} key={film._id}/>
                   })}
 
           </div>
