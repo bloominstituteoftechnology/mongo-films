@@ -20,7 +20,9 @@ router.post('/', function post(req, res) {
   });
   
   router.get('/', function get(req, res) {
-    Vehicle.find().then(vehicles => {
+    Vehicle.find()
+    .populate('pilots')
+    .then(vehicles => {
       res.status(200).json(vehicles);
     });
   });

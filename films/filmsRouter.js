@@ -20,9 +20,39 @@ router.post('/', function post(req, res) {
   });
   
   router.get('/', function get(req, res) {
-    Film.find().then(films => {
+
+    // (/api/films?released=2005)
+    // (/api/films?producer=gary+kurtz)
+    // Film
+    // .find()
+    let query = Film.find().select('episode title characters planets producer release_date')    .sort({episode: 1})
+    .populate('planets', ' -_id name climate terrain gravity diameter')
+    .populate('characters', 'eye_color name gender height skin_color hair_color')
+
+    ;
+    const {producer, released} = req.query;
+
+    if (req.query.producer) {
+      //filter by producer
+      console.log('This is the query for PRODUCER: ', producer)
+      const filter = new RegExp(producer, 'i');
+      query.where({producer: filter});
+    }
+    if (released) {
+      query.where({release_date: {$regex: released, $options: 'i'}});
+    }
+    // .select('producer release_date')
+
+    // .sort({episode: 1})
+
+    // .populate('planets', 'name climate terrain gravity diameter')
+    // .populate('characters', 'eye_color name gender height skin_color hair_color')
+    query
+    .then(films => {
       res.status(200).json(films);
-    });
+    })
+    .catch(err => res.status(500).json(err));
+    
   });
   
   router.get('/:id', (req, res) => {
