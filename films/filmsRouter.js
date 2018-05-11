@@ -47,7 +47,7 @@ router
 
 function get(req, res) {
 
-  let query = Film.find().select('producer release_date').sort('episode')
+  let query = Film.find().sort('episode')
   .populate('planets', 'name climet tarrain gravity diameter')
   .populate('characters', 'name gender height skin_color hair_color eye_color')
 
@@ -61,9 +61,9 @@ const {producer, released} = req.query;
     query.where({release_date: { $regex: released, $options: 'i'}})
   }
 
-query.then(chars=>{
+query.then(films=>{
   
-  res.json(chars)
+  res.json(films)
 })
 .catch(err=>{
   console.log(err)
