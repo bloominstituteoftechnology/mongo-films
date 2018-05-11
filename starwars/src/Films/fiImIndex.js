@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Route} from 'react-router-dom';
-import CharsList from './charsList'
-import Char from './char'
-class CharIndex extends Component{
+import CharsList from './filmList'
+import Char from './film'
+class FilmIndex extends Component{
 
     state ={
         chars:[]
@@ -47,4 +47,4 @@ console.log(this.state)
 
 
 }
-export default CharIndex
+export default FilmIndex
