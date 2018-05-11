@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 module.exports = {
-  connectTo: function(database = 'sandbox', host = 'localhost') {
+  connectTo: function(database = 'MongoFilms', host = 'localhost') {
     return mongoose.connect(`mongodb://${host}/${database}`);
   },
 };

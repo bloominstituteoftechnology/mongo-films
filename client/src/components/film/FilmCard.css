@@ -1,0 +1,19 @@
+.FilmCard {
+    width: 250px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.FilmCard__list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.FilmCard_body {
+    padding: 2px;
+
+}
+
+ul {
+    list-style: none;
+}
