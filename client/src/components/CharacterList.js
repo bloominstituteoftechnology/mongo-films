@@ -8,9 +8,11 @@ const CharacterList = props => {
 		<div>
 			{props.characters.map((char, index) => {
 				// insert key here
-				<div key={uuid()} className="CharacterList">
-					<Character char={char} index={index} />;
-				</div>;
+				return (
+					<div key={uuid()} className="CharacterList">
+						<Character char={char} index={index} />
+					</div>
+				);
 			})}
 		</div>
 	);
