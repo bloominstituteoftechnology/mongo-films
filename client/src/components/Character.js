@@ -6,8 +6,16 @@ const Character = props => {
 	console.log("CHARACTER PROPS: ", props);
 	return (
 		<Card>
-			{/* render character data here */}
-			<h3>This is a card for a character</h3>
+			<CardHeader>
+				<CardTitle title={props.char.name} />
+			</CardHeader>
+			<CardText>{props.char.gender}</CardText>
+			<CardText>{props.char.skin_color}</CardText>
+			<CardText>{props.char.hair_color}</CardText>
+			<CardText>{props.char.height}</CardText>
+			<CardText>{props.char.eye_color}</CardText>
+			<CardText>{props.char.birth_year}</CardText>
+			<CardText>{props.char.homeworld}</CardText>
 		</Card>
 	);
 };
