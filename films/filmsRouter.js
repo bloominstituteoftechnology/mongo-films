@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
 
   let query = Film.find()
     .sort("episode")
-    .select("producer release_date") // selector to narrow output info + populated info (comment it out )
+    // .select("producer release_date") // selector to narrow output info + populated info (comment it out )
     .populate(
       "characters",
       "_id name gender height skin_color hair_color eye_color"
