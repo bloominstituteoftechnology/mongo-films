@@ -8,8 +8,7 @@ const router = express.Router();
 
 // GET / ; get all films
 router.route("/").get((req, res) => {
-  // let query = Film.find()
-  const { producer, released } = req.query.select("producer release_date");
+  let { producer, released } = req.query;
 
   Film.find({})
     .sort({ episode: 1 })
@@ -29,33 +28,25 @@ router.route("/").get((req, res) => {
       gravity: 1,
       diameter: 1
     })
+
+    //   Film.find({}) NOT WORKING FIX THIS :(
     .then(films => {
+      let query = Film.find().select("producer release_date");
+      if (producer) {
+        const filter = new RegExp(producer, "i");
+
+        query.where({ producer: filter });
+      }
+      if (released) {
+        const filter = new RegExp(released, "i");
+
+        query.where({ release_date: filter });
+      }
       res.status(200).json(films);
     })
     .catch(error => {
       res.status(500).json(error);
     });
-});
-
-// GET producers query
-router.route("/").get((req, res) => {
-  let query = Film.find().select("producer release_date");
-  const { producer, released } = request.query;
-
-  if (producer) {
-    // filter by producer
-    const filter = new RegExp(producer, "i");
-    query.where({ producer: filter });
-  }
-
-  if (released) {
-    //filter by year
-    query.where({ release_date: { $regex: released, $options: "i" } });
-  }
-
-  query.then(films => {
-    res.status(200).json(films);
-  });
 });
 
 module.exports = router;
