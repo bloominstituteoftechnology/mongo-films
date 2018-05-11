@@ -63,7 +63,7 @@ router.get("/:id", (req, res) => {
 router.get("/:id/vehicles", (req, res) => {
   const { id } = req.params;
 
-  Vehicle.find({})
+  Vehicle.find({ pilots: id })
 
     .then(p => {
       res.status(200).json(p);
