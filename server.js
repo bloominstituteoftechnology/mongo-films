@@ -26,7 +26,7 @@ server.use('/api/starships', starshipsRouter);
 server.use('/api/vehicles', vehiclesRouter);
 server.use('/api/planets', planetsRouter);
 
-server.get('/', (req, res) => res.send('API Running...'));
+server.get('/', (req, res) => res.send('Amanda API Running...'));
 
 const port = process.env.PORT || 5000;
 server.listen(port, () =>
