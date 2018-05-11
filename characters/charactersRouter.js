@@ -42,7 +42,7 @@ function get(req, res) {
 
         if (gender) {
             character = character.filter(char => {
-                return char.gender == gender;
+                return char.gender == gender.toLowerCase();
             })
         }
         res.status(200).json(character);
