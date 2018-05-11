@@ -26,6 +26,18 @@ const Film = new mongoose.Schema({
     type: ObjectId,
     ref: 'Planet',
   }],
+  starships: [{
+    type: ObjectId,
+    ref: 'Starship',
+  }],
+  vehicles: [{
+    type: ObjectId,
+    ref: 'Vehicle',
+  }],
+  species: [{
+    type: ObjectId,
+    ref: 'Specie',
+  }]
 });
 
 module.exports = mongoose.model('Film', Film);

@@ -18,14 +18,10 @@ const Character = mongoose.Schema({
     type: ObjectId,
     ref: 'Planet',
   },
-  movies: [{
+  movies: {
     type: ObjectId,
-    ref: 'Film'
-  }],
-  vehicles: [{
-    type: ObjectId,
-    ref: 'Vehicle'
-  }]
+    ref: 'Film',
+  }
 });
 
 module.exports = mongoose.model('Character', Character);
