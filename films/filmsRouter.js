@@ -24,9 +24,9 @@ router
                 .populate('characters', { name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1 })
                 .then(films => res.status(200).json(films))
                 .catch(err => res.status(500).json({ error: err.message }))
-        } else if (req.query.release) {
+        } else if (req.query.released) {
             // console.log(Object.keys(req.query))
-            let regex = new RegExp(escapeRegex(req.query.release), 'gi')
+            let regex = new RegExp(escapeRegex(req.query.released), 'gi')
             Film.find({
                 "release_date": regex
             })

@@ -11,11 +11,13 @@ router
     .route('/')
     .get((req, res) => {
         if (req.query) {
-            Character.find({ $and: [{ height: { $gte: 100 } }, { gender: "female" }] })
+
+            Character.find({ gender: 'female', height: { $exists: true }, $where: `this.height >= 100` })
+                // { $and: [{ height: { $gte: 100 } }, { gender: "female" }] }
                 // .populate('homeworld', { _id: 0, _v: 0 })
                 // .populate('movies', { _id: 0, _v: 0 })
                 .then(chars => {
-                    console.log(chars)
+                    // console.log("fire", chars)
                     res.status(200).json(chars)
                 })
                 .catch(err => res.status(500).json({ error: err.message }))
