@@ -32,3 +32,5 @@ const port = process.env.PORT || 5000;
 server.listen(port, () =>
   console.log(`\n\nAPI running on http://localhost:${port}`)
 );
+
+// Pseudo code here
