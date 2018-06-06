@@ -17,6 +17,16 @@ router
                 })
                 .catch(err => res.status(500).json({ data: err }))
         }
+        else if (req.query.release) {
+
+            Film.find({ release_date: { "$regex": req.query.release, "$options": "i" } })
+
+                .then(response => {
+                    res.status(200).json({ data: response })
+                })
+                .catch(err => res.status(500).json({ data: err }))
+
+        }
         else {
 
             Film.find({})
