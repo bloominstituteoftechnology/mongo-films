@@ -16,6 +16,7 @@ router
   .get('/:id', (req, res) => {
     const { id } = req.params;
     Character.findById(id)
+      .populate('homeworld', {_id: 0, name: 1})
       .then(character => {
         if(character){
           res.status(200).json(character);
