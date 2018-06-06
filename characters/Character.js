@@ -13,7 +13,8 @@ const Character = mongoose.Schema({
   birth_year: String,
   key: { type: Number, unique: true },
   homeworld_key: Number,
-  // add homeworld field that links the character to it's planet
+  // add homeworld field that links the character to it's planet [X]
+  homeworld: {type: ObjectId, ref: 'Planet'}
 });
 
 module.exports = mongoose.model('Character', Character);
