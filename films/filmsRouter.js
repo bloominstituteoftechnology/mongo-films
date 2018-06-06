@@ -22,6 +22,7 @@ router
         diameter: 1,
         _id: 0
       })
+      .sort('episode')
       .then(films => {
         res.status(200).json(films);
       })
