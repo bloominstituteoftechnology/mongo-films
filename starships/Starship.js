@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
+var Schema = mongoose.Schema;
+
 
 const Starship = new mongoose.Schema({
   pilot_keys: [Number],

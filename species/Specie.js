@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
+var Schema = mongoose.Schema;
+
 
 const Specie = new mongoose.Schema({
   edited: { type: Date, default: Date.now },
@@ -21,6 +23,3 @@ const Specie = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Specie', Specie);
-
-
-friends: [{type: Schema.Types.ObjectId, ref: SomeModel}]
