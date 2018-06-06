@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Film = new mongoose.Schema({
@@ -15,9 +15,42 @@ const Film = new mongoose.Schema({
   specie_ids: [Number],
   key: { type: Number, unique: true },
   starship_ids: [Number],
-  vehicle_ids: [Number],
+  vehicle_ids: [Number]
   // add fields for starships, vehicles, planets, characters and species
   // to link them to the corresponding model
 });
 
-module.exports = mongoose.model('Film', Film);
+starship = [
+  {
+    type: ObjectId,
+    ref: "StarShip"
+  }
+];
+
+vehicle = [
+  {
+    type: ObjectId,
+    ref: "Vehicle"
+  }
+];
+
+planets = [
+  {
+    type: ObjectId,
+    ref: "Planets"
+  }
+];
+character = [
+  {
+    type: ObjectId,
+    ref: "Character"
+  }
+];
+specie = [
+  {
+    type: ObjectId,
+    ref: "Specie"
+  }
+];
+
+module.exports = mongoose.model("Film", Film);
