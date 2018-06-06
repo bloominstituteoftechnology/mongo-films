@@ -21,7 +21,6 @@ Use Node.js, Express.js and Mongoose.js to build an API that queries data persis
 
 ### Import Sample Data
 
-* Windows users follow [this tutorial](https://dangphongvanthanh.wordpress.com/2017/06/12/add-mongos-bin-folder-to-the-path-environment-variable/) to add the MongoDB _bin_ folder to your path. Linux and MacOS users should be ready to go. **If you don't have Windows 10**, follow [the section for your version of windows on this tutorial instead](https://www.computerhope.com/issues/ch000549.htm).
 * We have provided six _JSON_ files with sample data inside the `/data` folder.
 * Use the _mongoimport_ utility to import all the data into your local instance of MongoDB. **Please make sure the MongoDB server is running before starting the import process**.
 * In a _terminal_ or _command prompt_ window, **navigate to the data folder** and run the following command for each _JSON_ file.
