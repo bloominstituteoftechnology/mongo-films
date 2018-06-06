@@ -22,14 +22,23 @@ router
     .route("/:id")
     .get((req, res) => {
         const { id } = req.params;
+        const { movieID } = req.body
         Character.findById(id)
-        .populate('homeworld')
+        .populate('homeworld vehicles')
         .then(charFound => {
             res.status(200).json(charFound);
         })
         .catch(error => {
             res.status(500).json({ error: error.message })
         })
+    })
+
+router
+    .route('/:id/vehicles')
+    .get((req, res) => {
+        const { id } = req.params;
+        Character.findById(id)
+        .populate('vehicles')
     })
 
 module.exports = router;
