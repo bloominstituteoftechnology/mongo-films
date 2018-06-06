@@ -17,4 +17,16 @@ router
             .catch(err => res.status(500).json({ error: "The character information could not be retrieved" }))
     })
 
+    router
+    .route('/:id')
+    .get((req, res) => {
+        Character
+            .findById(req.params.id)
+            .populate('homeworld', '-_id name climate terrain diameter')
+            .then(characters => {
+                res.status(200).json(characters);
+            })
+            .catch(err => res.status(500).json({ error: "The character information could not be retrieved" }))
+    })
+
 module.exports = router;
