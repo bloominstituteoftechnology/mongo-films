@@ -23,6 +23,7 @@ router
         Character
             .findById(req.params.id)
             .populate('homeworld', '-_id name climate terrain diameter')
+            .populate('movies', 'episode')//NOT WORKING
             .then(characters => {
                 res.status(200).json(characters);
             })
