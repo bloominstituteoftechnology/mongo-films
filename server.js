@@ -19,12 +19,12 @@ db
 server.use(helmet());
 server.use(express.json());
 
-server.use('/api/characters', charactersRouter);
-server.use('/api/films', filmsRouter);
-server.use('/api/species', speciesRouter);
-server.use('/api/starships', starshipsRouter);
-server.use('/api/vehicles', vehiclesRouter);
-server.use('/api/planets', planetsRouter);
+server.use('/characters', charactersRouter);
+server.use('/films', filmsRouter);
+server.use('/species', speciesRouter);
+server.use('/starships', starshipsRouter);
+server.use('/vehicles', vehiclesRouter);
+server.use('/planets', planetsRouter);
 
 server.get('/', (req, res) => res.send('API Running...'));
 
