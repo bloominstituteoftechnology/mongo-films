@@ -5,22 +5,50 @@ const Film = require('./Film.js');
 const router = express.Router();
 
 // add endpoints here
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
 router
     .route('/')
     .get((req, res) => {
-        Film.find()
-            .populate('homeworld', { _id: 0, name: 1, climate: 1, terrain: 1, gravity: 1, diameter: 1 })
-            .populate('characters', { name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1 })
-            .then(films => res.status(200).json(films))
-            .catch(err => res.status(500).json({ error: err.message }))
+        // req.query.producer ?
+        if (req.query.producer) {
+            // console.log(Object.keys(req.query))
+            let regex = new RegExp(escapeRegex(req.query.producer), 'gi')
+            Film.find({
+                "producer": regex
+            })
+                .populate('homeworld', { _id: 0, name: 1, climate: 1, terrain: 1, gravity: 1, diameter: 1 })
+                .populate('characters', { name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1 })
+                .then(films => res.status(200).json(films))
+                .catch(err => res.status(500).json({ error: err.message }))
+        } else if (req.query.release) {
+            // console.log(Object.keys(req.query))
+            let regex = new RegExp(escapeRegex(req.query.release), 'gi')
+            Film.find({
+                "release_date": regex
+            })
+                .populate('homeworld', { _id: 0, name: 1, climate: 1, terrain: 1, gravity: 1, diameter: 1 })
+                .populate('characters', { name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1 })
+                .then(films => res.status(200).json(films))
+                .catch(err => res.status(500).json({ error: err.message }))
+        }
+
+        else {
+            // console.log(Object.keys(req.query))
+            Film.find().sort({ episode: 1 })
+                .populate('homeworld', { _id: 0, name: 1, climate: 1, terrain: 1, gravity: 1, diameter: 1 })
+                .populate('characters', { name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1 })
+                .then(films => res.status(200).json(films))
+                .catch(err => res.status(500).json({ error: err.message }))
+        }
     })
-// .post((req, res) => {
-//     let vars = ({ name, gender, skin_color, hair_color, height, eye_color, birth_year } = req.body)
-//     let newF = new Film(vars)
-//     Film.save()
-//         .then(newFilm => res.status(201).json(newFilm))
-//         .catch(err => res.status(500).json({ error: err.message }))
-// })
+
+
+
+
 router
     .route('/:id')
     .get((req, res) => {
@@ -31,5 +59,12 @@ router
             .then(film => res.status(200).json(film))
             .catch(err => res.status(500).json({ error: err.message }))
     })
+
+router
+    .route('/?producer=:producer')
+    .get((req, res) => {
+        console.log(req.params.producer)
+    })
+
 
 module.exports = router;
