@@ -14,6 +14,14 @@ router
         hair_color: 1,
         eye_color: 1
       })
+      .populate('planets', {
+        name: 1,
+        climate: 1,
+        terrain: 1,
+        gravity: 1,
+        diameter: 1,
+        _id: 0
+      })
       .then(films => {
         res.status(200).json(films);
       })
