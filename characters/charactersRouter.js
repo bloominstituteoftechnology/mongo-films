@@ -10,7 +10,7 @@ router
   .route("/")
   .get((req, res) => {
     Character.find()
-      .populate('homeworld', { _id:0})
+      .populate('homeworld')
       .then(characters => {
         res.status(200).json(characters);
       })
