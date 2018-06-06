@@ -15,7 +15,7 @@ db
   .connectTo('starwars')
   .then(() => console.log('\n... API Connected to Database ...\n'))
   .catch(err => console.log('\n*** ERROR Connecting to Database ***\n', err));
-
+// middlewarez
 server.use(helmet());
 server.use(express.json());
 
