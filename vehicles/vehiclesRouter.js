@@ -4,6 +4,11 @@ const Vehicle = require('./Vehicle.js');
 
 const router = express.Router();
 
-// add endpoints here
+router.get('/', (req, res) => {
+    Vehicle.find()
+    .then((vehicle) => {
+        res.status(200).json(vehicle);
+    })
+})
 
 module.exports = router;

@@ -4,6 +4,11 @@ const Character = require('./Character.js');
 
 const router = express.Router();
 
-// add endpoints here
+router.get('/', (req, res) => {
+    Character.find()
+    .then((character) => {
+        res.status(200).json(character);
+    })
+})
 
 module.exports = router;
