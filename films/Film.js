@@ -16,11 +16,11 @@ const Film = new mongoose.Schema({
   key: { type: Number, unique: true },
   starship_ids: [Number],
   vehicle_ids: [Number],
-  starships: { type: ObjectId, ref: 'Starship' },
-  vehicles: { type: ObjectId, ref: 'Vehicle' },
-  planets: { type: ObjectId, ref: 'Planet' },
-  characters: { type: ObjectId, ref: 'Character' },
-  species: { type: ObjectId, ref: 'Specie' }
+  starships: { type: [ObjectId], ref: 'Starship' },
+  vehicles: { type: [ObjectId], ref: 'Vehicle' },
+  planets: { type: [ObjectId], ref: 'Planet' },
+  characters: { type: [ObjectId], ref: 'Character' },
+  species: { type: [ObjectId], ref: 'Specie' }
 });
 
 module.exports = mongoose.model('Film', Film);
