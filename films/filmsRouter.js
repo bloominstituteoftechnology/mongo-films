@@ -13,7 +13,22 @@ router
       .then(films => {
         res.json({ films });
       })
-      .catch(error => res.status(500).json({ error: 'Error fetching friends' }));
+      .catch(error => res.status(500).json({ error: 'Error fetching films' }));
   })
+
+router
+  .route('/:id')
+  .get((req, res) => {
+    Film.findById(req.params.id)
+      .populate('characters')
+      .populate('planets')
+      .populate('vehicles')
+      .populate('starships')
+      .populate('species')
+      .then(film => {
+        res.json({ film });
+      })
+      .catch(error => res.status(500).json({ error: 'Error fetching film' }));
+  });
 
 module.exports = router;
