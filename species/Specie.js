@@ -19,7 +19,7 @@ const Specie = new mongoose.Schema({
   // add homeworld field that links the specie to it's native planet
   homeworld: {
     type: ObjectId,
-    ref: Planet
+    ref: "Planet"
   }
 });
 

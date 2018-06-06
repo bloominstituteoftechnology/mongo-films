@@ -8,8 +8,8 @@ const Vehicle = new mongoose.Schema({
   // add pilots field to link it to the Character model
   pilots: {
     type: ObjectId,
-    ref: Character
+    ref: "Character"
   }
 });
 
-module.exports = mongoose.model('Vehicle', Vehicle);
+module.exports = mongoose.model("Vehicle", Vehicle);

@@ -10,8 +10,8 @@ const Starship = new mongoose.Schema({
   // add pilots field to link the ship to the characters model
   pilots: {
     type: ObjectId,
-    ref: Starship
+    ref: "Starship"
   }
 });
 
-module.exports = mongoose.model('Starship', Starship);
+module.exports = mongoose.model("Starship", Starship);
