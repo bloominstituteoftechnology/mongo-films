@@ -24,7 +24,7 @@ router
 				res.json(films);
 			})
 			.catch(err => {
-				res.status(400).json({ error: error });
+				res.status(400).json({ error: 'Data not found' });
 			});
 	});
 
