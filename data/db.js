@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 module.exports = {
-  connectTo: function(database = 'sandbox', host = 'localhost') {
+  connectTo: function (database = 'sandbox', host = 'localhost') {
     return mongoose.connect(`mongodb://${host}/${database}`);
   },
 };
+
+// added mongoimport to db for all json files
