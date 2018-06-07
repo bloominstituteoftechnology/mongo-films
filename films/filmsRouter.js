@@ -14,8 +14,9 @@ router
   .get((req, res) => {
     const query = {};
     if (req.query) {
+      console.log("if")
       for (let key in req.query) {
-        console.log(key,req.query[key])
+        // console.log(key,req.query[key])
        query[key] = new RegExp(req.query[key], 'gi');
       }
      }
