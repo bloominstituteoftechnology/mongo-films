@@ -8,10 +8,25 @@ router
   .route('/')
   .get((req, res) => {
   const { producer } = req.query;
+  const { released } = req.query;
+  if(released) {
+    const releasedFilter = new RegExp(released, 'i');
+  Film 
+  .find()
+  .where('release_date')
+  .regex(releasedFilter)
+  .then(films => {
+    res.status(200)
+    res.json({ films })
+  })
+  .catch(err => {
+    res.status(404)
+    res.json({ message: "Release year not found."})
+  })
+  }
 
   if(producer) {
-  const producerFilter = new RegExp(producer, 'i');
-
+    const producerFilter = new RegExp(producer, 'i');
   Film
   .find({})
   .where('producer')
@@ -19,6 +34,10 @@ router
   .then(films => {
     res.status(200)
     res.json({ films })
+  })
+  .catch(err => {
+    res.status(404)
+    res.json({ message: "Producer not found."})
   })
   }
   else {
