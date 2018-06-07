@@ -2,6 +2,7 @@ const express = require('express');
 
 const Character = require('./Character.js');
 const Film = require('../films/Film');
+const Vehicle = require('../vehicles/Vehicle');
 
 const router = express.Router();
 
@@ -26,6 +27,20 @@ router
             res.json(charRaw);
           });
       });
-  });
+  })
+  
+/*************************
+** ROUTE /:id/vehicles **
+*************************/
+  .get('/:id/vehicles', (req, res) => {
+    const { id } = req.params;
 
+    Vehicle.find({ pilots: id })
+      .exec((err, vehRaw) => {
+        if (err)
+          return res.status(500).json(err);
+
+        res.json(vehRaw);
+      })
+  })
 module.exports = router;
