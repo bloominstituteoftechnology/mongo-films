@@ -1,6 +1,7 @@
 const express = require('express');
 
 const Character = require('./Character.js');
+const Film = require('../films/Film.js');
 
 const router = express.Router();
 
@@ -28,7 +29,20 @@ router
     const { id } = req.params;
     Character.findById(id)
       .populate('homeworld', '-_id -__v')
-      .then(c => res.json(c))
+      .then(c => {
+        console.log(c.key)
+        Film.find({ character_ids: c.key}, '-_id title')
+          .then(f => {
+            // console.log(f)
+            movies = [...f];
+            
+            // newC = Object.assign(c,{'movies':f})
+            // console.log(newC)
+            c['movie'] = movies;
+            console.log("c",c.movie)
+            res.json(c);
+          })
+      })
       .catch(e => res.status(500).json({ error: e.message }))
   })
 

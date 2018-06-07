@@ -11,6 +11,7 @@ const Character = mongoose.Schema({
   skin_color: String,
   eye_color: String,
   birth_year: String,
+  movie: Array,
   key: { type: Number, unique: true },
   homeworld_key: Number,
   homeworld: { type: ObjectId, ref: 'Planet'}
