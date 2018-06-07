@@ -9,10 +9,19 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {
-        Character.find({})
-            .populate('homeworld', {_id: 0, climate: 1, name: 1, terrain: 1})
-            .then(characters => res.json(characters))
-            .catch(err => res.status(500).json({ error: err.message }));
+        let { minheight } = req.query;
+        if (minheight) {
+            Character.find({ height: { $gt: minheight }, gender: 'female' })
+                .select('name gender height skin_color hair_color eye_color')
+                .then(characters => res.json(characters))
+                .catch(err => res.status(500).json({ error: err.message }))
+        } else {
+            Character.find()
+                .select('name gender height skin_color hair_color eye_color')
+                .populate('homeworld')
+                .then(characters => res.json(characters))
+                .catch(err => res.status(500).json({ error: err.message }));
+        }
     })
 
 router
@@ -20,8 +29,9 @@ router
     .get((req, res) => {
         const { id } = req.params;
         Character.findById(id)
-            .populate('homeworld', {_id: 0, climate: 1, name: 1, terrain: 1})
+            .populate('homeworld')
             .then(character => res.json(character))
             .catch(err => res.status(500).json({ error: err.message }));
     })
+
 module.exports = router;
