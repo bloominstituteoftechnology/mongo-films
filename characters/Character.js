@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
+const Schema = mongoose.Schema;
 
-const Character = mongoose.Schema({
+const Character = new mongoose.Schema({
   name: { type: String, required: true },
   edited: Date,
   created: Date,
@@ -13,6 +14,8 @@ const Character = mongoose.Schema({
   birth_year: String,
   key: { type: Number, unique: true },
   homeworld_key: Number,
+  movies: [{ type: Schema.Types.ObjectId, ref: 'Film' }],
+  homeworld: { type: Schema.Types.ObjectId, ref: 'Planet' }
   // add homeworld field that links the character to it's planet
 });
 
