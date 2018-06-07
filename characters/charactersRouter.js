@@ -14,7 +14,7 @@ router
         const { minheight } = req.query;
         if(minheight){
             Character
-                .find({"$and": [{ "height": { "$gt": 100 } }, { "gender": "female" }]})
+                .find({"$and": [{ "height": { "$gt": minheight } }, { "gender": "female" }]})
                 .select('gender name height')
                 .then(response => {
                     res.status(200).json(response)

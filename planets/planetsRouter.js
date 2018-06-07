@@ -2,6 +2,7 @@ const express = require('express');
 
 const Planet = require('./Planet.js');
 const Character = require('../characters/Character');
+const Specie = require('../species/Specie')
 
 const router = express.Router();
 
@@ -31,7 +32,13 @@ router
                     .select('name')
                     .then(response => {
                         planet.inhabitants = response;
-                        res.status(200).json({ data: planet })
+                        Specie
+                            .find({homeworld: req.params.id})
+                            .select('name classification')
+                            .then(response => {
+                                planet.natives = response;
+                                res.status(200).json({ data: planet })
+                            })
                     })
             })
             .catch(err => {

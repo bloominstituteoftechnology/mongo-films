@@ -11,6 +11,7 @@ router
     .get((req, res) => {
         Specie
             .find()
+            .populate('homeworld', 'name')
             .then(vehicle => {
                 res.status(200).json(vehicle)
             })

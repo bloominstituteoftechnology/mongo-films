@@ -13,7 +13,8 @@ const Planet = new mongoose.Schema({
   gravity: String,
   orbital_period: String,
   key: { type: Number, unique: true },
-  inhabitants: [{ type: ObjectId, ref: 'Character'}]
+  inhabitants: [{ type: ObjectId, ref: 'Character'}],
+  natives: [{ type: ObjectId, ref: 'Specie'}]
 });
 
 module.exports = mongoose.model('Planet', Planet);
