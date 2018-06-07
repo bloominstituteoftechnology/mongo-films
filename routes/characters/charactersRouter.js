@@ -35,7 +35,8 @@ router
   .get('/:id/vehicles', (req, res) => {
     const { id } = req.params;
 
-    Vehicle.find({ pilots: id })
+    Vehicle.find()
+      .populate('pilots', 'name -_id')
       .exec((err, vehRaw) => {
         if (err)
           return res.status(500).json(err);
@@ -43,4 +44,23 @@ router
         res.json(vehRaw);
       })
   })
+
+/*************************
+** ROUTE /?minheight=100 **
+*************************/
+  .get('/', (req, res) => {
+    const { minheight } = req.query;
+    
+    Character.find()
+      .select('gender height')
+      .where('gender', 'female')
+      .where('height', { $gt: 100 })
+      .exec((err, raw) => {
+        if (err)
+          return res.status(500).json(err);
+
+        res.json(raw);
+      })
+  })
+  
 module.exports = router;
