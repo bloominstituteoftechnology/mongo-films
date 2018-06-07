@@ -1,15 +1,13 @@
-const express = require('express');
-
-const Film = require('./Film.js');
-
-const router = express.Router();
+const express = require('express')
+const Film = require('./Film.js')
+const router = express.Router()
 
 router
     .route('/')
     .get((req, res) => {
-        const { producer, released } = req.query;
+        const { producer, released } = req.query
         if (producer) {
-            const producerFilter = new RegExp(producer, 'i');
+            const producerFilter = new RegExp(producer, 'i')
             Film.find()
                 .where('producer')
                 .regex(producerFilter)
@@ -30,7 +28,7 @@ router
                 })
                 
         } else if (released) {
-            const releasedFilter = new RegExp(released, 'i');
+            const releasedFilter = new RegExp(released, 'i')
             Film.find()
                 .where('release_date')
                 .regex(releasedFilter)
@@ -69,4 +67,4 @@ router
         }
     })
 
-module.exports = router;
+module.exports = router
