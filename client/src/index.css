@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.card-img-top {
+  width: 250px;
+  height: 180px;
+}
+.card {
+  width: 300px;
+  padding: 15px;
+  margin: 15px;
+  text-align: center;
+}
+
+.friendslist-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.App {
+  display: flex;
+  flex-direction: row;
+}
+.cardholder {
+  width: 350px;
+}
+
+.form-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.forms {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1160px;
+}
+
+.header {
+  background: lightblue;
+  height: 80px;
+}
+
+.btn-secondary {
+  height: 30px;
+  margin: 35px 0px;
+}

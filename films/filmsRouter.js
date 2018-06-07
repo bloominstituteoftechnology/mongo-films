@@ -8,26 +8,19 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {
-        // req.query.producer ?
-        if (req.query.producer) {
-            // console.log(Object.keys(req.query))
-            Film.find({ producer: { $regex: `.* 2005. * ` } })
-                .populate('homeworld', { _id: 0, name: 1, climate: 1, terrain: 1, gravity: 1, diameter: 1 })
-                .populate('characters', { name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1 })
-                .then(films => res.status(200).json(films))
-                .catch(err => res.status(500).json({ error: err.message }))
-        } else if (req.query.released) {
-            // console.log(Object.keys(req.query))
-            let regex = new RegExp(escapeRegex(req.query.released), 'gi')
-            Film.find({
-                "release_date": regex
-            })
+        if (req.query) {
+            let query = Object.keys(req.query)
+            let key = query[0] === "released" ? `release_date` : query[0]
+            const filter = new RegExp(req.query[query], 'i')
+
+            Film.find({})
+                .where(key)
+                .regex(filter)
                 .populate('homeworld', { _id: 0, name: 1, climate: 1, terrain: 1, gravity: 1, diameter: 1 })
                 .populate('characters', { name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1 })
                 .then(films => res.status(200).json(films))
                 .catch(err => res.status(500).json({ error: err.message }))
         }
-
         else {
             // console.log(Object.keys(req.query))
             Film.find().sort({ episode: 1 })
