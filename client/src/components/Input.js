@@ -1,10 +1,22 @@
-import React from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import React, { Component } from 'react'
 
-export default (props) => {
-    return (
-        <div>
+export class InputField extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: '',
 
-        </div>
-    )
+        };
+
+    }
+
+    render() {
+        return (
+            <div>
+
+            </div>
+        )
+    }
 }
+
+export default InputField
