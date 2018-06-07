@@ -18,5 +18,11 @@ router
             })
     })
   
-
+router
+    .route('/:id')
+    .get((req, res) => {
+        Planet
+            .findById(req.params.id)
+            .then
+    })
 module.exports = router;

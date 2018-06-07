@@ -5,7 +5,7 @@ const Character = mongoose.Schema({
   name: { type: String, required: true },
   edited: Date,
   created: Date,
-  gender: String,
+  gender: Number,
   height: String,
   hair_color: String,
   skin_color: String,
