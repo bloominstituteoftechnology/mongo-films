@@ -19,10 +19,11 @@ const Film = new Schema({
   vehicle_ids: [Number],
   // add fields for starships, vehicles, planets, characters and species
   // to link them to the corresponding model
-  starships: [{type: ObjectId, ref: 'Starship'}], //document linking...AKA refs
-  vechicles: [{type: ObjectId, ref: 'Vehicle'}],
+  //document linking...AKA refs
+  starships: [{type: ObjectId, ref: 'Starship'}],
+  vehicles: [{type: ObjectId, ref: 'Vehicle'}],
   planets: [{type: ObjectId, ref: 'Planet'}],
-  characters: [{type: ObjectId, ref: 'character'}],
+  characters: [{type: ObjectId, ref: 'Character'}],
   species: [{type: ObjectId, ref: 'Specie'}],
 });
 
