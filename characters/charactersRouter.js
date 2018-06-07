@@ -15,10 +15,9 @@ router
         const { minheight } = req.query;
         console.log(typeof minheight)
         if (minheight) {
-            console.log("type of data", typeof minheight, "actual value", minheight)
+            console.log("type of data", typeof minheight, "actual value", minheight);
             var x = parseInt(minheight)
-            console.log("type of data", typeof x, "actual value", x)
-            console.log("testing query", x)
+            console.log("type of data", typeof x, "actual value", x);
             query.where({ height: { $gte: x } } )
         }
         query.then(resource => {
