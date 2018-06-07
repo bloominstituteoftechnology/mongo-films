@@ -4,7 +4,7 @@ import {
     CardTitle
 } from 'reactstrap';
 
-const FriendsList = (props) => {
+const FilmList = (props) => {
     console.log(props)
 
     return (
@@ -30,4 +30,4 @@ const FriendsList = (props) => {
     )
 }
 
-export default FriendsList
+export default FilmList

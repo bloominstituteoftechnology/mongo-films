@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FriendsList from './components/FriendsList'
+import FilmList from './components/FriendsList'
 import Header from './components/Header'
 import axios from 'axios'
 
@@ -60,7 +60,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <FriendsList films={this.state.films} destroy={this.destroy} />
+        <FilmList films={this.state.films} destroy={this.destroy} />
       </div>
     );
   }
