@@ -10,20 +10,22 @@ router
 .get((req, res) => {
   const { producer, released } = req.query;
 
-  let filmQuery = Film
-    .find();
+  let filmQuery = Film.find();
+
   if(producer){
     const producerFilter = new RegExp(req.query.producer, 'i');
     filmQuery
       .where('producer')
       .regex(producerFilter);
   }
+
   if(released){
     const releasedFilter = new RegExp(req.query.released, 'i');
     filmQuery
       .where('release_date')
       .regex(releasedFilter);
   }
+  
   filmQuery
     .sort( { episode: 1 } )
     .select('-_id episode producer release_date')
