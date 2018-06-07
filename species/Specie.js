@@ -17,7 +17,7 @@ const Specie = new mongoose.Schema({
   key: { type: Number, unique: true },
   homeworld_key: Number,
   // add homeworld field that links the specie to it's native planet
-  planets: { type: ObjectId, ref: 'Plantet'}
+  homeworld: { type: ObjectId, ref: 'Planet'}
 });
 
 module.exports = mongoose.model('Specie', Specie);
