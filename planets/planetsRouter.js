@@ -1,7 +1,7 @@
 const express = require('express');
-
+const Character = require('../characters/Character.js');
 const Planet = require('./Planet.js');
-
+const Species = require('../species/Specie.js');
 const router = express.Router();
 
 // add endpoints here
@@ -22,7 +22,22 @@ router
       .get((req, res) => {
         const { id } = req.params;
         Planet.findById(id) // { username: 1, firstName: 1, lastName: 1, _id: 0 } A WAY to do this.3
-          .then(foundPlanet => res.json(foundPlanet))
+          .then(foundPlanet => {
+
+            Character
+              .find({homeworld_key: foundPlanet.key }, 'name -_id')
+              .then(foundC => {
+                foundPlanet.characters = [...foundC]
+                Species
+                  .find({homeworld_key: foundPlanet.key }, 'name -_id')
+                  .then(foundS => {
+                    console.log(foundPlanet.key)
+                    console.log(foundS)
+                    foundPlanet.species = [...foundS]
+                    res.json(foundPlanet)
+                  })
+              })
+          })
           .catch(err => res.status(500).json({ error: err }));
         });
 
