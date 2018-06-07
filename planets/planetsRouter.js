@@ -9,7 +9,7 @@ const router = express.Router();
 router
   .route('/')
   .get((req, res) => {
-    Planet.find()
+    Planet.find({}, {characters: 0, species: 0})
       .then(planets => {
         res.json(planets);
       })

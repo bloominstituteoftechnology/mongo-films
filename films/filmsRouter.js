@@ -4,9 +4,7 @@ const Film = require('./Film.js');
 
 const router = express.Router();
 
-// function escapeRegex(text) {
-//   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-// };
+
 
 // add endpoints here
 router
@@ -14,11 +12,6 @@ router
   .get((req, res) => {
     const query = {};
     console.log("req.query:",req.query);
-    // if (req.query) {
-    //   for (let key in req.query) {
-    //     query[key] = new RegExp(escapeRegex(req.query[key]), 'gi');
-    //   }
-    // }
     if (req.query) {
       for (let key in req.query) {
         query[key] = { $regex: req.query[key], $options: 'i' };
@@ -27,8 +20,8 @@ router
     console.log("Film Route Query:",query);
     Film.find(query)
       .sort({ episode: 1 })
-      .populate('characters', {name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1})
-      .populate('planets', {name: 1, climate: 1, terrain: 1, gravity: 1, diameter: 1 })
+      .populate('characters',{"_id":0,"name":1,"gender":1,"height":1,"skin_color":1,"hair_color":1,"eye_color":1})
+      .populate('planets', {"_id":0,"name":1,"climate":1,"terrain":1,"gravity":1,"diameter":1})
       .then(Films => {
         res.json(Films);
       })

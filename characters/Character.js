@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
+const Mixed = mongoose.Schema.Types.Mixed;
 
 const Character = mongoose.Schema({
   name: { type: String, required: true },
@@ -15,7 +16,7 @@ const Character = mongoose.Schema({
   homeworld_key: Number,
   // add homeworld field that links the character to it's planet
   homeworld: {type:ObjectId, ref: 'Planet'},
-  movies: [String]
+  movies: [Mixed]
 })
 
 module.exports = mongoose.model('Character', Character);

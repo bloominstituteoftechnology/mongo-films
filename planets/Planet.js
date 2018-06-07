@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Character = require('../characters/Character.js');
+const Mixed = mongoose.Schema.Types.Mixed;
 
 const Planet = new mongoose.Schema({
   edited: { type: Date, default: Date.now },
@@ -13,8 +14,8 @@ const Planet = new mongoose.Schema({
   gravity: String,
   orbital_period: String,
   key: { type: Number, unique: true },
-  characters: [String],
-  species: [String]
+  characters: [Mixed],
+  species: [Mixed]
 });
 
 module.exports = mongoose.model('Planet', Planet);
