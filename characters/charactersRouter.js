@@ -10,15 +10,28 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {
-        Character
-            .find({"$and": [{ "height": { "$gt": 100}},{ "gender": "female" }]})
-            .select('name gender height')
-            .then(response => {
-                res.status(200).json(response)
-            })
-            .catch(error => {
-                res.status(500).json({ error: error.message })
-            })
+        const { minheight } = req.query;
+        if(minheight) {
+            Character
+                .find({"$and": [{ "height": { "$gt": 100}},{ "gender": "female" }]})
+                .select('name gender height')
+                .then(response => {
+                    res.status(200).json(response)
+                })
+                .catch(error => {
+                    res.status(500).json({ error: error.message })
+                })
+        } else {
+            Character
+                .find()
+                .populate('homeworld', 'name climate terrain diameter')
+                .then(response => {
+                    res.status(200).json(response)
+                })
+                .catch(error => {
+                    res.status(500).json({ error: error.message })
+                })
+        }
     })
 router
     .route('/:id')

@@ -10,6 +10,7 @@ router
     .get((req, res) => {
         Specie
             .find()
+            .populate('homeworld', 'name')
             .then(response => {
                 res.status(200).json(response)
             })
