@@ -11,7 +11,8 @@ const router = express.Router();
 router
   .route('/')
   .get((req, res) => {
-    Character.find()
+    if (req.query.minheight) {
+      Character.find({ height: { $gt: 100 }, gender: 'female' })
         .select('name gender height skin_color hair_color eye_color')
         .populate('homeworld')
         .then(chars => {
@@ -19,7 +20,18 @@ router
         })
         .catch(err => {
           res.status(500).json([{ error: "The character information could not be retrieved." }]);
-        });
+        })
+    } else {
+      Character.find()
+        .select('name gender height skin_color hair_color eye_color')
+        .populate('homeworld')
+        .then(chars => {
+          res.status(200).json(chars);
+        })
+        .catch(err => {
+          res.status(500).json([{ error: "The character information could not be retrieved." }]);
+        })
+    };
   });
 
 router
