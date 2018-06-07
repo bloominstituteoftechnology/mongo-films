@@ -20,8 +20,8 @@ router
     console.log("Film Route Query:",query);
     Film.find(query)
       .sort({ episode: 1 })
-      .populate('characters',{"_id":0,"name":1,"gender":1,"height":1,"skin_color":1,"hair_color":1,"eye_color":1})
-      .populate('planets', {"_id":0,"name":1,"climate":1,"terrain":1,"gravity":1,"diameter":1})
+      .populate('characters',{"_id":1,"name":1,"gender":1,"height":1,"skin_color":1,"hair_color":1,"eye_color":1})
+      .populate('planets', {"_id":1,"name":1,"climate":1,"terrain":1,"gravity":1,"diameter":1})
       .then(Films => {
         res.json(Films);
       })
@@ -41,8 +41,8 @@ router
     const { id } = req.params;
     //==>
     Film.findById(id)
-      .populate('characters', {name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1})
-      .populate('planets', {name: 1, climate: 1, terrain: 1, gravity: 1, diameter: 1 })
+    .populate('characters',{"_id":0,"name":1,"gender":1,"height":1,"skin_color":1,"hair_color":1,"eye_color":1})
+    .populate('planets', {"_id":0,"name":1,"climate":1,"terrain":1,"gravity":1,"diameter":1})
       .then(Film => {
         res.json(Film);
       })
@@ -52,8 +52,8 @@ router
     const { id } = req.params;
     //==>
     Film.findByIdAndUpdate(id, req.body, { new: true})
-      .populate('characters', {name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1})
-      .populate('planets', {name: 1, climate: 1, terrain: 1, gravity: 1, diameter: 1 })
+    .populate('characters',{"_id":0,"name":1,"gender":1,"height":1,"skin_color":1,"hair_color":1,"eye_color":1})
+    .populate('planets', {"_id":0,"name":1,"climate":1,"terrain":1,"gravity":1,"diameter":1})
       .then(Film => {
         res.json(Film);
       })

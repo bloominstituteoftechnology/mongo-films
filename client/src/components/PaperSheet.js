@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+/* Additional Dependencies & Components */
+import SimpleCard from './SimpleCard';
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -13,18 +15,25 @@ const styles = theme => ({
 });
 
 function PaperSheet(props) {
-  const { classes, film } = props;
-  const { episode, title } = film;
+  const { classes, data } = props;
+  console.log("props.match.path",props.match.path);
+
+  const { characters, episode, title } = data;
   return (
     <div>
       <Paper className={classes.root} elevation={4}>
-        <Typography variant="headline" component="h2">
+        <Typography variant="display1" component="h1">
           Star Wars Episode {episode}: {title}
         </Typography>
         <br />
-        <Typography variant="display1" component="h3">
+        <Typography variant="title" component="h2">
           Characters
         </Typography>
+          <div className="flex flex-wrap">
+          {
+            characters.map(character => <SimpleCard key={character._id} data={character} />)
+          }
+          </div>
       </Paper>
     </div>
   );

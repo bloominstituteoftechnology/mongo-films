@@ -6,10 +6,13 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+/* Additional Dependencies & Components */
+import { Link } from 'react-router-dom';
 
 const styles = {
   card: {
-    minWidth: 275,
+    maxWidth: 325,
+    margin: '0.5rem',
   },
   bullet: {
     display: 'inline-block',
@@ -26,35 +29,47 @@ const styles = {
 };
 
 function SimpleCard(props) {
-  const { classes } = props;
-  console.log("SimpleCard classes:",classes);
-  const bull = <span className={classes.bullet}>•</span>;
+  const { classes, data } = props;
+  const { name, _id } = data;
 
   return (
     <div>
       <Card className={classes.card}>
         <CardContent>
-          <Typography className={classes.title} color="textSecondary">
-            Word of the Day
-          </Typography>
-          <Typography variant="headline" component="h2">
-            be{bull}nev{bull}o{bull}lent
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            adjective
-          </Typography>
-          <Typography component="p">
-            well meaning and kindly.<br />
-            {'"a benevolent smile"'}
+          <Typography variant="title" component="h2">
+            {name}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Link to={`/character/${_id}`}><Button size="small">Learn More</Button></Link>
         </CardActions>
       </Card>
     </div>
   );
 }
+
+/* 
+<Card className={classes.card}>
+  <CardContent>
+    <Typography className={classes.title} color="textSecondary">
+      Word of the Day
+    </Typography>
+    <Typography variant="headline" component="h2">
+      be{bull}nev{bull}o{bull}lent
+    </Typography>
+    <Typography className={classes.pos} color="textSecondary">
+      adjective
+    </Typography>
+    <Typography component="p">
+      well meaning and kindly.<br />
+      {'"a benevolent smile"'}
+    </Typography>
+  </CardContent>
+  <CardActions>
+    <Button size="small">Learn More</Button>
+  </CardActions>
+</Card>
+*/
 
 SimpleCard.propTypes = {
   classes: PropTypes.object.isRequired,
