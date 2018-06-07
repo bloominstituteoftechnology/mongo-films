@@ -6,7 +6,7 @@ const Character = mongoose.Schema({
   edited: Date,
   created: Date,
   gender: String,
-  height: String,
+  height: Number,
   hair_color: String,
   skin_color: String,
   eye_color: String,

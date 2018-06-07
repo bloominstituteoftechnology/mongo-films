@@ -2,23 +2,39 @@ const express = require('express');
 
 const Character = require('./Character.js');
 
+const Vehicle = require('../vehicles/Vehicle.js');
+
 const router = express.Router();
 
 router
   .route('/')
   .get((req, res) => {
+  let { minheight } = req.query;
+  minheight = Number(minheight);
 
-    Character
-    .find()
-    .then(characters => {
-      res.status(200)
-      res.json({ characters })
-    })
-    .catch(err => {
-      res.status(500)
-      res.json({ message: 'The characters information could not be retrieved.' });
-    })
+    if (minheight) {
+      Character
+      .find()
+      .where('gender').equals('female')
+      .where('height').gt(minheight)
+      .then(characters => {
+        res.json({ characters });
+      })
+      .catch(error => res.status(500).json({ error: 'Error fetching characters height.' }));
+    }
+    else {
+      Character
+     .find()
+      .then(characters => {
+        res.json({ characters });
+      })
+      .catch(err => {
+        res.status(500)
+        res.json({ message: "Error fetching characters."})
+      })
+    }
   })
+
 
 router
   .route('/:id')
@@ -38,6 +54,22 @@ router
         res.json({ message: "The character information could not be retrieved." })
     })
   })
+  
+router 
+  .route('/:id/vehicles')
+  .get((req, res) => {
+
+  Vehicle
+  .find()
+  .where('pilots').in([req.params.id])
+  .then((vehicles) => {
+    res.json({ vehicles });
+  })
+  .catch(error => {
+    res.status(500).json({ error: 'Error fetching vehicles' })
+  })
+})
+
 
 
 module.exports = router;
