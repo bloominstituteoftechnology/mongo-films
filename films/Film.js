@@ -26,3 +26,10 @@ const Film = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Film', Film);
+
+// 
+// custom validator
+// validate: customValidate
+// function customVal(name) {
+  //return name.length >= 15; 
+// }

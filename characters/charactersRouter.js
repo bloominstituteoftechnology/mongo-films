@@ -22,9 +22,14 @@ router
     .route("/:id")
     .get((req, res) => {
         const { id } = req.params;
-        const { movieID } = req.body
         Character.findById(id)
-        .populate('homeworld vehicles')
+        .populate('homeworld', 'name climate -id')
+        .populate('vehicles', {
+            name: 1
+        })
+        .populate('movies', {
+            title: 1
+        })
         .then(charFound => {
             res.status(200).json(charFound);
         })
@@ -39,6 +44,12 @@ router
         const { id } = req.params;
         Character.findById(id)
         .populate('vehicles')
+        .then(fv => {
+            res.status(200).json(fv);
+        })
+        .catch(error => {
+            res.status(500).json({ error: error.message })
+        })
     })
 
 module.exports = router;
