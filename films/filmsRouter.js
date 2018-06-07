@@ -10,6 +10,7 @@ router
     .get((req, res) => {
         Film
             .find()
+            .sort('episode')
             .then(response => {
                 res.status(200).json(response)
             })
