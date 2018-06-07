@@ -22,7 +22,7 @@ const Film = new mongoose.Schema({
   vehicles: [{type: ObjectId, ref: 'Vehicle'}],
   planets: [{type: ObjectId, ref: 'Planet'}],
   characters: [{type: ObjectId, ref: 'Character'}],
-  species: [{type: ObjecetId, ref: 'Specie'}]
+  species: [{type: ObjectId, ref: 'Specie'}]
 });
 
 module.exports = mongoose.model('Film', Film);
