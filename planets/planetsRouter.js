@@ -14,6 +14,15 @@ router
             .catch(err => res.status(500).json({ error: err.message }));
     })
 
+router
+    .route('/:id')
+    .get((req, res) => {
+        const { id } = req.params;
+        Planet.findById(id)
+            .then(planet => res.json(planet))
+            .catch(err => res.status(500).json({ error: err.message}));
+    })
+
 
 
 module.exports = router;
