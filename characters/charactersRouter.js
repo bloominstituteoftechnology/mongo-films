@@ -13,11 +13,24 @@ const router = express.Router();
 router
   .route('/')
   .get((req, res) => {
-    Character.find()
-      .then(characters => {
-        res.json({ characters });
-      })
-      .catch(error => res.status(500).json({ error: 'Error fetching characters' }));
+    let { minheight } = req.query;
+    minheight = Number(minheight);
+    if (minheight) {
+      Character.find()
+        .where('gender').equals('female')
+        .where('height').gt(minheight)
+        .then(characters => {
+          res.json({ characters });
+        })
+        .catch(error => res.status(500).json({ error: 'Error fetching characters' }));
+    }
+    else {
+      Character.find()
+        .then(characters => {
+          res.json({ characters });
+        })
+        .catch(error => res.status(500).json({ error: 'Error fetching characters' }));
+    }
   })
 
 router
