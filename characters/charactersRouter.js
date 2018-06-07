@@ -36,6 +36,7 @@ router
             const { id } = req.params;            
             Character.findById(id)
                 .populate('homeworld', { _id: 0, __v: 0, key: 0})
+                .populate('movies')
                 .then(foundCharacter => {
                     res.json(foundCharacter);
                 })

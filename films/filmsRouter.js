@@ -1,16 +1,37 @@
 const express = require('express');
+const db = require('mongoose')
 
 const Film = require('./Film.js');
 
 const router = express.Router();
 
+const sendUserError = (status, message, res) => {
+    res.status(status).json({ error: message });
+    return;
+}
+
 router 
     .route('/')
     .get((req, res) => {
+        const { producer } = req.query;
+        const { released } = req.query;
+        if (producer) {
+        Film.find( { $text: { $search: "Gary Kurtz" }})
+                    .then(films => res.json(films))
+                    .catch(err => {
+                        sendUserError(500, err.message, res)})
+                    } else if (released) {
+                        Film.find({ $year: 'released_date'}.equals({ $year: released}))
+                        .then(films => res.json(films))
+                        .catch(err => sendUserError(500, err.message, res))
+                    } else {
         Film.find()
+            .sort({ episode: 1 })
+            .populate('characters')
+            .populate('planets')
             .then(film => res.json(film))
             .catch(err => sendUserError(500, err.message, res))
-    })
+        }})
 
 router
     .route('/:id')
@@ -38,10 +59,11 @@ router
                     foundFilm.characters = Object.assign({}, foundFilm.characters, characterID)
                     foundFilm.save()
                         .then(savedFilm => res.status(201).json(savedFilm))
-                        .catch(err => sendUserError(500, err.message, res))
+                        .catch(err => { sendUserError(500, err.message, res)})
                 })
-                .catch(err => sendUserError(500, err.message, res))
+                .catch(err => { sendUserError(500, err.message, res)})
         })
+
 router
     .route('/:id/planets')
         .get((req, res) => {

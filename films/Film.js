@@ -10,7 +10,7 @@ const Film = new mongoose.Schema({
   producer: String,
   title: { type: String, required: true },
   director: String,
-  release_date: String,
+  release_date: Date,
   opening_crawl: String,
   character_ids: [Number],
   characters: [{type: ObjectId, ref: 'Character'}],
@@ -22,5 +22,5 @@ const Film = new mongoose.Schema({
   vehicle_ids: [Number],  
   vehicles: [{type: ObjectId, ref: 'Vehicle'}],
 });
-
+Film.index({ producer: 'text' })
 module.exports = mongoose.model('Film', Film);
