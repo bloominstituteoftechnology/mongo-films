@@ -8,8 +8,10 @@ const router = express.Router();
 router
   .route('/')
   .get((req, res) => {
-    Film.find(query) // filter, .select(), .where(), .sort()
+    Film.find({}) // filter, .select(), .where(), .sort()
       .sort({ episode: 1})
+      .populate('characters', '_id, name gender height skin_color hair_color eye_color')
+      .populate('planets', 'name climate terrain gravity diameter')
       .then(films => res.json(films))
       .catch(err => res.status(500).json({ error: err.message }));
   });
