@@ -9,11 +9,37 @@ const router = express.Router();
 router
   .route('/')
   .get((req, res) => {
-    Film.find()
-      .then(films => {
-        res.json({ films });
-      })
-      .catch(error => res.status(500).json({ error: 'Error fetching films' }));
+    const { producer, released } = req.query;
+    if (producer) {
+      const producerMatcher = new RegExp(producer, "i");
+      Film.find()
+        .where('producer').regex(producerMatcher)
+        .then(films => {
+          res.json({ films });
+        })
+        .catch(error => res.status(500).json({ error: 'Error fetching films' }));
+    }
+    if (released) {
+      const yearMatcher = new RegExp(released, "i");
+      Film.find()
+        .where('release_date').regex(yearMatcher)
+        .then(films => {
+          res.json({ films });
+        })
+        .catch(error => res.status(500).json({ error: 'Error fetching films' }));
+    }
+    else {
+      Film.find()
+        .sort('episode')
+        .populate('characters', '_id name gender height skin_color hair_color eye_color')
+        .populate('planets', '-_id name climate terrain gravity diameter')
+        .select('planets edited producer title created director release_date opening_crawl characters')
+        .then(films => {
+          res.json({ films });
+        })
+        .catch(error => res.status(500).json({ error: 'Error fetching films' }));
+    }
+
   })
 
 router
