@@ -18,16 +18,16 @@ class App extends Component {
   //   })
   // }
 
-  // destroy = (id) => {
-  //   console.log(id)
-  //   axios.delete(`http://localhost:5000/api/films/${id}`)
-  //     .then(response => {
-  //       axios.get('http://localhost:5000/api/films')
-  //         .then(res => this.setState({ friends: res.data.friends }))
-  //         .catch(err => console.log(err))
-  //     })
-  //     .catch(err => console.log(err))
-  // }
+  destroy = (id) => {
+    console.log(id)
+    axios.delete(`http://localhost:5000/api/films/${id}`)
+      .then(response => {
+        axios.get('http://localhost:5000/api/films')
+          .then(res => this.setState({ friends: res.data }))
+          .catch(err => console.log(err))
+      })
+      .catch(err => console.log(err))
+  }
 
   // submitUser = (e) => {
   //   e.preventDefault();
@@ -60,7 +60,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <FriendsList films={this.state.films} />
+        <FriendsList films={this.state.films} destroy={this.destroy} />
       </div>
     );
   }

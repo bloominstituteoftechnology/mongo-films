@@ -57,7 +57,11 @@ h5 {
 h2 {
   padding: 20px;
 }
-
+button {
+  border-radius: 5px;
+  color: black;
+  background: darkgray;
+}
 @font-face {
   font-family: 'SF Distant Galaxy';
   src:
