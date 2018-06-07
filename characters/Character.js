@@ -7,13 +7,15 @@ const Character = mongoose.Schema({
   created: Date,
   gender: String,
   height: String,
+  movies: Array,
+  vehicles:Array,
   hair_color: String,
   skin_color: String,
   eye_color: String,
   birth_year: String,
   key: { type: Number, unique: true },
   homeworld_key: Number,
-  planets: [{ type: ObjectId, ref: 'Planet' }],
+  homeworld: { type: ObjectId, ref: 'Planet' },
   // add homeworld field that links the character to it's planet
 });
 

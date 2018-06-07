@@ -17,11 +17,13 @@ router
       })
   })
 
-  router.route('/:id').get((req, res) => {
-  const { id } = req.params;
-  Planet.findById(id) // { username: 1, firstName: 1, lastName: 1, _id: 0 } A WAY to do this.3
-    .then(foundPlanet => res.json(foundPlanet))
-    .catch(err => res.status(500).json({ error: err }));
-  });
+  router
+    .route('/:id')
+      .get((req, res) => {
+        const { id } = req.params;
+        Planet.findById(id) // { username: 1, firstName: 1, lastName: 1, _id: 0 } A WAY to do this.3
+          .then(foundPlanet => res.json(foundPlanet))
+          .catch(err => res.status(500).json({ error: err }));
+        });
 
 module.exports = router;

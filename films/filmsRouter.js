@@ -9,15 +9,37 @@ const router = express.Router();
 router
   .route("/")
   .get((req,res) => {
-    Film.find()
-      .sort({ episode: 1})
-      .then(film => {
-        res.status(200).json(film)
-      })
-      .catch(err => {
-        res.status(500).json(err)
-      })
-  })
+    var producer = req.query;
+    const keys = Object.keys(producer);
+    var queryValue = req.query[keys];
+    console.log('qv',queryValue )
+    if (queryValue) {
+      const producerFilter = new RegExp(queryValue, 'i'); // build a case-insensitive match around the producer name
+      console.log(producerFilter);
+
+      Film.find({})
+        .where(`${keys}`)// find where producer matches the following regex pattern
+        .regex(producerFilter)
+        .sort({ episode: 1})
+        .then(film => {
+          res.status(200).json(film)
+        })
+        .catch(err => {
+          res.status(500).json(err)
+        })
+      }
+    else{
+      Film.find({})
+        .sort({ episode: 1})
+        .then(film => {
+          res.status(200).json(film)
+        })
+        .catch(err => {
+          res.status(500).json(err)
+        })
+    }
+
+    })
 
 router
   .route('/:id')
@@ -30,4 +52,19 @@ router
         .catch(err => res.status(500).json({ error: err }));
       });
 
+router
+  .route('/:id/characters')
+    .post((req, res) => {
+      const { id } = req.params;
+      const { charID } = req.body;
+      Film.findById(id)
+        .then(foundUser => {
+          Film.characters = [...foundUser.hobbies, hobbyID];
+          foundUser
+            .save()
+            .then(savedUser => res.status(201).json(savedUser))
+            .catch(saveError => res.status(500).json({ error: saveError.message }));
+        })
+        .catch(err => res.status(500).json({ error: err.message }));
+      });
 module.exports = router;
