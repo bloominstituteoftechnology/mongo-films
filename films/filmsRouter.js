@@ -10,18 +10,27 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {
-        Film.find({})
+        const { producer, released } = req.query;
+        const { id } = req.params;
+        let query = Film.find()
             .sort('episode') //order by episode
-            //popuate with these two tables
-            .populate('character', { name: 1, created: 1, gender: 1, height: 1, hair_color: 1, skin_color: 1, birth_year: 1, _id: 0 })
-            .populate('planet', { climate: 1, surface_water: 1, name: 1, created: Date.now, _id: 0 })
-            .then(response => {
+            .select('episode title producer homeworld release_date')
+            if(producer !== undefined){
+                const filter = new RegExp(producer, 'i' )
+                query.where({producer: filter})
+            }
+            if(released !== undefined){
+                query.where({release_date: {$regex: released, $options: 'i'}})
+            }
+            query.then(response => {
                 res.status(201).json(response)
             })
             .catch(err => {
                 res.status(500).json(err);
             })
     })
+
+
 router  
     .route('/:id')
     .get((req, res) => {
@@ -39,7 +48,6 @@ router
                     res.status(500).json(err)
                 })
     })
-
 
 
 module.exports = router;
