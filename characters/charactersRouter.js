@@ -9,14 +9,14 @@ const router = express.Router();
 router
   .route('/')
   .get((req, res) => {
-    Character.find()
-      .populate('homeworld')
-      .then(chars => {
-        res.status(200).json(chars);
-      })
-      .catch(err => {
-        res.status(500).json([{ error: "The character information could not be retrieved." }]);
-      });
+      Character.find()
+        .populate('homeworld')
+        .then(chars => {
+          res.status(200).json(chars);
+        })
+        .catch(err => {
+          res.status(500).json([{ error: "The character information could not be retrieved." }]);
+        });
   });
 
 router
@@ -32,7 +32,5 @@ router
         res.status(500).json([{ error: err }]);
       });
   });
-
-
 
 module.exports = router;
