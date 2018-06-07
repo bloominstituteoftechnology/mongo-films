@@ -2,12 +2,12 @@ const express = require('express');
 const helmet = require('helmet');
 
 const db = require('./data/db.js');
-const charactersRouter = require('./characters/charactersRouter.js');
-const filmsRouter = require('./films/filmsRouter.js');
-const speciesRouter = require('./species/speciesRouter.js');
-const starshipsRouter = require('./starships/starshipsRouter.js');
-const vehiclesRouter = require('./vehicles/vehiclesRouter.js');
-const planetsRouter = require('./planets/planetsRouter.js');
+const charactersRouter = require('./routes/characters/charactersRouter.js');
+const filmsRouter = require('./routes/films/filmsRouter.js');
+const speciesRouter = require('./routes/species/speciesRouter.js');
+const starshipsRouter = require('./routes/starships/starshipsRouter.js');
+const vehiclesRouter = require('./routes/vehicles/vehiclesRouter.js');
+const planetsRouter = require('./routes/planets/planetsRouter.js');
 
 const server = express();
 
