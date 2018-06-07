@@ -15,6 +15,7 @@ router
     const released = (req.query.released) ? new RegExp('^' + req.query.released) : /\d+/;
     
     Film.find()
+      .limit(1)
       .where('producer', producer)
       .where('release_date', released)
       .sort('episode')
