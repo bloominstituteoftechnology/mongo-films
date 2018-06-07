@@ -14,9 +14,8 @@ const Character = mongoose.Schema({
   key: { type: Number, unique: true },
   homeworld_key: Number,
   homeworld: [{ type: ObjectId, ref: 'Planet'}],
-  vehicles: [{ type: ObjectId, ref: 'Vehicle'}],
   // add homeworld field that links the character to it's planet
-  movies: [{ type: ObjectId, ref: 'Film'}]
+  // movies: [{ type: ObjectId, ref: 'Film'}]
 });
 
 module.exports = mongoose.model('Character', Character);
