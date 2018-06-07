@@ -1,6 +1,7 @@
 const express = require('express');
 const Character = require('./Character.js');
 const Film = require('../films/Film.js');
+const Vehicle = require('../vehicles/Vehicle.js');
 
 const router = express.Router();
 
@@ -20,6 +21,7 @@ router
         const { id } = req.params
         Character.findById(id)
             .populate('homeworld', 'name')
+            .populate('vehicles')
             .populate('movies')
             .then(charResponse => {
                 let obj = charResponse
@@ -28,7 +30,14 @@ router
                     .select('title')
                     .then(filmResponse => {
                         obj.movies = filmResponse
-                        res.status(200).json({ data: obj })
+
+                        Vehicle
+                            .find({ pilots: id })
+                            .select('vehicle_class')
+                            .then(vehicleResponse => {
+                                obj.vehicles = vehicleResponse
+                                res.status(200).json({ data: obj })
+                            })
                     })
 
             })
