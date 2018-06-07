@@ -9,6 +9,7 @@ router.route("/").get((req, res) => {
   if(req.query.producer) {
     Film.find()
         .where({ producer: new RegExp(req.query.producer, "gi")})
+        //.select('episode')
         .populate('characters', {edited: 0, created: 0, key: 0, __v: 0, homeworld_key: 0, homeworld: 0})
         .populate('planets', 'name climate terrain gravity diameter -_id') //better syntax
         .then(films => {
