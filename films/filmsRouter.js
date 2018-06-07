@@ -9,6 +9,7 @@ router
     .route('/')
     .get((req, res) => {
         Film.find({})
+        .sort({episode: 1})
         .then(films => res.json(films))
         .catch(err => res.status(500).json({error: err}))
     })
