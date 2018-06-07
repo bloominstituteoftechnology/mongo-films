@@ -9,13 +9,25 @@ const router = express.Router()
 router
     .route('/')
     .get((req, res) => {
-        Character.find()
-            .then( chars => {
-                res.json(chars)
-            })
-            .catch( err => {
-                res.status(500).json({ error: err.message })
-            })
+        const { minheight } = req.query
+        if (minheight) {
+            Character.find({ 'height': { $gt: 100 } })
+                .then( chars => {
+                    res.json(chars)
+                })
+                .catch( err => {
+                    res.status(500).json({ error: err.message })
+                })
+        }  else {
+            Character.find()
+                .then( chars => {
+                    res.json(chars)
+                })
+                .catch( err => {
+                    res.status(500).json({ error: err.message })
+                })
+        }
+        
     })
 
 router
