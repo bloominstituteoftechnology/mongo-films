@@ -1,6 +1,7 @@
 const express = require('express');
 
 const Vehicle = require('./Vehicle.js');
+const Character = require('../characters/Character.js');
 
 const router = express.Router();
 
@@ -18,5 +19,15 @@ router
             })
     })
   
+router
+    .route('/:id')
+    .get((req, res) => {
+        Vehicle
+            .findById(req.params.id)
+            .populate('pilots', 'name')
+            .then()
+    })
+
+
 
 module.exports = router;
