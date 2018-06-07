@@ -3,6 +3,8 @@ const router = express.Router();
 
 const Character = require('./Character.js');
 const Vehicle = require('../vehicles/Vehicle.js');
+const Film = require("../films/Film.js");
+
 
 
 // add endpoints here
@@ -11,14 +13,17 @@ router
   .route("/")
   .get((req, res) => {
     Character.find()
-      .populate('homeworld')
+      .select('name gender height skin_color hair_color eye_color')
+      .populate("homeworld")
       .then(characters => {
         res.status(200).json(characters);
       })
       .catch(err => {
-        res.status(500).json({
-          error: "The character information could not be retrieved."
-        });
+        res
+          .status(500)
+          .json({
+            error: "The character information could not be retrieved."
+          });
       });
   })
 
@@ -27,8 +32,13 @@ router.
       const { id } = req.params;
       Character.findById(id)
         .populate("homeworld")
-        .then(characters => {
-          res.status(200).json(characters);
+        .then(char => {
+            Film.find({ characters: id })
+            .select('title -_id')
+            .then(films => {
+                const character = {...char._doc, movies: films}
+                res.status(200).json(character);
+            })
         })
         .catch(err => {
           res
