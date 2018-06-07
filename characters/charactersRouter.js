@@ -11,7 +11,7 @@ router
     .get((req, res) => {
         const { minheight } = req.query
         if (minheight) {
-            Character.find({ 'height': { $gt: 100 } })
+            Character.find({ 'height': { $gt: 100 }, 'gender': 'female' })
                 .then( chars => {
                     res.json(chars)
                 })
