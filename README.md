@@ -60,7 +60,7 @@ Return a list of all films. (/api/films)
 
 Find all films produced by _Gary Kurtz_ (/api/films?producer=gary+kurtz)
 
-Find all films released in _2005_. (/api/films?released=2005)
+Find all films released in _2005_. (/api/films?release_date=2005)
 
 Given a character id, (/api/characters/:id)
 
