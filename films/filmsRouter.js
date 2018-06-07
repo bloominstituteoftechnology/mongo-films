@@ -15,14 +15,15 @@ const populateQuery = [{
 router.route('/').get((req, res) => {
     const { producer, released } = req.query;
     if(producer) {
-        const regexProducer = new RegExp(producer, 'i');
-        console.log(regexProducer)
-        Film.find({ $and:[{ $text: { $search: producer }},{ 'producer': { $regex: regexProducer }}]})
+        const regex = new RegExp(producer, 'i');
+        Film.find({ $and:[{ $text: { $search: producer }},{ 'producer': { $regex: regex }}] })
             .then(response => res.json(response))
             .catch(err => res.status(500).json({ error: err.message}));
     } 
     else if (released) {
-
+        Film.find({ $text: { $search: released }})
+            .then(response => res.json(response))
+            .catch(err => res.status(500).json({ error: err.message}));
     } 
     else {
     Film.find().sort({
