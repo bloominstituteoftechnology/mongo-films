@@ -51,6 +51,7 @@ router.
     Character.findById(id)
       .then(char => {
         Vehicle.find({ pilot_keys: char.key })
+          .select('vehicle_class')  
           .then(vehicles => {
             res.status(200).json(vehicles);
           })
