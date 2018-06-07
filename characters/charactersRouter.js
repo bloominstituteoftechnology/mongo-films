@@ -20,6 +20,23 @@ router
         });
       });
   })
+
+router.
+  route("/:id").get((req,res) => {
+      const { id } = req.params;
+      Character.findById(id)
+        .populate("homeworld")
+        .then(characters => {
+          res.status(200).json(characters);
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({
+              error: `The character with id# ${id} information could not be retrieved.`
+            });
+        });
+  })
   
 
 module.exports = router;
