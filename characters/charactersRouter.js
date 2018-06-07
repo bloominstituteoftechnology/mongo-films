@@ -2,6 +2,8 @@ const express = require('express');
 
 const Character = require('./Character.js');
 
+const Film = require('../films/Film.js');
+
 const router = express.Router();
 
 // add endpoints here
@@ -22,7 +24,12 @@ router
     Character.findById(req.params.id)
       .populate('homeworld')
       .then(character => {
-        res.json({ character });
+        Film.find()
+          .where('characters').in([req.params.id])
+          .then((movies) => {
+            res.json({ character, movies });
+          })
+
       })
       .catch(error => res.status(500).json({ error: 'Error fetching character' }));
   });
