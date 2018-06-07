@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.card-img-top {
+  width: 250px;
+  height: 180px;
+}
+.card {
+  width: 300px;
+  padding: 15px;
+  margin: 15px;
+  text-align: center;
+}
+
+.friendslist-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.App {
+  display: flex;
+  flex-direction: row;
+  font-family: SF Distant Galaxy;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1160px;
+}
+.cardholder {
+  width: 350px;
+}
+
+.form-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.header {
+  background: lightgray;
+  height: 100px;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-secondary {
+  height: 30px;
+  margin: 35px 0px;
+}
+h5 {
+  border-top: 1px solid lightgray;
+  padding-top: 10px;
+}
+h2 {
+  padding: 20px;
+}
+button {
+  border-radius: 5px;
+  color: black;
+  background: darkgray;
+}
+@font-face {
+  font-family: 'SF Distant Galaxy';
+  src:
+      local('SF Distant Galaxy'),
+      url('SFDistantGalaxy.ttf');
+  }
+
+  
