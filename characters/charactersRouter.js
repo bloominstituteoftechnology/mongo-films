@@ -14,4 +14,13 @@ router
             .catch(err => res.status(500).json({ error: err.message }));
     })
 
+router
+    .route('/:id')
+    .get((req, res) => {
+        const { id } = req.params;
+        Character.findById(id)
+            .populate('homeworld', {_id: 0, climate: 1, name: 1, terrain: 1})
+            .then(character => res.json(character))
+            .catch(err => res.status(500).json({ error: err.message }));
+    })
 module.exports = router;
