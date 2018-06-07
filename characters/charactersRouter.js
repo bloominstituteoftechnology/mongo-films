@@ -13,7 +13,22 @@ router
   .route("/")
   .get((req, res) => {
     if(req.query.minheight) {
-        Character.find({ height: { $gt: 100 }, gender: "female" })
+        Character.find({ height: { $gte: Number(req.query.minheight) }, gender: "female" })
+          .select("name gender height skin_color hair_color eye_color")
+          .populate("homeworld")
+          .then(characters => {
+            res.status(200).json(characters);
+          })
+          .catch(err => {
+            res
+              .status(500)
+              .json({
+                error:
+                  "The character information could not be retrieved."
+              });
+          });
+    } else {
+        Character.find()
           .select("name gender height skin_color hair_color eye_color")
           .populate("homeworld")
           .then(characters => {
