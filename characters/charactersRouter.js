@@ -11,12 +11,23 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {
-        Character
+        const { minheight } = req.query;
+        if(minheight){
+            Character
+                .find({"$and": [{ "height": { "$gt": 100 } }, { "gender": "female" }]})
+                .select('gender name height')
+                .then(response => {
+                    res.status(200).json(response)
+                })
+                .catch(err => res.status(500).json({ error: err.message }))
+        }else {
+          Character
             .find()
             .then(characters => {
                 res.status(200).json(characters);
             })
-            .catch(err => res.status(500).json({ error: "The character information could not be retrieved" }))
+            .catch(err => res.status(500).json({ error: "The character information could not be retrieved" }))  
+        }
     })
 
 router
