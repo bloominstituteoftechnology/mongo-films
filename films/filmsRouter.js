@@ -5,21 +5,13 @@ const Film = require('./Film.js');
 const router = express.Router();
 
 // add endpoints here
-
-function escapeRegex(text) {
-    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-};
-
 router
     .route('/')
     .get((req, res) => {
         // req.query.producer ?
         if (req.query.producer) {
             // console.log(Object.keys(req.query))
-            let regex = new RegExp(escapeRegex(req.query.producer), 'gi')
-            Film.find({
-                "producer": regex
-            })
+            Film.find({ producer: { $regex: `.* 2005. * ` } })
                 .populate('homeworld', { _id: 0, name: 1, climate: 1, terrain: 1, gravity: 1, diameter: 1 })
                 .populate('characters', { name: 1, gender: 1, height: 1, skin_color: 1, hair_color: 1, eye_color: 1 })
                 .then(films => res.status(200).json(films))
