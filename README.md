@@ -48,6 +48,8 @@ Now that we have the sample data loaded, it is time to work on the API.
 ### Configure relationships on the provided _mongoose_ Schemas.
 
 Each _Schema_ is configured to work with the data imported into the corresponding collection on the database, but is missing the field(s) needed for the relatioships.
+Tasks:
+  1. Add relation keys
 
 ### Write endpoints to perform the following queries.
 
