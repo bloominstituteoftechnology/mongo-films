@@ -12,19 +12,22 @@ const Film = require("../films/Film.js");
 router
   .route("/")
   .get((req, res) => {
-    Character.find()
-      .select('name gender height skin_color hair_color eye_color')
-      .populate("homeworld")
-      .then(characters => {
-        res.status(200).json(characters);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({
-            error: "The character information could not be retrieved."
+    if(req.query.minheight) {
+        Character.find({ height: { $gt: 100 }, gender: "female" })
+          .select("name gender height skin_color hair_color eye_color")
+          .populate("homeworld")
+          .then(characters => {
+            res.status(200).json(characters);
+          })
+          .catch(err => {
+            res
+              .status(500)
+              .json({
+                error:
+                  "The character information could not be retrieved."
+              });
           });
-      });
+    }
   })
 
 router.
@@ -55,6 +58,7 @@ router.
         Character.findById(id)
           .then(char => {
             Vehicle.find({ pilot_keys: char.key })
+            .select('vehicle_class')
               .then(vehicles => {
                 res.status(200).json(vehicles);
               })
