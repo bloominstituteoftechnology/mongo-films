@@ -1,6 +1,6 @@
 const express = require('express');
 const Film = require('./Film.js');
-const sendErrorMessage = require('../helpers');
+const sendErrorMessage = require('../util/sendErrorMessage.js');
 const router = express.Router();
 
 router
@@ -31,18 +31,18 @@ router
       });
   })
   .get('/:id', (req, res) => {
-  const { id } = req.params;
-  Film.findById(id)
-    .then(film => {
-      if(film){
-        res.status(200).json(film);
-      } else {
-        res.status(404).json({ error: 'The film with the specified ID does not exist.' });
-      }
-    })
-    .catch(error => {
-      sendErrorMessage(error, res, 'The film could not be retrieved.');
-    });
+    const { id } = req.params;
+    Film.findById(id)
+      .then(film => {
+        if(film){
+          res.status(200).json(film);
+        } else {
+          res.status(404).json({ error: 'The film with the specified ID does not exist.' });
+        }
+      })
+      .catch(error => {
+        sendErrorMessage(error, res, 'The film could not be retrieved.');
+      });
   })
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const express = require('express');
 const Character = require('./Character.js');
-const sendErrorMessage = require('../helpers');
+const sendErrorMessage = require('../util/sendErrorMessage.js');
 const router = express.Router();
 
 router

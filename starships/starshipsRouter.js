@@ -1,6 +1,6 @@
 const express = require('express');
 const Starship = require('./Starship.js');
-const sendErrorMessage = require('../helpers');
+const sendErrorMessage = require('../util/sendErrorMessage.js');
 const router = express.Router();
 
 router

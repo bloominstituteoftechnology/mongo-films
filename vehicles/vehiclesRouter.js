@@ -1,6 +1,6 @@
 const express = require('express');
 const Vehicle = require('./Vehicle.js');
-const sendErrorMessage = require('../helpers');
+const sendErrorMessage = require('../util/sendErrorMessage.js');
 const router = express.Router();
 
 router
