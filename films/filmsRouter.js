@@ -18,7 +18,7 @@ router
           res.status(200).json(films);
         })
         .catch(err => {
-          res.status(500).json([{ error: "The character information could not be retrieved." }]);
+          res.status(500).json([{ error: err.message }]);
         });
     } else if (req.query.dates) {
       Film.find()
@@ -29,7 +29,7 @@ router
           res.status(200).json(films);
         })
         .catch(err => {
-          res.status(500).json([{ error: "The character information could not be retrieved." }]);
+          res.status(500).json([{ error: err.message }]);
         });
     } else {
       Film.find()
@@ -40,7 +40,7 @@ router
           res.status(200).json(films);
         })
         .catch(err => {
-          res.status(500).json([{ error: "The character information could not be retrieved." }]);
+          res.status(500).json([{ error: err.message }]);
         });
     }
   })

@@ -20,7 +20,7 @@ router
           res.status(200).json(chars);
         })
         .catch(err => {
-          res.status(500).json([{ error: "The character information could not be retrieved." }]);
+          res.status(500).json([{ error: err.message }]);
         })
     } else {
       Character.find()
@@ -30,7 +30,7 @@ router
           res.status(200).json(chars);
         })
         .catch(err => {
-          res.status(500).json([{ error: "The character information could not be retrieved." }]);
+          res.status(500).json([{ error: err.message }]);
         })
     };
   });
@@ -69,11 +69,11 @@ router.
             res.status(200).json(vehicles);
           })
           .catch(err => {
-            res.status(404).json([{ error: "The vehicle information could not be retrieved." }]);
+            res.status(404).json([{ error: err.message }]);
           });
       })
       .catch(err => {
-        res.status(500).json([{ error: "The character information could not be retrieved." }]);
+        res.status(500).json([{ error: err.message }]);
       });
   });
 

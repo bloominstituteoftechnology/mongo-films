@@ -19,11 +19,11 @@ router
             res.status(200).json(chars);
           })
           .catch(err => {
-            res.status(500).json([{ err: error.message }])
+            res.status(500).json([{ error: err.message }])
           })
       })
       .catch(err => {
-        res.status(500).json([{ err: error.message }])
+        res.status(500).json([{ error: err.message }])
       })
   })
 
