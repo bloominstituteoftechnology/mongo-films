@@ -12,7 +12,7 @@ router
     .get((req, res) => {
         if (req.query) {
 
-            Character.find({ gender: 'female', height: { $exists: true }, $where: `this.height >= 100` })
+            Character.find({ $and: [{ height: { $gte: 100 } }, { gender: "female" }] })
                 // { $and: [{ height: { $gte: 100 } }, { gender: "female" }] }
                 // .populate('homeworld', { _id: 0, _v: 0 })
                 // .populate('movies', { _id: 0, _v: 0 })
