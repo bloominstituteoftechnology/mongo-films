@@ -60,17 +60,20 @@ router
   .route('/:id/vehicles')
   .get((req, res) => {
     const { id } = req.params;
-
     Character.findById(id)
-      .then(char => {
-	Vehicle.find({ pilots: id })
+      .then(character => {
+       	Vehicle.find({ pilots: id })
 	  .select('vehicle_class')
-	  .then(vehicles => res.status(200).json(vehicles))
-	  .catch(err => {
-	    res.status(500).json({ error: 'There was an error retrieving the data.' });
+	  .then(vehicles => {
+	    res.status(200).json(vehicles);
+	  })
+          .catch(err => {
+            res.status(500).json({ error: 'There was an error retrieving the data.' });
 	  });
-    });
+	 
+      });
   });
+  
 //Given planet id, find all characters born there and all native species (/api/planet/:id)
-
+//I put this in the Planet Router
 module.exports = router;
