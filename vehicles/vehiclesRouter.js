@@ -9,6 +9,9 @@ router.get('/', (req, res) => {
     .then((vehicle) => {
         res.status(200).json(vehicle);
     })
+    .catch(err => {
+        res.status(500).json({error: 'information could not be retrieved'})
+    })
 })
 
 module.exports = router;
