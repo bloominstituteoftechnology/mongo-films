@@ -8,10 +8,30 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {
-        Film.find({})
-        .sort({episode: 1})
-        .then(films => res.json(films))
-        .catch(err => res.status(500).json({error: err}))
+        const { producer } = req.query;
+        const { release_date } = req.query;
+        if(producer){
+            const producerFilter = new RegExp(producer, 'i');
+            console.log(producerFilter);
+            Film.find({})
+            .where('producer')
+            .regex(producerFilter)
+            .then(films => res.json(films))
+            .catch(err => res.status(500).json({error: err}))
+        } else if( release_date) {
+            const filmFilter = new RegExp(release_date, 'i');
+            console.log(filmFilter)
+            Film.find({})
+            .where('release_date')
+            .regex(filmFilter)
+            .then(films => res.json(films))
+            .catch(err => res.status(500).json({error: err}))
+        } else{ 
+            Film.find({})
+            .sort({episode: 1})
+            .then(films => res.json(films))
+            .catch(err => res.status(500).json({error: err}))
+        }
     })
 
 router
