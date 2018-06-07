@@ -7,14 +7,20 @@ const router = express.Router();
 // add endpoints here
 router
   .route('/')
-  .get((req, res) => {
+  .get((req, res) => { 
+    const { producer } = req.query;
+    if (producer) {
+        Film.find({ producer: { $regex: producer, $options: 'i' } })
+            .then(films => res.json(films))
+            .catch(err => res.status(500).json({ error: err.message }));
+    } else {
     Film.find({}) // filter, .select(), .where(), .sort()
-      .sort({ episode: 1})
+      .sort('episode')
       .populate('characters', '_id, name gender height skin_color hair_color eye_color')
       .populate('planets', 'name climate terrain gravity diameter')
       .then(films => res.json(films))
       .catch(err => res.status(500).json({ error: err.message }));
-  });
+  }});
 
 router.route('/:id').get((req, res) => {
   const { id } = req.params;
