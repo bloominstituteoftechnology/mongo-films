@@ -10,6 +10,11 @@ router
     .route('/')
     .get((req, res) => {
         Film.find({})
+            .populate('characters', ('name gender height skin_color hair_color eye_color'))
+            .populate('planets', ('name climate terrain gravity diameter -_id'))
+            .populate('vehicles')
+            .populate('starships')
+            .populate('species')
             .sort('episode')
             .then(films => res.json(films))
             .catch(err => res.status(500).json({ error: err.message}));

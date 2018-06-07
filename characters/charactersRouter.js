@@ -10,6 +10,7 @@ router
     .route('/')
     .get((req, res) => {
         Character.find({})
+            .populate('homeworld', {_id: 0, climate: 1, name: 1, terrain: 1})
             .then(characters => res.json(characters))
             .catch(err => res.status(500).json({ error: err.message }));
     })

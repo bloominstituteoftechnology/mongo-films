@@ -10,6 +10,7 @@ router
     .route('/')
     .get((req, res)=> {
         Starship.find()
+            .populate('pilots', {_id: 0, name: 1, gender: 1})
             .then(starships => {
                 res.json(starships)
             })

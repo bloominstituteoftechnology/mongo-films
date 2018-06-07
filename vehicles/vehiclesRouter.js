@@ -10,6 +10,7 @@ router
     .route('/')
     .get((req, res) => {
         Vehicle.find()
+            .populate('pilots')
             .then(vehicles => res.json(vehicles))
             .catch(err => res.status(500).json({ error: err.message }))
     })
