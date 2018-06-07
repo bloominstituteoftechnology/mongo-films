@@ -10,6 +10,7 @@ router
 
     Film
     .find()
+    .sort({ episode: '1'})
     .then(films => {
       res.status(200)
       res.json({ films })
