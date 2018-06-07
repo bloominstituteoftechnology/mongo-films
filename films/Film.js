@@ -26,10 +26,10 @@ const Film = new mongoose.Schema({
     type: ObjectId,
     ref: "Vehicle"
   },
-  planets: {
+  planets: [{
     type: ObjectId,
     ref: "Planet"
-  },
+  }],
   characters: [{
     type: ObjectId,
     ref: "Character"
