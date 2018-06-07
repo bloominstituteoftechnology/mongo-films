@@ -8,10 +8,10 @@ const router = express.Router();
 router
 .route('/')
 	.get((req, res) => {
-		const { minheight }  = req.query;
+		const minheight  = req.query.minheight;
 		let query = Character.find({})
 		if (minheight) {
-			Character.find({ gender: 'female', height: {$exists: true}, $where: `this.height >= 100`})
+			Character.find({ gender: 'female', height: {$exists: true}, $where: `this.height >= ${minheight}`})
 			.then(character => { 
         console.log(character);
         res.status(200).json(character)
