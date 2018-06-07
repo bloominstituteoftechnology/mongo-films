@@ -14,4 +14,5 @@ const Planet = new mongoose.Schema({
   key: { type: Number, unique: true },
 });
 
+
 module.exports = mongoose.model('Planet', Planet);
