@@ -6,11 +6,10 @@
   "scripts": {
     "start": "nodemon server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LambdaSchool/mongo-films.git"
-  },
-  "keywords": ["mongo"],
+  "repository": "git+https://github.com/LambdaSchool/mongo-films.git",
+  "keywords": [
+    "mongo"
+  ],
   "author": "Lambda School",
   "license": "ISC",
   "bugs": {
@@ -21,6 +20,7 @@
     "nodemon": "^1.17.3"
   },
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.16.3",
     "helmet": "^3.12.0",
     "mongoose": "^5.0.17"
