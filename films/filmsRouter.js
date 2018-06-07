@@ -10,8 +10,8 @@ router
     .get((req, res) => {
         //const { characters_id } = req.params;
        Film.find({})
-        .populate( 'planets') 
-        .populate('characters',{_id:0})
+        .populate( 'planets', {_id:0, edited:0, created:0, key:0, surface_water:0, rotation_period:0, orbital_period:0, __v:0 }) 
+        .populate('characters',{edited:0, created:0, key:0, __v:0, birth_year:0, homeworld_key:0, homeworld:0 })
         //.populate('characters')
         .then(film => res.json(film))
         .catch(err => res.status(500).json({ error: err })); 
