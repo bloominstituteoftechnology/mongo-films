@@ -22,7 +22,7 @@ const Character = mongoose.Schema({
   // add homeworld field that links the character to it's planet
   homeworld: {
     type: ObjectId,
-    ref: 'planet'
+    ref: 'Planet'
   }
 });
 
