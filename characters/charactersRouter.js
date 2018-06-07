@@ -23,6 +23,7 @@ router
         }else {
           Character
             .find()
+            .populate('homeworld', 'name climate terrain diameter')
             .then(characters => {
                 res.status(200).json(characters);
             })
