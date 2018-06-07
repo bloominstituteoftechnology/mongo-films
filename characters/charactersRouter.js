@@ -19,11 +19,22 @@ router
     .route('/:id')
     .get((req, res) => {
         const { id }  = req.params;
-        Character.findById(id)
-        .select('name gender height skin_color hair_color eye_color')
-        .populate('Planet')
-        .then(foundCharacter => res.json(foundCharacter))
-        .catch(err => res.status(500).json({error: err}))
+        const { gender } = req.query;
+        if (gender === "female"){
+            const genderFilter = new RegExp(gender, 'i');
+            console.log(genderFilter)
+            Character.find({})
+            .where('Character')
+            .regex(genderFilter)
+            .then(femaleCharacters => res.json(femaleCharacters))
+            .catch(err => res.status(500).json({error: err}))
+        } else {
+            Character.findById(id)
+            .select('name gender height skin_color hair_color eye_color')
+            .populate('Planet')
+            .then(foundCharacter => res.json(foundCharacter))
+            .catch(err => res.status(500).json({error: err}))
+        }
     })
 
 router
