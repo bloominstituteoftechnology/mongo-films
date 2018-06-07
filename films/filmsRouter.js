@@ -9,9 +9,15 @@ const router = express.Router();
 router
 .route('/')
 .get((req, res) => {
-  Film.find()
+  Film.find().sort( { episode: 1 } )
     .populate('characters', 'name gender height skin_color hair_color eye_color')
     .populate('planets', '-_id name climate terrain gravity diameter')
+    .populate('starships')
+    .populate('species')
+    .populate({
+        path: 'vehicles',
+        populate: { path: 'pilots'}
+      })
     .then(films => {
       res.json(films);
     })
