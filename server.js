@@ -1,5 +1,6 @@
 const express = require('express');
 const helmet = require('helmet');
+const cors = require('cors')
 
 const db = require('./data/db.js');
 const charactersRouter = require('./characters/charactersRouter.js');
@@ -18,6 +19,7 @@ db
 
 server.use(helmet());
 server.use(express.json());
+server.use(cors())
 
 server.use('/api/characters', charactersRouter);
 server.use('/api/films', filmsRouter);

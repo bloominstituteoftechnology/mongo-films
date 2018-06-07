@@ -8,7 +8,7 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {
-        if (req.query) {
+        if (Object.keys(req.query).length > 0) {
             let query = Object.keys(req.query)
             let key = query[0] === "released" ? `release_date` : query[0]
             const filter = new RegExp(req.query[query], 'i')

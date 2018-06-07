@@ -24,6 +24,10 @@ body {
 .App {
   display: flex;
   flex-direction: row;
+  font-family: SF Distant Galaxy;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1160px;
 }
 .cardholder {
   width: 350px;
@@ -35,20 +39,30 @@ body {
   justify-content: space-around;
 }
 
-.forms {
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 1160px;
-}
-
 .header {
-  background: lightblue;
-  height: 80px;
+  background: lightgray;
+  height: 100px;
+  width: 100%;
+  text-align: center;
 }
 
 .btn-secondary {
   height: 30px;
   margin: 35px 0px;
 }
+h5 {
+  border-top: 1px solid lightgray;
+  padding-top: 10px;
+}
+h2 {
+  padding: 20px;
+}
+
+@font-face {
+  font-family: 'SF Distant Galaxy';
+  src:
+      local('SF Distant Galaxy'),
+      url('SFDistantGalaxy.ttf');
+  }
+
+  
