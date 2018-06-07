@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const ObjectId = mongoose.Schema.Types.ObjectId;
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const Vehicle = new mongoose.Schema({
   vehicle_class: String,
@@ -10,6 +10,6 @@ const Vehicle = new mongoose.Schema({
     type: ObjectId,
     ref: 'Character'
   }]
-});
+})
 
-module.exports = mongoose.model('Vehicle', Vehicle);
+module.exports = mongoose.model('Vehicle', Vehicle)

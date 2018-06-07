@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const ObjectId = mongoose.Schema.Types.ObjectId;
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const Character = mongoose.Schema({
   name: { type: String, required: true },
@@ -18,6 +18,6 @@ const Character = mongoose.Schema({
     type: ObjectId,
     ref: 'Planet'
   }
-});
+})
 
-module.exports = mongoose.model('Character', Character);
+module.exports = mongoose.model('Character', Character)

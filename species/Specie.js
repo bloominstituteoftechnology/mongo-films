@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const ObjectId = mongoose.Schema.Types.ObjectId;
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const Specie = new mongoose.Schema({
   edited: { type: Date, default: Date.now },
@@ -21,6 +21,6 @@ const Specie = new mongoose.Schema({
     type: ObjectId,
     ref: 'Planet'
   }
-});
+})
 
-module.exports = mongoose.model('Specie', Specie);
+module.exports = mongoose.model('Specie', Specie)

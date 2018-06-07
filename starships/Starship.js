@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const ObjectId = mongoose.Schema.Types.ObjectId;
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const Starship = new mongoose.Schema({
   pilot_keys: [Number],
@@ -12,6 +12,6 @@ const Starship = new mongoose.Schema({
     type: ObjectId,
     ref: 'Character'
   }]
-});
+})
 
-module.exports = mongoose.model('Starship', Starship);
+module.exports = mongoose.model('Starship', Starship)
