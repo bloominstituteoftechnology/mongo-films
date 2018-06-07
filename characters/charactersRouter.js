@@ -11,8 +11,9 @@ const router = express.Router();
 router
   .route('/')
   .get((req, res) => {
+    // console.log(req.query.minheight)
     if (req.query.minheight) {
-      Character.find({ height: { $gt: 100 }, gender: 'female' })
+      Character.find({ height: { $gte: Number(req.query.minheight) }, gender: 'female' })
         .select('name gender height skin_color hair_color eye_color')
         .populate('homeworld')
         .then(chars => {
