@@ -11,10 +11,10 @@ router
   .route('/')
   .get((req, res) => {
     // console.log(req.query.minheight)
-    if (req.query.minheight) {
+    if (req.query.h) {
       Character.find({
           height: {
-            $get: Number(req.query.minheight)
+            $gt: Number(req.query.h) // $gt (>) $gte (>=) $lt (<)... so on
           },
           gender: 'female'
         })
@@ -84,6 +84,5 @@ router
         }]);
       });
   });
-
 
 module.exports = router;
