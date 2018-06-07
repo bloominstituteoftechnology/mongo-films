@@ -28,7 +28,17 @@ server.use('/api/planets', planetsRouter);
 
 server.get('/', (req, res) => res.send('API Running...'));
 
+
 const port = process.env.PORT || 5000;
 server.listen(port, () =>
   console.log(`\n\nAPI running on http://localhost:${port}`)
 );
+
+
+// Mongo Imports
+// Create db : use starwars
+// Create collections: 1st one in mongo shell then use Compass for the rest : db.createCollection('characters')
+// Cd into data file
+// I.e., 
+// mongoimport --db starwars --collection characters --file characters.jso
+
