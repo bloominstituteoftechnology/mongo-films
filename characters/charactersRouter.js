@@ -4,6 +4,8 @@ const Character = require('./Character.js');
 
 const Vehicle = require('../vehicles/Vehicle.js');
 
+const Film = require('../films/Film.js');
+
 const router = express.Router();
 
 router
@@ -48,6 +50,12 @@ router
     .then(character => {
         res.status(200)
         res.json({ character })
+    })
+    Film // Couldn't get this one to work :/
+    .find(id)
+    .where('characters')
+    .then(movies => {
+      res.json({ character, movies })
     })
     .catch(err => {
         res.status(500)
