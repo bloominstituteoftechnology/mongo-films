@@ -1,6 +1,10 @@
 const express = require('express');
 
 const Character = require('./Character.js');
+const Film = require('../films/Film.js');
+const Vehicle = require('../vehicles/Vehicle.js');
+const Starship = require('../starships/Starship.js');
+
 
 const router = express.Router();
 
@@ -13,16 +17,15 @@ router
       let characterQuery = Character.find();
 
       if(minheight){
-        console.log(minheight);
         characterQuery
           .where('height').gt(minheight)
           .where('gender').equals('female')
       }
 
       characterQuery
-        .populate('homeworld')
+        .populate('homeworld', '-_id name')
         .then(foundCharacters => 
-          res.json(foundCharacters)
+            res.json(foundCharacters)
         )
         .catch(err =>
           res.status(500).json({ error: 'Error reading the DB' })
@@ -32,20 +35,65 @@ router
 router
     .route('/:id')
     .get((req, res) => {
-        const { id } = req.params;
+        const { id } = req.params
         Character.findById(id)
-            .populate('homeworld')
+          .select('-_id -vehicles -key -__v -edited -created -homeworld_key')
+            .populate('homeworld', '-_id name')
             .then(foundCharacter => {
-                if (foundCharacter === null) {
-                    res.status(404).json({ errorMessage: "The character with the specified ID does not exist." })
+                let data = foundCharacter
+                if(foundCharacter) {
+                  Film
+                    .find()
+                    .where('characters').equals(id)
+                    .select('-_id title')
+                    .then(movies => {
+                      if(movies) {
+                        data.movies = movies
+                        res.status(200).json( data )
+                      } else {
+                        res.status(404).json( { error: 'Movie not found' } )
+                      }
+                    })
                 } else {
-                    res.status(200).json(foundCharacter);
+                  res.status(404).json( { error: 'Character not found' } )
                 }
             })
-            .catch(err => {
-                res.status(500).json({ error: 'Error reading the DB' });
-            });
+            .catch(err =>
+              res.status(500).json({ error: 'Error reading the DB' })
+            );
     })
-    
+
+
+    router
+    .route('/:id/vehicles')
+    .get((req, res) => {
+      const { id } = req.params
+      Vehicle
+        .find()
+        .where('pilots').equals(id)
+        .select('-_id vehicle_class')
+        .then(vehicles => 
+          res.status(200).json( vehicles )
+        )
+        .catch(err =>
+          res.status(500).json({ error: 'Error reading the DB' })
+        );
+    })
+
+    router
+    .route('/:id/starships')
+    .get((req, res) => {
+      const { id } = req.params
+      Starship
+        .find()
+        .where('pilots').equals(id)
+        .select('key starship_class')
+        .then(starships => 
+          res.status(200).json( starships )
+        )
+        .catch(err =>
+          res.status(500).json({ error: 'Error reading the DB' })
+        );
+    })
 
 module.exports = router;
