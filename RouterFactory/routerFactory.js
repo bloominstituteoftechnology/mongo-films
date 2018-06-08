@@ -76,10 +76,56 @@ const routerFactory = function(router, db) {
         next(e);
       });
   }
-  function validateParameters(req, res, next) {}
+  function validateParameters(req, res, next) {
+    const parameters = { ...req.body };
+
+    // To 'push' the path that are "required: true"
+    let requiredPaths = [];
+
+    // Get Schema paths and path's properties:
+    const entries = Object.entries(db.schema.paths);
+
+    /**
+     * Filter the required paths: and push tehm to the 'requiredPaths' variable
+     */
+    entries.forEach(entrie => {
+      const pathName = entrie[0];
+      const pathProperties = entrie[1];
+      pathProperties.validators.length === 1 && requiredPaths.push(pathName);
+
+      /**
+       * If there a several 'validators': => filter if one of them are of type 'required: true'
+       */
+      if (pathProperties.validators.length > 1) {
+        pathProperties.validators.forEach(validator => {
+          validator.type == 'required' && requiredPaths.push(pathName);
+        });
+      }
+    });
+    console.log(requiredPaths.length, requiredPaths);
+
+    /**
+     * If there are no imssing required fields: ? next() : next('custom-error')
+     */
+    requiredPaths.length === 0 || !areMissingPathsInParams(requiredPaths, parameters)
+      ? next()
+      : next(createError(400, `The following field are required: ${requiredPaths.join(' ')}`));
+  }
+
   /**
    * Schema middlewares: Custom Pre, Post middlewares
    */
+
+  /**
+   * OTHER Helpers: auxiliar functions
+   */
+  function areMissingPathsInParams(paths, parameters) {
+    let missingFields = false;
+    for (let path of paths) {
+      if (!parameters.hasOwnProperty(path)) missingFields = true;
+    }
+    return missingFields;
+  }
 
   return function(...arg) {
     arg.forEach(arg => toPopulate.push(arg));
