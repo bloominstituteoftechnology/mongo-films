@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
 
     if(minheight) {
         query.find({gender: 'female'}).where('height').gt(minheight);
+        //issues in returning
     }
     query.then(characters => {
         res.status(200).json(characters);
