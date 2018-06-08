@@ -46,7 +46,7 @@ router
         Film.find({ characters: id })
           .select('title -_id')  
           .then(films => {
-            const character = {...char._doc, movies: films}
+            const character = {char, movies: films}
             res.status(200).json(character);
           })
           .catch(err => {
