@@ -10,7 +10,7 @@ const Film = new mongoose.Schema({
   producer: String,
   title: { type: String, required: true },
   director: String,
-  release_date: Date,
+  release_date: String,
   opening_crawl: String,
   character_ids: [Number],
   characters: [{type: ObjectId, ref: 'Character'}],
