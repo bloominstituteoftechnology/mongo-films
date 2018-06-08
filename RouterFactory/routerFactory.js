@@ -18,7 +18,19 @@ const routerFactory = function(router, db) {
   /**
    * ROUTER HANDLERS: handle endpoints
    */
-  function handlePOST(req, res, next) {}
+  function handlePOST(req, res, next) {
+    const parameters = req.body;
+
+    const toPost = new db(parameters);
+    toPost
+      .save()
+      .then(response => {
+        res.status(201).json(response);
+      })
+      .catch(e => {
+        next(e);
+      });
+  }
   function handleGET(req, res, next) {
     const { id } = req.params;
     let fetching = !id ? db.find({}) : db.find({ _id: id });
