@@ -28,7 +28,7 @@ router.get('/:id', function (req, res) {
     // (Luke Skywalker data/homeworld/films)
     Character
         .findById(id)
-        .populate('homeworld', 'climate -_id')
+        .populate('homeworld', 'name climate terrain -_id')
         .then(char => {
             Film.find({ characters: id })
                 .select('title -_id episode release_date')
