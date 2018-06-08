@@ -10,7 +10,7 @@ const routerFactory = function(router, db) {
   router
     .route('/:id')
     .get(isIdValid, handleGET)
-    .put(isIdValid, validateParameters, handlePUT)
+    .put(isIdValid, validateParameters, excludeUniqueFieldsFromPUT, handlePUT)
     .delete(isIdValid, handleDELETE);
 
   router.use(handleError);
@@ -58,7 +58,17 @@ const routerFactory = function(router, db) {
         next(createError(500, 'The friend could not be removed'));
       });
   }
-  function handlePUT(req, res, next) {}
+  function handlePUT(req, res, next) {
+    const { id } = req.params;
+    const { ...toUpdate } = req.toUpdate;
+    db.findByIdAndUpdate(id, toUpdate, { new: true, runValidators: true })
+      .then(response => {
+        res.status(200).json(response);
+      })
+      .catch(e => {
+        next(e);
+      });
+  }
   /**
    * ERROR: Handle Error
    */
@@ -98,7 +108,7 @@ const routerFactory = function(router, db) {
     const entries = Object.entries(db.schema.paths);
 
     /**
-     * Filter the required paths: and push tehm to the 'requiredPaths' variable
+     * Filter the required paths: and push them to the 'requiredPaths' variable
      */
     entries.forEach(entrie => {
       const pathName = entrie[0];
@@ -117,11 +127,29 @@ const routerFactory = function(router, db) {
     console.log(requiredPaths.length, requiredPaths);
 
     /**
-     * If there are no imssing required fields: ? next() : next('custom-error')
+     * If there are no missing required fields: ? next() : next('custom-error')
+     * If the required field is in the body but has no value: error handle by the Schema validators.
      */
     requiredPaths.length === 0 || !areMissingPathsInParams(requiredPaths, parameters)
       ? next()
       : next(createError(400, `The following field are required: ${requiredPaths.join(' ')}`));
+  }
+  function excludeUniqueFieldsFromPUT(req, res, next) {
+    const toUpdate = { ...req.body };
+    const entries = Object.entries(db.schema.paths);
+    entries.forEach(entrie => {
+      const pathName = entrie[0];
+      const pathProperties = entrie[1];
+      /**
+       * if a 'path' is set to be 'unique' in the Schema: => delete that path from the 'toUpdate' object.
+       * Thus: the 'unique' path does not get updated.
+       */
+      // if (pathProperties.options.unique == true) parameters[pathName] = null;
+      pathProperties.options.unique == true && delete toUpdate[pathName];
+    });
+    // Pass the parameters with the adjustments to the next middleware handler
+    req.toUpdate = toUpdate;
+    next();
   }
 
   /**
@@ -138,7 +166,6 @@ const routerFactory = function(router, db) {
     }
     return missingFields;
   }
-
   return function(...arg) {
     arg.forEach(arg => toPopulate.push(arg));
     console.log(toPopulate);
