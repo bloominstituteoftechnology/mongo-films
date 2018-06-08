@@ -1,4 +1,7 @@
-module.exports = function(router, db) {
+const routerFactory = function(router, db) {
+  console.log('inside Routerfactory');
+  let toPopulate = [];
+
   router
     .route('/')
     .get(handleGET)
@@ -15,36 +18,22 @@ module.exports = function(router, db) {
   /**
    * ROUTER HANDLERS: handle endpoints
    */
-  function handlePOST(req, res, next) {
-    const data = ({ firstName, lastName, age } = req.body);
-
-    const newFriend = new Friend(data);
-    newFriend
-      .save()
-      .then(response => {
-        res.status(201).json(response);
-      })
-      .catch(e => {
-        // if there were an Error validatin the data in the Schema:
-        if (e.name === 'ValidationError' || e instanceof Error)
-          return next(createError(400, (e.message = `Age:${age} -> must be a number between 1 and 120`)));
-        // If there were any other problem POSTING to the data base: send custom-default Error.
-        next(createError(500, 'There was an error while saving the friend to the database.'));
-      });
-  }
+  function handlePOST(req, res, next) {}
   function handleGET(req, res, next) {
     const { id } = req.params;
-    const fetching = !id ? db.find() : db.findById(id);
+    let fetching = !id ? db.find({}) : db.find({ _id: id });
 
-    fetching
-      .then(response => {
-        res.status(200).json(response);
-      })
-      .catch(e => {
+    toPopulate.forEach(join => fetching.populate(join));
+
+    fetching.exec(function(err, response) {
+      if (err) {
         !id
           ? next(createError(500, 'The friends information could not be retrieved.'))
           : next(500, 'The friend information could not be retrieved.');
-      });
+      } else {
+        res.status(200).json(response);
+      }
+    });
   }
   function handleDELETE(req, res, next) {
     const { id } = req.params;
@@ -57,28 +46,7 @@ module.exports = function(router, db) {
         next(createError(500, 'The friend could not be removed'));
       });
   }
-  function handlePUT(req, res, next) {
-    const data = ({ firstName, lastName, age } = req.body);
-    const { id } = req.params;
-
-    /**
-     * VALIDATE 'AGE':
-     * Mongoose do not validate on PUT: So I define a custom middleware for this purpose.
-     * POST: validates via the Schema.
-     * REFACTORED: Now POST && PUT get 'age' validationo vía a 'setter'
-     */
-
-    db.findByIdAndUpdate({ _id: id }, { $set: { ...data } }, { new: true })
-      .then(response => {
-        res.status(200).json(response);
-      })
-      .catch(e => {
-        // if there were an Error validatin the data in the Schema:
-        if (e.name === 'ValidationError') next(createError(400, e.message));
-        // If there were any other problem POSTING to the data base: send custom-default Error.
-        next(createError(500, 'The friend information could not be modified.'));
-      });
-  }
+  function handlePUT(req, res, next) {}
   /**
    * ERROR: Handle Error
    */
@@ -108,19 +76,21 @@ module.exports = function(router, db) {
         next(e);
       });
   }
-  function validateParameters(req, res, next) {
-    const data = ({ firstName, lastName, age } = req.body);
-    // if any is not in the req.body
-    !firstName || !lastName || (age !== 0 && !age)
-      ? // create an error and past it to "handleError"
-        next(createError(400, 'Please provide firstName, lastName and age for the db.'))
-      : // else pass to the next hanldler
-        next();
-  }
-  function validateAge(req, res, next) {
-    const { age } = req.body;
-    Number.isInteger(age) && (1 <= age && age <= 120)
-      ? next()
-      : next(createError(400, 'Age must be a number between 1 and 120'));
-  }
+  function validateParameters(req, res, next) {}
+  /**
+   * Schema middlewares: Custom Pre, Post middlewares
+   */
+
+  return function(...arg) {
+    arg.forEach(arg => toPopulate.push(arg));
+    console.log(toPopulate);
+  };
+  // return {
+  //   setPopulate: function(...arg) {
+  //     arg.forEach(arg => toPopulate.push(arg));
+  //     console.log(toPopulate);
+  //   },
+  // };
 };
+
+module.exports = { routerFactory };

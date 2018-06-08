@@ -2,11 +2,11 @@ const express = require('express');
 
 const Vehicle = require('./Vehicle.js');
 
-const routerFactory = require('../RouterFactory/routerFactory');
+const myFactory = require('../RouterFactory/routerFactory');
 
 const router = express.Router();
 
 // add endpoints here
-routerFactory(router, Vehicle);
+myFactory.routerFactory(router, Vehicle);
 
 module.exports = router;

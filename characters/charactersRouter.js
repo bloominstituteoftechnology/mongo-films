@@ -2,11 +2,14 @@ const express = require('express');
 
 const Character = require('./Character.js');
 
-const routerFactory = require('../RouterFactory/routerFactory');
+const myFactory = require('../RouterFactory/routerFactory');
 
 const router = express.Router();
 
+console.log(myFactory);
+
 // add endpoints here
-routerFactory(router, Character);
+// myFactory.routerFactory(router, Character).setPopulate('homeworld');
+myFactory.routerFactory(router, Character)('homeworld');
 
 module.exports = router;

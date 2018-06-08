@@ -2,11 +2,11 @@ const express = require('express');
 
 const Starship = require('./Starship.js');
 
-const routerFactory = require('../RouterFactory/routerFactory');
+const myFactory = require('../RouterFactory/routerFactory');
 
 const router = express.Router();
 
 // add endpoints here
-routerFactory(router, Starship);
+myFactory.routerFactory(router, Starship)('pilot');
 
 module.exports = router;

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
-const Planet = require('../planets/Planet');
 
 const Character = mongoose.Schema({
   name: { type: String, required: true },
@@ -15,7 +14,12 @@ const Character = mongoose.Schema({
   key: { type: Number, unique: true },
   homeworld_key: Number,
   // add homeworld field that links the character to it's planet
-  homeworld: [{ type: mongoose.Schema.Types.ObjectId, ref: Planet }],
+  homeworld: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Planet' }],
 });
+
+// Character.post('find', function(next) {
+//   this.populate('Planet');
+//   next();
+// });
 
 module.exports = mongoose.model('Character', Character);

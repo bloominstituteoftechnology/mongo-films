@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
-const Planet = require('../planets/Planet');
 
 const Specie = new mongoose.Schema({
   edited: { type: Date, default: Date.now },
@@ -18,7 +17,7 @@ const Specie = new mongoose.Schema({
   key: { type: Number, unique: true },
   homeworld_key: Number,
   // add homeworld field that links the specie to it's native planet
-  planet: [{ type: mongoose.Schema.Types.ObjectId, ref: Planet }],
+  homeworld: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Planet' }],
 });
 
 module.exports = mongoose.model('Specie', Specie);

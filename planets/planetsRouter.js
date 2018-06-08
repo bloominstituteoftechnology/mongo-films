@@ -1,9 +1,13 @@
 const express = require('express');
 
 const Planet = require('./Planet.js');
-const routerFactory = require('../RouterFactory/routerFactory');
+
+const myFactory = require('../RouterFactory/routerFactory');
+
 const router = express.Router();
 
 // add endpoints here
-routerFactory(router, Planet);
+// myFactory.routerFactory(router, Planet).setPopulate();
+myFactory.routerFactory(router, Planet);
+
 module.exports = router;
