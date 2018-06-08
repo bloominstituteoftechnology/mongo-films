@@ -3,8 +3,8 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Character = mongoose.Schema({
   name: { type: String, required: true },
-  edited: Date,
-  created: Date,
+  edited: Date, 
+  created: Date, 
   gender: String,
   height: String,
   hair_color: String,
