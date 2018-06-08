@@ -1,16 +1,16 @@
 const express = require('express');
 const Character = require('./Character.js');
 const Film = require('../films/Film.js');
+const Vehicle = require('../vehicles/Vehicle.js');
 const router = express.Router();
 
-const populateQuery = [{
+const populateQuery_1 = [{
     path: 'homeworld',
     select: '-_id -edited -created -__v -key'
 }, {
     path: 'movies'
-}, {
-    path: 'vehicles'
 }];
+
 
 router.route('/').get((req, res) => {
     Character.find()
@@ -21,7 +21,7 @@ router.route('/').get((req, res) => {
 router.route('/:id').get((req, res) => {
     const { id } = req.params;
     Character.findById(id)
-        .populate(populateQuery)
+        .populate(populateQuery_1)
         .then(response => {
             if(response === null) res.status(400).json({ error: `The character by that ID does not exist.`});
             Film.find({ characters: id})
@@ -34,6 +34,14 @@ router.route('/:id').get((req, res) => {
                 .catch(err => res.status(500).json({ error: err.message}));
         })
         .catch(err => res.status(500).json({ error: err.message }));
+})
+
+router.route('/:id/vehicles').get((req, res) => {
+    const { id } = req.params;
+    Vehicle.find({ pilots: id })
+        .select('vehicle_class')
+        .then(response => res.json(response))
+        .catch(err => json.status(500).json({ error: err.message}));
 })
 
 module.exports = router;
