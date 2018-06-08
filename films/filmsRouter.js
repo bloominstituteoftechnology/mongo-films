@@ -1,11 +1,13 @@
 const express = require('express');
 const Film = require('./Film.js');
 const sendErrorMessage = require('../util/sendErrorMessage.js');
+const formatRequestQuery = require('../util/formatRequestQuery.js');
 const router = express.Router();
 
 router
   .get('/', (req, res) => {
-    Film.find()
+    const filters = formatRequestQuery('Film', req.query);
+    Film.find(filters)
       .populate('characters', {
         name: 1,
         gender: 1,
