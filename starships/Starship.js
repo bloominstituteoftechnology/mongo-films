@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const ObjectId = mongoose.Schema.Types.ObjectId;
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const Starship = new mongoose.Schema({
   pilot_keys: [Number],
@@ -7,7 +7,11 @@ const Starship = new mongoose.Schema({
   starship_class: String,
   hyperdrive_rating: String,
   key: { type: Number, unique: true },
-  // add pilots field to lik the ship to the characters model
-});
+  // add pilots field to link the ship to the characters model
+  pilots: [{
+    type: ObjectId,
+    ref: 'Character'
+  }]
+})
 
-module.exports = mongoose.model('Starship', Starship);
+module.exports = mongoose.model('Starship', Starship)
