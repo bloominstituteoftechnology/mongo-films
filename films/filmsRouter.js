@@ -11,8 +11,8 @@ router.get('/', (req, res) => {
   Film.find()
     .sort('episode')
     .select('episode title planets characters')
-    .populate('characters', '_id name gender height skin_color hair_color eye_color') // you can chain populate as long as subsequent populates reference different models.
-    .populate('planets', 'name climate terrain gravity diameter')
+    .populate('characters', '-_id name gender height skin_color hair_color eye_color') // you can chain populate as long as subsequent populates reference different models.
+    .populate('planets', ' -_id name climate terrain gravity diameter')
     // .where().gt()
     .then(films => res.status(200).json(films))
 })

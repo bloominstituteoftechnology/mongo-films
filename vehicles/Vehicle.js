@@ -9,6 +9,10 @@ const Vehicle = new mongoose.Schema({
   pilots: [{
     type: ObjectId,
     ref: 'Character'
+  }],
+  films: [{
+    type: ObjectId,
+    ref: 'Film'
   }]
 })
 

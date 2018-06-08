@@ -29,10 +29,10 @@ router.get('/:id', (req, res) => {
   Character.findById(id)
   .populate('homeworld')
   .select('name climate')
-    .then(char => {
-        res.status(200).json(char))
-      })
-    .catch(err => res.status(200).json(err))
+  .then(char => {
+      res.status(200).json(char))
+    })
+  .catch(err => res.status(200).json(err))
 })
 */
 
