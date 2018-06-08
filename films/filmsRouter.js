@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
         // Find all films produced by Gary Kurtz
         // Postman test okay. http://localhost:5000/api/films?producer=gary+kurtz
         if (producer) {
-            const filter = new RedExp(producer, 'i');
+            const filter = new RegExp(producer, 'i');
             query.where({ producer: filter })
         }
 

@@ -7,8 +7,8 @@ const Starship = new mongoose.Schema({
   starship_class: String,
   hyperdrive_rating: String,
   key: { type: Number, unique: true },
-  // add pilots field to link the ship to the characters model
-  pilots: [{
+  // add pilots field to link the ship to the c haracters model
+  pilots: [{ 
     type: ObjectId,
     ref: 'Character',
   }],

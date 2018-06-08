@@ -21,6 +21,10 @@ const Specie = new mongoose.Schema({
     type: ObjectId,
     ref: 'Planet',
   },
+  characters: [{
+    type: ObjectId,
+    ref: 'Character'
+  }]
 });
 
 module.exports = mongoose.model('Specie', Specie);

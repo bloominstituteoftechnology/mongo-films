@@ -10,12 +10,24 @@ const router = express.Router();
 
 // GET Character by ID -- show films/homeworld
 
+router
+    .route('/')
+    .get((req, res) => {
+        Character
+            .find()
+            .then(characters => {
+                res.status(200).json(characters);
+            })
+            .catch(error => res.status(500).json({ error: error.message }));
+    })
+
 router.get('/:id', function (req, res) {
     const { id } = req.params;
     // Add a movies property that should be an array of all the movies when the character appeared.
     // Postman test okay. http://localhost:5000/api/characters/5aa995a3b97194b732c167ab
     // (Luke Skywalker data/homeworld/films)
-    Character.findById(id)
+    Character
+        .findById(id)
         .populate('homeworld', 'climate -_id')
         .then(char => {
             Film.find({ characters: id })
@@ -40,6 +52,7 @@ router.get('/:id', function (req, res) {
     
     // Gender by height
 
+
     router
         .route('/')
         .get(femaleTall)
@@ -51,7 +64,8 @@ router.get('/:id', function (req, res) {
         const minheight = req.query.minheight;
         let query = Character.find({});
         if (minheight) {
-            Character.find({ gender: 'female', height: {$exists: true}, $where: `this.height >= ${minheight}`})
+            Character
+                .find({ gender: 'female', height: {$exists: true}, $where: `this.height >= ${minheight}`})
                 .then(friends => {
                     res.status(200).json(friends);
                 })
