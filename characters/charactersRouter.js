@@ -14,13 +14,16 @@ router.get('/:id', function (req, res) {
     const { id } = req.params;
     // Add a movies property that should be an array of all the movies when the character appeared.
     // Postman test okay. http://localhost:5000/api/characters/5aa995a3b97194b732c167ab
+    // (Luke Skywalker data/homeworld/films)
     Character.findById(id)
         .populate('homeworld', 'climate -_id')
         .then(char => {
             Film.find({ characters: id })
                 .select('title -_id episode release_date')
+
                 .then(films => {
                     const character = { ...char._doc, movies: films };
+
                     res.status(200).json(character);
                 });
         })
@@ -39,12 +42,12 @@ router.get('/:id', function (req, res) {
 
     router
         .route('/')
-        .get(femaletall)
+        .get(femaleTall)
 
     //Find all female characters taller than 100cm (/api/characters?minheight=100)
     // http://localhost:5000/api/characters?minheight=100 
     
-    function femaletall (req, res) {
+    function femaleTall (req, res) {
         const minheight = req.query.minheight;
         let query = Character.find({});
         if (minheight) {
