@@ -14,6 +14,12 @@ const Character = mongoose.Schema({
   key: { type: Number, unique: true },
   homeworld_key: Number,
   // add homeworld field that links the character to it's planet
+  homeworld: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Planet' }],
 });
+
+// Character.post('find', function(next) {
+//   this.populate('Planet');
+//   next();
+// });
 
 module.exports = mongoose.model('Character', Character);
