@@ -30,7 +30,7 @@ router
         .catch(err =>
           res.status(500).json({ error: 'Error reading the DB' })
         );
-    })
+    });
 
 router
     .route('/:id')
@@ -49,7 +49,7 @@ router
                     .then(movies => {
                       if(movies) {
                         data.movies = movies
-                        res.status(200).json( data )
+                        res.json( data )
                       } else {
                         res.status(404).json( { error: 'Movie not found' } )
                       }
@@ -73,7 +73,7 @@ router
         .where('pilots').equals(id)
         .select('-_id vehicle_class')
         .then(vehicles => 
-          res.status(200).json( vehicles )
+          res.json( vehicles )
         )
         .catch(err =>
           res.status(500).json({ error: 'Error reading the DB' })
@@ -89,7 +89,7 @@ router
         .where('pilots').equals(id)
         .select('key starship_class')
         .then(starships => 
-          res.status(200).json( starships )
+          res.json( starships )
         )
         .catch(err =>
           res.status(500).json({ error: 'Error reading the DB' })
