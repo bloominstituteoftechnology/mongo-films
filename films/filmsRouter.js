@@ -24,7 +24,7 @@ router
         if (released) {
             let yearQuery = new RegExp(released, "i");
             Film.find()
-            .where('release_date').regex(yearQuery)
+            .where({release_date: yearQuery})
             .then(released_in_2005 => res.json({ released_in_2005 }))
         }
                      else {

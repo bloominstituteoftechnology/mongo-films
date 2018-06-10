@@ -26,14 +26,23 @@ router
         .catch(err => {
             sendUserError(500, "The character information could not be found.", res)
         })
+        let { released } = req.query;
+        released = Date()
     } else {
         Character.find()
-        .then(characters => {
-            res.json({ characters });
-        })
-        .catch(error => res.status(500).json({ error: 'Error fetching characters'}))
-    }
-    })
+        .then(chars => {
+        let character = []
+        const promises = chars.map(char => {
+            return Film.find({ characters: char.id })
+            .select('title')
+            .then(films => {
+                character.push({ ...char._doc, movies: films });
+            })
+            .catch(err => sendUserError(500, err.message, res))
+        });
+        Promise.all(promises).then(char => res.status(200).json(character)).catch(err => sendUserError(500, err.message, res))
+    }).catch(err => sendUserError(500, err.message, res))
+}})
     // .post((req, res) => {
     //     const character = { name, edited, created, gender, height, hair_color, skin_color, eye_color, birth_year, key, homeworld_key, homeworld } = req.body;
     //     const newCharacter = new Character(character);
@@ -50,12 +59,13 @@ router
             Character.findById(id)
                 .populate('homeworld', '-_id name climate terrain gravity orbital_period')
                 .select('-_id -_v -key -homeworld_key')
-                .then(character => {
+                .then(char => {
                     Film.find()
                     .where('characters').in([id])
                     .select('-_id title opening_crawl release_date')
                     .then((movies => {
-                        res.json({ character, movies })
+                        let character = Object.assign({}, char._doc, { movies })
+                        res.json({ character })
                     }))
                     .catch(error => res.status(500).json({ error: error }))
                 })
