@@ -23,8 +23,7 @@ router
 
 router.get('/:id', function (req, res) {
     const { id } = req.params; 
-    // Add a movies property that should be an array of all the movies when the character appeared.
-    // Postman test okay. http://localhost:5000/api/characters/5aa995a3b97194b732c167ab
+    // Add a movies property that should be an array of all the movies when the character appeared.    
     // (Luke Skywalker data/homeworld/films)
      Character
         .findById(id)

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Planet = new mongoose.Schema({
   edited: { type: Date, default: Date.now },
