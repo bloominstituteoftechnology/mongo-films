@@ -6,21 +6,24 @@ const Character = new mongoose.Schema({
     type: String, 
     required: true 
   },
-  // edited: Date,
-  // created: Date,
+  edited: Date,
+  created: Date,
   gender: String,
   height: String,
   hair_color: String,
   skin_color: String,
   eye_color: String,
-  // birth_year: String,
+  birth_year: String,
   key: { 
     type: Number, 
     unique: true 
   },
   homeworld_key: Number,
   // add homeworld field that links the character to it's planet
-  homeworld: String
+  homeworld: {
+    type: ObjectId,
+    ref: 'Planet'
+  }
 });
 
 const characterModel = mongoose.model('Character', Character);
