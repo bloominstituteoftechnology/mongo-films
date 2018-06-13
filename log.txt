@@ -1,0 +1,92 @@
+[33m[nodemon] 1.17.4[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node server.js`[39m
+
+
+API running on http://localhost:5000
+
+... API Connected to Database ...
+
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+
+API running on http://localhost:5000
+
+... API Connected to Database ...
+
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+
+API running on http://localhost:5000
+
+... API Connected to Database ...
+
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+
+API running on http://localhost:5000
+
+... API Connected to Database ...
+
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+
+API running on http://localhost:5000
+
+... API Connected to Database ...
+
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+
+API running on http://localhost:5000
+
+... API Connected to Database ...
+
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+
+API running on http://localhost:5000
+
+... API Connected to Database ...
+
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+
+API running on http://localhost:5000
+
+... API Connected to Database ...
+
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+
+API running on http://localhost:5000
+
+... API Connected to Database ...
+
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+
+API running on http://localhost:5000
+
+... API Connected to Database ...
+
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+
+
+API running on http://localhost:5000
+
+... API Connected to Database ...
+
