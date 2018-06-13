@@ -7,7 +7,7 @@ const Starship = new mongoose.Schema({
   starship_class: String,
   hyperdrive_rating: String,
   key: { type: Number, unique: true },
-  // add pilots field to lik the ship to the characters model
+  pilots: [{type: ObjectId, ref:'Pilot'}]// add pilots field to lik the ship to the characters model
 });
 
 module.exports = mongoose.model('Starship', Starship);
