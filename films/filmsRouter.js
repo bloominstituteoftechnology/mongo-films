@@ -4,6 +4,24 @@ const Film = require('./Film.js');
 
 const router = express.Router();
 
+const errorMessage = (status, message, res) => {
+    res.status(status).json({ error: message });
+    return;
+}
+
 // add endpoints here
+
+router
+    .route('/')
+    .get((req, res) => {
+        Film
+            .find()
+            .then(films => {
+                res.status(200).json({ films })
+            })
+            .catch(error => {
+                errorMessage(500, 'Something wrong to get the data', res)
+            })
+})
 
 module.exports = router;
