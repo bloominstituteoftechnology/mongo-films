@@ -5,6 +5,7 @@ const Character = require('./Character.js');
 const router = express.Router();
 
 // add endpoints here
+//GET all characters
 router
 .route( '/' )
 .get( ( req, res ) =>
