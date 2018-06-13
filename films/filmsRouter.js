@@ -8,8 +8,21 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {
-        Film.find()
-        .select('.episode producer title drector release_date characters planets')
+        const { producer } = req.query;//producer query
+        if (producer) {
+            const producerFilter = new RegExp(producer, 'i');
+            Film.find({})
+            .where('producer')
+            .regex(producerFilter)
+            .then(films => {
+                res.status(200).json(films)
+            })
+            .catch(error => {
+                res.status(500).json(error);
+            })
+        } else {
+        Film.find({})
+        .sort('episode')
         .populate('characters', '_id name gender height skin_color hair_color eye_color')
         .populate('planets', 'name climate terrain gravity diameter')
         .then(films => {
@@ -18,14 +31,14 @@ router
         .catch(error => {
             res.status(500).json(error);
         })
-    })
+    }})
    
-    router
+    /* router
     .route('/:id')
     .get((req, res) => {
         const { id } = req.params;
         Film.find(id)
-        .populate('chatacters', '_id name gender height skin_color hair_color eye_color')
+        .populate('characters', '_id name gender height skin_color hair_color eye_color')
         .populate('planets', 'name climate terrain gravity diameter')
         .then(films => {
             res.status(200).json(films)
@@ -33,6 +46,6 @@ router
         .catch(error => {
             res.status(500).json(error);
         })
-    })
+    }) */
 
 module.exports = router;
