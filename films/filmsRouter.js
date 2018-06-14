@@ -16,6 +16,9 @@ router
     .get((req, res) => {
         Film
             .find()
+            .sort({ episode: 1 })
+            .populate('characters', '_id name gender height skin_color hair_color eye_color')
+            .populate('planets', 'name climate terrain gravity diameter')
             .then(films => {
                 res.status(200).json({ films })
             })

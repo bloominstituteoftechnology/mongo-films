@@ -27,7 +27,7 @@ router
 router
     .route('/:id')
     .get((req, res) => {
-        const { id } = req.params;
+        const { id } = req.params;        
         Character
             .findById(id)
             .then(foundChar => {
@@ -37,7 +37,7 @@ router
                 res.status(200).json({ foundChar })
             })
             .catch(error => {
-                errorMessage(500, 'Something wrong to get the data', res)
+                errorMessage(500, error, res)
             })
 })
 
