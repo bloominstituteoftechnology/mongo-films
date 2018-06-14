@@ -40,7 +40,7 @@ const get = (req, res) =>{
         .populate('planets', {_id:0, name:1})
         .populate('species', {_id:0})
         .sort({episode: 1})
-        .select({_id:0, episode: 1, title:1})
+        .select({_id:1, episode: 1, title:1})
         .then(films =>{
             res.status(200).json(films)
         })
@@ -134,7 +134,9 @@ const postCharacter = (req, res) =>{
             sendUserError(500, "There was an error in saving char to database");
             });
         });
-}
+};
+
+
 
 router.route("/")
     .get(get)

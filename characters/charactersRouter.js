@@ -1,6 +1,8 @@
 const express = require('express');
 
 const Character = require('./Character.js');
+const Film = require('../films/Film.js');
+const Vehicle = require('../vehicles/Vehicle.js');
 
 const router = express.Router();
 
@@ -33,7 +35,7 @@ const get = (req, res) =>{
     Character.find()
         .populate('homeworld', {name:1, _id:0})
         .then(characters =>{
-            res.status(200).json(characters)
+            res.status(200).json(characters);
         })
         .catch(err =>{
             sendUserError(500, `There was an error in retrieving characters`, res, err);
@@ -61,10 +63,15 @@ const getId = (req, res) =>{
     Character.findById(id)
         .populate('homeworld', {name:1, _id:0})
         .then(character =>{
-            if(character.length===0){
-                sendUserError(404, `There was an error in fetching character with ${id}`, res);
-            }
-            res.status(200).json(character);
+            let charKey = character.key;
+                Film.find({character_ids: Number(charKey)}, {title:1, episode:1, producer:1, director:1,_id:0, })
+                    .then(films =>{
+                        character.movies = [...films]
+                    })
+                    .catch(err=>{
+                        sendUserError(500, "There was an error in retrieving characters from film", res, err)
+                    })
+                res.status(200).json(character)
         })
         .catch(err =>{
             sendUserError(500, "There was an error in fetching character");
@@ -120,7 +127,22 @@ const postPlanet = (req, res) =>{
             sendUserError(500, "There was an error in saving character to database", res, err);
             });
         });
-}
+};
+
+const getVehicles = (req, res) => {
+        const { id } = req.params;
+
+        Vehicle.find({pilots:`${id}`},{vehicle_class:1, _id:0})
+          .then(vehicles => {
+            res.json(vehicles);
+        })
+          .catch(err => res.status(500).json({ error: err.message }));
+      };
+
+
+
+
+
 
 router.route("/")
     .get(get)
@@ -133,5 +155,8 @@ router.route("/:id")
 
 router.route("/:id/planet")
     .post(postPlanet)
+
+router.route("/:id/vehicles")
+    .get(getVehicles)
 
 module.exports = router;
