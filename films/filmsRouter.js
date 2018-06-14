@@ -11,13 +11,36 @@ const sendUserError = (status, message, res, err="Not from Catch") =>{
 
 // add endpoints here
 const get = (req, res) =>{
+    const { producer } = req.query;
+    if (producer){
+       const filtered = new RegExp(producer, 'i');
+       console.log(filtered);
+       Film.find({})
+        .where('producer')
+        .regex(filtered)
+        .then(films => res.json(films))
+        .catch(err => sendUserError(500, "There as an error in filtering results", res, err))
+        }
+    
+        const { released } = req.query;
+        if (released){
+           const filtered = new RegExp(released, 'g');
+           console.log(filtered);
+           Film.find({})
+            .where('release_date')
+            .regex(filtered)
+            .then(films => res.json(films))
+            .catch(err => sendUserError(500, "There as an error in filtering results", res, err))
+            }
+        
     Film.find()
-        .populate('characters', { _id:1, name:1, gender:1, height:1, skin_color:1, hair_color:1,eye_color:1})
+        .populate('characters', { _id:1, name:1})
         .populate('vehicles', {_id:0})
         .populate('starships', {_id:0})
-        .populate('planets', {_id:0, name:1, climate:1, terrain:1, gravity:1, diameter:1})
+        .populate('planets', {_id:0, name:1})
         .populate('species', {_id:0})
         .sort({episode: 1})
+        .select({_id:0, episode: 1, title:1})
         .then(films =>{
             res.status(200).json(films)
         })

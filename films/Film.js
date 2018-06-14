@@ -48,23 +48,23 @@ const Film = new mongoose.Schema({
   vehicle_ids: {
     type:[Number]
   },
-  starships: [{
+  starships: [{ //each film has a list of starships
     type: ObjectId,
     ref: "Starship"
   }],
-  vehicles: [{
+  vehicles: [{ //each film has a list of vehicles
     type: ObjectId,
     ref: "Vehicle"
   }],
-  planets: [{
+  planets: [{ //each film has a list of planets
     type: ObjectId,
     ref: "Planet"
   }],
-  characters: [{
+  characters: [{ //each film has a list of chars
     type: ObjectId,
     ref: "Character"
   }],
-  species: [{
+  species: [{ //each film has a list of species
     type: ObjectId,
     ref: "Species"
   }]

@@ -58,9 +58,9 @@ Return a list of all films. (/api/films) X
   * only include: `_id, name, gender, height, skin_color, hair_color and eye_color`. X
 * populate planets, include: `name, climate, terrain, gravity and diameter`. X
 
-Find all films produced by _Gary Kurtz_ (/api/films?producer=gary+kurtz)
+Find all films produced by _Gary Kurtz_ (/api/films?producer=gary+kurtz) X
 
-Find all films released in _2005_. (/api/films?released=2005)
+Find all films released in _2005_. (/api/films?released=2005) X
 
 Given a character id, (/api/characters/:id)
 
