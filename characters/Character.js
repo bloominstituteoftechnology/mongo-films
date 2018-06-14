@@ -6,15 +6,23 @@ const Character = mongoose.Schema({
   edited: Date,
   created: Date,
   gender: String,
-  height: String,
+  height: {
+    Number,
+    validate: customHeightStringValidator,
+    msg: 'Number needs to be greater then 100cm',
+    required: true
+  },
   hair_color: String,
   skin_color: String,
   eye_color: String,
   birth_year: String,
   key: { type: Number, unique: true },
+  validate: customHeightStringValidator,
+  msg: 'Number needs to be greater then 100cm',
+  required: true,
 
   homeworld_key: Number,
   characters: [ { type: ObjectId, res: 'Character' } ],
 });
-
+const HeightModel = mongoose.model( 'height', HobbiesSchema );
 module.exports = mongoose.model('Character', Character);
