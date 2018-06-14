@@ -14,14 +14,14 @@
 ### Start the API and Implement Requirements
 - [X] To start the server, type yarn start or npm start from the root folder (where the package.json file is).
 - [X] Take some time to study the code provided.
-- [ ] Configure relationships on the provided mongoose Schemas.
+- [X] Configure relationships on the provided mongoose Schemas.
 - [ ] Write endpoints to perform the following queries;
 ===Film===
 - [ ] /api/films
 - [ ] /api/films?producer=gary+kurtz
 - [ ] /api/films?released=2005
 ===Characters===
-- [ ] /api/characters/:id
+- [X] /api/characters/:id
 - [ ] /api/characters/:id/vehicles
 - [ ] /api/characters?minheight=100
 ===Planet===
