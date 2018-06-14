@@ -12,8 +12,7 @@ const errorMessage = (status, message, res) => {
 // add endpoints here
 router
     .route('/')
-    .get((req, res) => {
-        const { id } = req.params;    
+    .get((req, res) => {   
         const { minheight} = req.query;
         if(minheight) {
             Character
@@ -37,18 +36,19 @@ router
 router
     .route('/:id')
     .get((req, res) => {
-            
-            Character
-                .findById(id)            
-                .then(foundChar => {
-                    if(!foundChar) {
-                        errorMessage(404, 'No the specific character found', res);
-                    }
-                    res.status(200).json({ foundChar })
-                })
-                .catch(error => {
-                    errorMessage(500, error, res)
-                })
+        const { id } = req.params;             
+        Character
+            .findById(id)
+            .populate('homeworld')          
+            .then(foundChar => {
+                if(!foundChar) {
+                    errorMessage(404, 'No the specific character found', res);
+                }
+                res.status(200).json({ foundChar })
+            })
+            .catch(error => {
+                errorMessage(500, error, res)
+            })
 })
 
 module.exports = router;
