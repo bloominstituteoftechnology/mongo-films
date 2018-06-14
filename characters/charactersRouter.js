@@ -2,6 +2,8 @@ const express = require('express');
 
 const Character = require('./Character.js');
 
+const Vehicle = require('../vehicles/Vehicle.js');
+
 const router = express.Router();
 
 // add endpoints here
@@ -20,6 +22,7 @@ const router = express.Router();
     router
     .route('/:id')
     .get((req, res) => {
+        const { id } = req.params;
         Character.findById(id)
         .populate('homeworld')
         .populate('movies')
@@ -30,4 +33,18 @@ const router = express.Router();
             res.status(500).json(error);
         })
     }) 
+    router
+    .route('/:id/vehicles')
+    .get((req, res) => {
+        const { id } = req.params;
+        Vehicle.find({pilots: id})
+        .then(vehicles => {
+            res.status(200).json(vehicles)
+        })
+        .catch(error => {
+            res.status(500).json(error);
+        })
+    }) 
+
+
 module.exports = router;
