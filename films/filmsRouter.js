@@ -34,9 +34,10 @@ Film.find({})
     .populate('characters',
     '_id, name, gender, height, skin_color, hair_color and eye_color'
     )
-    // .populate('characters',
-    // '_id, name, gender, height, skin_color, hair_color and eye_color'
-    // )
+    .populate(
+        'planets',
+        'name, climate, terrain, gravity and diameter'
+    )
     .then( films =>
     {
     res.status( 200 ).json( films );
