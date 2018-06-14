@@ -15,8 +15,9 @@ router
     .route('/')
     .get((req, res) => {
         Film
-            .find()
+            .find({})
             .sort({ episode: 1 })
+            // .select('episode title director producer') //select (act like projection in compass) to show only these catagory.
             .populate('characters', '_id name gender height skin_color hair_color eye_color')
             .populate('planets', 'name climate terrain gravity diameter')
             .then(films => {
@@ -28,3 +29,4 @@ router
 })
 
 module.exports = router;
+ 
