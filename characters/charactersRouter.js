@@ -1,6 +1,7 @@
 const express = require('express');
 
 const Character = require('./Character.js');
+const Vehicle = require('../vehicles/Vehicle.js');
 
 const router = express.Router();
 
@@ -45,6 +46,20 @@ router
                     errorMessage(404, 'No the specific character found', res);
                 }
                 res.status(200).json({ foundChar })
+            })
+            .catch(error => {
+                errorMessage(500, error, res)
+            })
+})
+
+router
+    .route('/:id/vehicles')
+    .get((req, res) => {
+        const { id } = req.params;             
+        Vehicle
+            .find({ pilots: id })          
+            .then(vehicles => {
+                res.json(vehicles)
             })
             .catch(error => {
                 errorMessage(500, error, res)

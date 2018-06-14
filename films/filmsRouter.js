@@ -57,5 +57,22 @@ router
             }
 })
 
+router
+    .route('/:id')
+    .get((req, res) => {
+        const { id } = req.params;
+        Film
+            .findById(id)
+            .then(film => {
+                if(!film) {
+                    errorMessage(404, 'No film with this id found', res);
+                }
+                res.status(200).json({ film })
+            })
+            .catch(error => {
+                errorMessage(500, 'Something wrong with our data', res)
+            })
+    })
+
 module.exports = router;
  
