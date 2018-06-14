@@ -25,7 +25,7 @@
 - [ ] /api/characters/:id/vehicles
 - [ ] /api/characters?minheight=100
 ===Planet===
-- [ ] /api/planet/:id
+- [X] /api/planet/:id
 - [ ] Test the API using Postman as you work through the exercises.
 
 ### Stretch Problems
@@ -33,3 +33,4 @@
 - [ ] From the React application connect to the /api/films endpoint in the API and show the list of Characters
 - [ ] Style the list of characters however you see fit.
 - [ ] Add as many CRUD endpoints as you can for the Resources to make it a full API.
+
