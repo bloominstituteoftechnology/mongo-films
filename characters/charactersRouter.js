@@ -6,7 +6,7 @@ const router = express.Router();
 
 // add endpoints here
 
-/* router
+ router
     .route('/')
     .get((req, res) => {
         Character.find()
@@ -17,15 +17,17 @@ const router = express.Router();
             res.status(500).json(error);
         })
     })
+    router
     .route('/:id')
     .get((req, res) => {
         Character.findById(id)
         .populate('homeworld')
+        .populate('movies')
         .then(character => {
             res.status(200).json(character)
         })
         .catch(error => {
             res.status(500).json(error);
         })
-    }) */
+    }) 
 module.exports = router;
