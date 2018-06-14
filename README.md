@@ -64,13 +64,13 @@ Find all films released in _2005_. (/api/films?released=2005) X
 
 Given a character id, (/api/characters/:id)
 
-* find the character and return it.
+* find the character and return it. X
 * populate the character's homeworld. X
 * add a _movies_ property that should be an array of all the movies where the character appeared.
 
 Find all vehicles driven by a given character. (/api/characters/:id/vehicles)
 
-Find all female characters taller than 100cm (/api/characters?minheight=100)
+Find all female characters taller than 100cm (/api/characters?minheight=100) X
 
 Given a planet Id find all `characters` born in that planet and all native `species`. (/api/planet/:id)
 

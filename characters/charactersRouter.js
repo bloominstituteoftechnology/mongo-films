@@ -11,6 +11,28 @@ const sendUserError = (status, message, res, err="Not from Catch") =>{
 
 // add endpoints here
 const get = (req, res) =>{
+
+    const { character } = req.query;
+    if (character){
+       const filtered = new RegExp(character, 'i');
+       console.log(filtered);
+       Character.find({})
+        .where('name')
+        .regex(filtered)
+        .then(films => res.json(films))
+        .catch(err => sendUserError(500, "There as an error in filtering results", res, err))
+        }
+    
+        const { minheight } = req.query;
+        if (minheight){
+           Character.find({gender: "female", height:{$gt: minheight}},{name: 1, height:1, gender:1})
+            .then(films => res.json(films))
+            .catch(err => sendUserError(500, "There as an error in filtering results", res, err))
+            }
+
+
+
+
     Character.find()
         .populate('homeworld', {name:1, _id:0})
         .then(characters =>{
