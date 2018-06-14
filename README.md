@@ -15,9 +15,9 @@ Use Node.js, Express.js and Mongoose.js to build an API that queries data persis
 
 ### Download Project Files and Install Dependencies
 
-* **Fork** and **Clone** this repository.
-* **CD into the folder** where you cloned the repository.
-* Type `yarn` or `npm install` to download all dependencies listed inside `package.json`.
+[x]* **Fork** and **Clone** this repository.
+*[x] **CD into the folder** where you cloned the repository.
+* [x]Type `yarn` or `npm install` to download all dependencies listed inside `package.json`.
 
 ### Import Sample Data
 
