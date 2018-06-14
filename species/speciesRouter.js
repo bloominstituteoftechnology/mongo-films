@@ -12,11 +12,11 @@ router
     .find()
     .then(species => {
       res.status(200)
-      res.json({ species })
+      .json({ species })
     })
     .catch(err => {
       res.status(500)
-      res.json({ message: 'The species information could not be retrieved.' });
+      .json({ message: 'The species information could not be retrieved.' });
     })
   })
 
@@ -30,11 +30,11 @@ router
     .populate('homeworld')
     .then(specie => {
         res.status(200)
-        res.json({ specie })
+        .json({ specie })
     })
     .catch(err => {
         res.status(500)
-        res.json({ message: "The specie information could not be retrieved." })
+        .json({ message: "The specie information could not be retrieved." })
     })
   })
 

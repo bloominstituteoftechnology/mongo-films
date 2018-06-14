@@ -32,7 +32,7 @@ router
       })
       .catch(err => {
         res.status(500)
-        res.json({ message: "Error fetching characters."})
+        .json({ message: "Error fetching characters."})
       })
     }
   })
@@ -49,17 +49,12 @@ router
     .populate('movies')
     .then(character => {
         res.status(200)
-        res.json({ character })
+        .json({ character })
     })
-    Film // Couldn't get this one to work :/
-    .find(id)
-    .where('characters')
-    .then(movies => {
-      res.json({ character, movies })
-    })
+
     .catch(err => {
         res.status(500)
-        res.json({ message: "The character information could not be retrieved." })
+        .json({ message: "The character information could not be retrieved." })
     })
   })
   
