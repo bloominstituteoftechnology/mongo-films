@@ -21,6 +21,24 @@ Character.find()
     } );
 } )
 
+//GET by ID
+///api/characters/:id
+router
+.route( '/:id' )
+.get( ( req, res ) =>
+{
+const { id } = req.params;
+Character.findById( id )
+    .then( foundCharacter =>
+    {
+    res.status( 200 ).json( foundCharacter );
+    } )
+    .catch( err =>
+    {
+    res.status( 500 ).json( { errorMessage: "The friends information could not be retrieved." } );
+    } )
+})
+
 
 module.exports = router;
 
