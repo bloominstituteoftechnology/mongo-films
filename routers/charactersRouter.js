@@ -5,7 +5,7 @@ const Character = require('../schemas/Character.js');
 const router = express.Router();
 
 // add endpoints here
-// All characters!!!!
+// ! All characters!!!!
 router
     .route( '/' )
     .get( ( req, res ) =>
@@ -20,5 +20,7 @@ router
             {
                 res.status( 500 ).json( { error: 'Error' } )
             } );
-    })
+    } )
+    
+
 module.exports = router;

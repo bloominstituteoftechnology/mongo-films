@@ -1,21 +1,21 @@
 ## Mongo-Film
-- [ ] Decide how you will tackle the problem
-- [ ] Fork and Clone this repository.
-- [ ] CD into the folder where you cloned the repository.
-- [ ] Type yarn or npm install to download all dependencies listed inside package.json.
+- [ x ] Decide how you will tackle the problem
+- [ x ] Fork and Clone this repository.
+- [ x ] CD into the folder where you cloned the repository.
+- [ x ] Type yarn or npm install to download all dependencies listed inside package.json.
 
 ### Import Sample Data
-- [ ] Make sure the MongoDB server is running before starting the import process.
-- [ ] In a terminal or command prompt window, navigate to the data folder and run the following command for each JSON file.
+- [ x ] Make sure the MongoDB server is running before starting the import process.
+- [ x ] In a terminal or command prompt window, navigate to the data folder and run the following command for each JSON file.
  ** mongoimport --db starwars --collection characters --file characters.json**
-- [ ] Modify the command, changing the collection name and the file name to import the other JSON files.
-- [ ] After importing all files, open MongoDB compass and verify that the data was imported successfully into the starwarsdatabase.
+- [ x ] Modify the command, changing the collection name and the file name to import the other JSON files.
+- [ x ] After importing all files, open MongoDB compass and verify that the data was imported successfully into the starwarsdatabase.
 
 ### Start the API and Implement Requirements
-- [ ] To start the server, type yarn start or npm start from the root folder (where the package.json file is).
-- [ ] Take some time to study the code provided.
-- [ ] Configure relationships on the provided mongoose Schemas.
-- [ ] Write endpoints to perform the following queries;
+- [ x ] To start the server, type yarn start or npm start from the root folder (where the package.json file is).
+- [ x ] Take some time to study the code provided.
+- [ x ] Configure relationships on the provided mongoose Schemas.
+- [ ] Write endpoints to perform the following queries:
 ===Film===
 - [ ] /api/films
 - [ ] /api/films?producer=gary+kurtz
