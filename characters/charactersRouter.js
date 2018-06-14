@@ -11,6 +11,16 @@ const router = express.Router();
  router
     .route('/')
     .get((req, res) => {
+        const { minheight } = req.query;
+      if (minheight)  {
+        Character.find({gender: 'female', height: { $gt: minheight }})
+        .then(characters => {
+            res.status(200).json(characters)
+        })
+        .catch(error => {
+            res.status(500).json(error);
+        })
+      } else {
         Character.find()
         .then(characters => {
             res.status(200).json(characters)
@@ -18,6 +28,7 @@ const router = express.Router();
         .catch(error => {
             res.status(500).json(error);
         })
+      }
     })
     router
     .route('/:id')
