@@ -102,6 +102,26 @@ const postPlanet = (req, res) =>{
         });
 }
 
+const postPeople = (req, res) =>{
+    const { id } = req.params;
+    const { peopleId } = req.body;
+
+    Character.findOne({ _id: id })
+        .then(foundPeople =>{
+            foundPeople.characters = [...foundPeople.characters, peopleId];
+            foundPeople
+                .save()
+                .then(savedPeople =>{
+                    res.status(201).json(savedPeople);
+                })
+                .catch(err =>{
+                    sendUserError(500, "There was an error in saving planet to char database", res, err)
+                })
+        .catch(err =>{
+            sendUserError(500, "There was an error in saving character to database");
+            });
+        });
+}
 
 router.route("/")
     .get(get)
@@ -114,6 +134,9 @@ router.route("/:id")
 
 router.route("/:id/planet")
     .post(postPlanet)
+
+router.route("/:id/people")
+    .post(postPeople)
  
     
 module.exports = router;

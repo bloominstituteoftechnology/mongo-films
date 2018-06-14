@@ -51,12 +51,12 @@ Each _Schema_ is configured to work with the data imported into the correspondin
 
 ### Write endpoints to perform the following queries.
 
-Return a list of all films. (/api/films)
+Return a list of all films. (/api/films) X
 
-* order by episode.
-* populate character information.
-  * only include: `_id, name, gender, height, skin_color, hair_color and eye_color`.
-* populate planets, include: `name, climate, terrain, gravity and diameter`.
+* order by episode. X
+* populate character information. X
+  * only include: `_id, name, gender, height, skin_color, hair_color and eye_color`. X
+* populate planets, include: `name, climate, terrain, gravity and diameter`. X
 
 Find all films produced by _Gary Kurtz_ (/api/films?producer=gary+kurtz)
 
@@ -65,7 +65,7 @@ Find all films released in _2005_. (/api/films?released=2005)
 Given a character id, (/api/characters/:id)
 
 * find the character and return it.
-* populate the character's homeworld.
+* populate the character's homeworld. X
 * add a _movies_ property that should be an array of all the movies where the character appeared.
 
 Find all vehicles driven by a given character. (/api/characters/:id/vehicles)
@@ -79,7 +79,7 @@ Given a planet Id find all `characters` born in that planet and all native `spec
 * Use `create-react-app` to create an application inside the root folder, name it `client`.
 * From the React application connect to the `/api/films` endpoint in the API and show the list of Characters
 * Style the list of characters however you see fit.
-* Add as many CRUD endpoints as you can for the _Resources_ to make it a full API.
+* Add as many CRUD endpoints as you can for the _Resources_ to make it a full API. 
 
 ### Additional Notes
 

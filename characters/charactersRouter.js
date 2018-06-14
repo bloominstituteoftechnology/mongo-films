@@ -12,6 +12,7 @@ const sendUserError = (status, message, res, err="Not from Catch") =>{
 // add endpoints here
 const get = (req, res) =>{
     Character.find()
+        .populate('homeworld', {name:1, _id:0})
         .then(characters =>{
             res.status(200).json(characters)
         })
@@ -97,7 +98,7 @@ const postPlanet = (req, res) =>{
                     sendUserError(500, "There was an error in saving planet to char database", res, err)
                 })
         .catch(err =>{
-            sendUserError(500, "There was an error in saving character to database");
+            sendUserError(500, "There was an error in saving character to database", res, err);
             });
         });
 }
@@ -113,5 +114,5 @@ router.route("/:id")
 
 router.route("/:id/planet")
     .post(postPlanet)
-    
+
 module.exports = router;
