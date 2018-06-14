@@ -23,15 +23,12 @@ const get = (req, res) =>{
         .catch(err => sendUserError(500, "There as an error in filtering results", res, err))
         }
     
-        const { minheight } = req.query;
-        if (minheight){
-           Character.find({gender: "female", height:{$gt: minheight}},{name: 1, height:1, gender:1})
-            .then(films => res.json(films))
-            .catch(err => sendUserError(500, "There as an error in filtering results", res, err))
-            }
-
-
-
+    const { minheight } = req.query;
+    if (minheight){
+        Character.find({gender: "female", height:{$gt: minheight}},{name: 1, height:1, gender:1})
+        .then(films => res.json(films))
+        .catch(err => sendUserError(500, "There as an error in filtering results", res, err))
+        }
 
     Character.find()
         .populate('homeworld', {name:1, _id:0})
