@@ -17,7 +17,7 @@
 - [X] Configure relationships on the provided mongoose Schemas.
 - [ ] Write endpoints to perform the following queries;
 ===Film===
-- [ ] /api/films
+- [X] /api/films
 - [ ] /api/films?producer=gary+kurtz
 - [ ] /api/films?released=2005
 ===Characters===

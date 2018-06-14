@@ -12,32 +12,16 @@ router
 .get( ( req, res ) =>
 {
 Film.find()
-    .then( films =>
-    {
-    res.status( 200 ).json( films );
-    } )
-    .catch( err =>
-    {
-    res.status( 500 ).json( { error: 'Error' } )
-    } );
-} )
-
-// add endpoints here
-//GET all characters
-router
-.route( '/films' )
-.get( ( req, res ) =>
-{
-Film.find({})
     .sort({ episode: 1})
     .select('episode')
     .populate('characters',
-    '_id, name, gender, height, skin_color, hair_color and eye_color'
+    '_id name gender height skin_color hair_color and eye_color'
     )
-    .populate(
-        'planets',
-        'name, climate, terrain, gravity and diameter'
+    .populate('planets',
+    'name climate terrain gravity and diameter'
     )
+    //2nd method to POPULATE
+    // .populate({path: 'characters', select: '-_id, name, gender, height, skin_color, hair_color and eye_color'})
     .then( films =>
     {
     res.status( 200 ).json( films );
@@ -48,5 +32,31 @@ Film.find({})
     } );
 } )
 
-
 module.exports = router;
+
+
+// add endpoints here
+//GET all characters
+// router
+// .route( '/films' )
+// .get( ( req, res ) =>
+// {
+// Film.find({})
+    // .sort({ episode: 1})
+    // .select('episode')
+    // .populate('characters',
+    // '_id, name, gender, height, skin_color, hair_color and eye_color'
+    // )
+    // .populate(
+    //     'planets',
+    //     'name, climate, terrain, gravity and diameter'
+    // )
+//     .then( films =>
+//     {
+//     res.status( 200 ).json( films );
+//     } )
+//     .catch( err =>
+//     {
+//     res.status( 500 ).json( { error: 'Error' } )
+//     } );
+// } )
