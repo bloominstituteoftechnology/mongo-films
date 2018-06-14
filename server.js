@@ -1,5 +1,6 @@
 const express = require('express');
 const helmet = require('helmet');
+const mongoose = require('mongoose');
 
 const db = require('./data/db.js');
 const charactersRouter = require('./characters/charactersRouter.js');
@@ -8,6 +9,7 @@ const speciesRouter = require('./species/speciesRouter.js');
 const starshipsRouter = require('./starships/starshipsRouter.js');
 const vehiclesRouter = require('./vehicles/vehiclesRouter.js');
 const planetsRouter = require('./planets/planetsRouter.js');
+
 
 const server = express();
 
