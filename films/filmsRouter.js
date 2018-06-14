@@ -7,45 +7,39 @@ const router = express.Router();
 
 // add endpoints here
 //GET all characters
-router
-    .route( '/' )
-    .get( ( req, res ) =>
+// router 
+//     .route( '/' )
+//     .get( ( req, res ) =>
+//     {
+const router = express();
+router.route( '/' ).get( ( req, res ) =>
+{
+    const { producer } = req.query;
+    if ( producer )
     {
-        Film.find()
-            .then( films =>
-            {
-                res.status( 200 ).json( films );
-            } )
-            .catch( err =>
-            {
-                res.status( 500 ).json( { error: 'Error' } )
-            } );
-    } )
-
-// add endpoints here
-//GET all characters
-router
-    .route( '/films' )
-    .get( ( req, res ) =>
+        film.find( { producer: { $regex: producer, $options: '1' } } )
+            .then( films => res.json( films ) )
+            .catch( error => res.status( 500 ).json( { error: error.message } ) );
+    } else
     {
-        Film.find( {} )
-            .sort( { episode: 1 } )
-            .select( 'episode' )
+        find.find( {} )
+            .sort( 'episode' )
+         
+            // Film.find()
+            //     .sort( { episode: 1 } )
+            //     .select( 'episode' )
             .populate( 'characters',
-                '_id, name, gender, height, skin_color, hair_color and eye_color'
+                '_id name gender height skin_color hair_color and eye_color'
             )
-            // .populate('characters',
-            // '_id, name, gender, height, skin_color, hair_color and eye_color'
-            // )
-            .then( films =>
-            {
-                res.status( 200 ).json( films );
-            } )
-            .catch( err =>
-            {
-                res.status( 500 ).json( { error: 'Error' } )
-            } );
-    } )
+            .populate( 'planets',
+                'name climate terrain gravity and diameter'
+            )
+            //2nd method to POPULATE
+            // .populate({path: 'characters', select: '-_id, name, gender, height, skin_color, hair_color and eye_color'})
+            .then( films => res.json( films ) )
+            .catch( error => res.status( 500 ).json( { error: 'error.message' } ) );
+            } 
+        });
 
 
 module.exports = router;
