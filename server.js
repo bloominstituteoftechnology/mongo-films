@@ -2,14 +2,15 @@ const express = require('express');
 const helmet = require('helmet');
 
 const db = require('./data/db.js');
-const charactersRouter = require('./characters/charactersRouter.js');
-const filmsRouter = require('./films/filmsRouter.js');
-const speciesRouter = require('./species/speciesRouter.js');
-const starshipsRouter = require('./starships/starshipsRouter.js');
-const vehiclesRouter = require('./vehicles/vehiclesRouter.js');
-const planetsRouter = require('./planets/planetsRouter.js');
+const charactersRouter = require('./routers/charactersRouter.js');
+const filmsRouter = require('./routers/filmsRouter.js');
+const speciesRouter = require('./routers/speciesRouter.js');
+const starshipsRouter = require('./routers/starshipsRouter.js');
+const vehiclesRouter = require('./routers/vehiclesRouter.js');
+const planetsRouter = require('./routers/planetsRouter.js');
 
 const server = express();
+const port = process.env.PORT || 8080;
 
 db
   .connectTo('starwars')
@@ -28,7 +29,6 @@ server.use('/api/planets', planetsRouter);
 
 server.get('/', (req, res) => res.send('API Running...'));
 
-const port = process.env.PORT || 5000;
 server.listen(port, () =>
   console.log(`\n\nAPI running on http://localhost:${port}`)
 );

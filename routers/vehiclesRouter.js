@@ -1,6 +1,6 @@
 const express = require('express');
 
-const Vehicle = require('./Vehicle.js');
+const Vehicle = require('../schemas/Vehicle.js');
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 const express = require('express');
 
-const Film = require('./Film.js');
+const Film = require('../schemas/Film.js');
 
 const router = express.Router();
 

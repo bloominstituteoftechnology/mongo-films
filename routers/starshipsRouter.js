@@ -1,6 +1,6 @@
 const express = require('express');
 
-const Starship = require('./Starship.js');
+const Starship = require('../schemas/Starship.js');
 
 const router = express.Router();
 
