@@ -13,6 +13,7 @@ const sendUserError = (status, message, res, err="Not from Catch") =>{
 const get = (req, res) =>{
     Species.find()
         .populate("homeworld", {name:1, _id:0})
+        .select({name:1, _id:0})
         .then(species =>{
             res.status(200).json(species)
         })
@@ -130,13 +131,9 @@ router.route("/")
 router.route("/:id")
     .get(getId)
     .delete(deleteId)
-    .put(updateId);
-
-router.route("/:id/planet")
+    .put(updateId)
     .post(postPlanet)
-
-router.route("/:id/people")
-    .post(postPeople)
+    .post(postPeople);
  
     
 module.exports = router;

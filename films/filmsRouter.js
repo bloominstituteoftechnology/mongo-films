@@ -1,6 +1,11 @@
 const express = require('express');
 
 const Film = require('./Film.js');
+const Species = require('../species/Specie.js')
+const Vehicle = require('../vehicles/Vehicle.js');
+const Starship = require('../starships/Starship.js');
+const Character = require('../characters/Character.js');
+const Planet = require('../planets/Planet.js');
 
 const router = express.Router();
 
@@ -136,7 +141,60 @@ const postCharacter = (req, res) =>{
         });
 };
 
+const getChars = (req, res) =>{
+    const { character_ids } = req.params;
 
+    Character.find({character_ids},{name:1,_id:0})
+        .then(characters =>{
+            res.json({characters});
+        })
+        .catch(err =>{
+            res.status(500).json({error:err.message})
+        });
+};
+
+const getStarships = (req, res) => {
+    const { starships_id } = req.params;
+
+    Starship.find({starships_id},{starship_class:1, _id:0})
+      .then(starships => {
+        res.json({starships});
+    })
+      .catch(err => res.status(500).json({ error: err.message }));
+  };
+
+const getVehicles = (req, res) => {
+    const { vehicle_id } = req.params;
+
+    Vehicle.find({vehicle_id},{vehicle_class:1, _id:0})
+      .then(vehicles => {
+        res.json({vehicles});
+    })
+      .catch(err => res.status(500).json({ error: err.message }));
+  };
+
+  const getSpecies = (req, res) => {
+    const { specie_ids} = req.params;
+
+    Species.find({specie_ids},{name:1, language:1, _id:0})
+      .populate('homeworld', {name:1, _id:0})
+      .then(species => {
+        res.json({species});
+    })
+      .catch(err => res.status(500).json({ error: err.message }));
+  };
+
+const getPlanet = (req, res) =>{
+    const {planet_ids} = req.params;
+
+    Planet.find(planet_ids)
+        .then(planets =>{
+            res.json(planets);
+        })
+        .catch(err =>{
+            res.status(500).json({error:err.message})
+        });
+};
 
 router.route("/")
     .get(get)
@@ -147,7 +205,17 @@ router.route("/:id")
     .delete(deleteId)
     .put(updateId);
 
+router.route("/:id/characters")
+    .get(getChars)
+router.route("/:id/vehicles")
+    .get(getVehicles)
+router.route("/:id/starships")
+    .get(getStarships)
+router.route("/:id/species")
+    .get(getSpecies)
 router.route("/:id/planet")
     .post(postCharacter)
+    .get(getPlanet)
+
 
 module.exports = router;

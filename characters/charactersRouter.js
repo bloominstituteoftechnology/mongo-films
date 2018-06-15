@@ -63,9 +63,9 @@ const getId = (req, res) =>{
 
     Character.findById(id)
         .populate('homeworld', {name:1, _id:0})
+        .populate('movies', {title:1, _id:0})
         .then(character =>{
-            let charKey = character.key;
-                Film.find({character_ids: Number(charKey)}, {title:1, episode:1, producer:1, director:1,_id:0, })
+                Film.find({character_ids: id}, {title:1, episode:1, producer:1, director:1,_id:0, })
                     .then(films =>{
                         character.movies = [...films]
                     })
@@ -154,7 +154,7 @@ const getFilms = (req, res) =>{
 
     Film.find({characters: `${id}`},{title:1,_id:0})
         .then(films =>{
-            res.json(films);
+            res.json({movies:films});
         })
         .catch(err =>{
             res.status(500).json({error:err.message})
@@ -168,7 +168,7 @@ router.route("/")
 router.route("/:id")
     .get(getId)
     .delete(deleteId)
-    .put(updateId);
+    .put(updateId)
 
 router.route("/:id/planet")
     .post(postPlanet)
@@ -181,4 +181,5 @@ router.route("/:id/starships")
 
 router.route("/:id/movies")
     .get(getFilms)
+
 module.exports = router;
