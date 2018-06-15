@@ -3,6 +3,7 @@ const express = require('express');
 const Character = require('./Character.js');
 const Film = require('../films/Film.js');
 const Vehicle = require('../vehicles/Vehicle.js');
+const Starship = require('../starships/Starship.js');
 
 const router = express.Router();
 
@@ -139,6 +140,16 @@ const getVehicles = (req, res) => {
           .catch(err => res.status(500).json({ error: err.message }));
       };
 
+const getStarships = (req, res) => {
+        const { id } = req.params;
+
+        Starship.find({pilots:`${id}`},{starship_class:1, _id:0})
+          .then(starships => {
+            res.json(starships);
+        })
+          .catch(err => res.status(500).json({ error: err.message }));
+      };
+
 
 
 
@@ -158,5 +169,8 @@ router.route("/:id/planet")
 
 router.route("/:id/vehicles")
     .get(getVehicles)
+
+router.route("/:id/starships")
+    .get(getStarships)
 
 module.exports = router;
