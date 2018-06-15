@@ -15,9 +15,9 @@ Use Node.js, Express.js and Mongoose.js to build an API that queries data persis
 
 ### Download Project Files and Install Dependencies
 
-* **Fork** and **Clone** this repository.
-* **CD into the folder** where you cloned the repository.
-* Type `yarn` or `npm install` to download all dependencies listed inside `package.json`.
+[x]* **Fork** and **Clone** this repository.
+*[x] **CD into the folder** where you cloned the repository.
+* [x]Type `yarn` or `npm install` to download all dependencies listed inside `package.json`.
 
 ### Import Sample Data
 
@@ -56,10 +56,10 @@ Return a list of all films. (/api/films)
 * order by episode.
 * populate character information.
   * only include: `_id, name, gender, height, skin_color, hair_color and eye_color`.
-* populate planets, include: `name, climate, terrain, gravity and diameter`.
+[x]* populate planets, include: `name, climate, terrain, gravity and diameter`.
 
-Find all films produced by _Gary Kurtz_ (/api/films?producer=gary+kurtz)
-
+[x]Find all films produced by _Gary Kurtz_ (/api/films?producer=gary+kurtz)
+]
 Find all films released in _2005_. (/api/films?released=2005)
 
 Given a character id, (/api/characters/:id)
