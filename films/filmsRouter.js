@@ -1,17 +1,23 @@
 const express = require('express');
-
 const Film = require('./Film.js');
-
 const router = express.Router();
 
 
-// add endpoints here
+
+//add endpoints here
 router.route( '/' ).get(( req, res ) => {
     const { producer } = req.query;
     if (producer) {
-        Film.find({ producer: { $regex: producer, $options: 'i'} })
-            .then(films => res.json(films))
-            .catch(error => res.status(500).json({ error: error.message }));
+        const producerFilter = new RegExp(producer, 'i');
+        console.log(producerFilter);
+        Film.find({})
+        .where('producer')
+        .regex(producerFilter)
+        
+        // 2nd way to do producer query selector
+        // Film.find({ producer: { $regex: producer, $options: 'i'} })
+        .then(films => res.json(films))
+        .catch(error => res.status(500).json({ error: error.message }));
     } else {
         Film.find({})
             .sort({ episode: 1})
