@@ -149,11 +149,17 @@ const getStarships = (req, res) => {
         })
           .catch(err => res.status(500).json({ error: err.message }));
       };
+const getFilms = (req, res) =>{
+    const { id } = req.params;
 
-
-
-
-
+    Film.find({characters: `${id}`},{title:1,_id:0})
+        .then(films =>{
+            res.json(films);
+        })
+        .catch(err =>{
+            res.status(500).json({error:err.message})
+        });
+};
 
 router.route("/")
     .get(get)
@@ -173,4 +179,6 @@ router.route("/:id/vehicles")
 router.route("/:id/starships")
     .get(getStarships)
 
+router.route("/:id/movies")
+    .get(getFilms)
 module.exports = router;

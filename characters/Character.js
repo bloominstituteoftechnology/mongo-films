@@ -45,7 +45,8 @@ const Character = mongoose.Schema({
     ref: 'Planet'
   },
   movies: {
-    type: [mongoose.Schema.Types.Mixed]
+    type: [ObjectId],
+    ref: 'Film'
   }
 });
 
