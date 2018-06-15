@@ -47,7 +47,7 @@ const get = (req, res) =>{
         .sort({episode: 1})
         .select({_id:1, episode: 1, title:1})
         .then(films =>{
-            res.status(200).json(films)
+            res.status(200).json({films})
         })
         .catch(err =>{
             sendUserError(500, `There was an error in retrieving films`, res, err);
@@ -145,6 +145,7 @@ const getChars = (req, res) =>{
     const { character_ids } = req.params;
 
     Character.find({character_ids},{name:1,_id:0})
+        .sort({name:1})
         .then(characters =>{
             res.json({characters});
         })
@@ -156,7 +157,9 @@ const getChars = (req, res) =>{
 const getStarships = (req, res) => {
     const { starships_id } = req.params;
 
-    Starship.find({starships_id},{starship_class:1, _id:0})
+    Starship.find({starships_id},{starship_class:1,hyperdrive_rating:1, pilots:1, _id:0})
+      .populate('pilots', {name:1, _id:0})
+      .sort({starship_class:1})
       .then(starships => {
         res.json({starships});
     })
@@ -166,7 +169,8 @@ const getStarships = (req, res) => {
 const getVehicles = (req, res) => {
     const { vehicle_id } = req.params;
 
-    Vehicle.find({vehicle_id},{vehicle_class:1, _id:0})
+    Vehicle.find({vehicle_id},{vehicle_class:1, pilots:1, _id:0})
+      .populate('pilots', {name:1, _id:0})
       .then(vehicles => {
         res.json({vehicles});
     })
