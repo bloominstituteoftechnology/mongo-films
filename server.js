@@ -28,7 +28,7 @@ server.use('/api/planets', planetsRouter);
 
 server.get('/', (req, res) => res.send('API Running...'));
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5007;
 server.listen(port, () =>
   console.log(`\n\nAPI running on http://localhost:${port}`)
 );
