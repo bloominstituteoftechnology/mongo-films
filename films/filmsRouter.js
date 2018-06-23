@@ -9,13 +9,15 @@ router.route("/").get((req, res) => {
   //making the search query dynamic
   //next time design the database so that the search query name === the database name
   if (Object.keys(req.query).length > 0) {
+    //making the search query dynamic
     let query = Object.keys(req.query);
     let key = query[0] === "released" ? `release_date` : query[0];
     const filter = new RegExp(req.query[query], "i");
+    //console.log(key, filter);
 
     Film.find({})
-      .where(key)
-      .regex(filter)
+      .where(key) //mongoose way of querying
+      .regex(filter) //mongoose way of how to query by
       .populate("homeworld", {
         //a way to select what to populate with ObjectID
         _id: 0,
@@ -44,7 +46,7 @@ router.route("/").get((req, res) => {
   } else {
     // console.log(Object.keys(req.query))
     Film.find()
-      .sort({ episode: 1 })
+      .sort({ episode: 1 }) //sort({how to sort by})
       .populate("homeworld", {
         _id: 0,
         name: 1,
