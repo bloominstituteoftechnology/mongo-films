@@ -48,7 +48,7 @@ router.route('/:id/vehicles').get((req, res) => {
     Vehicle.find({ pilots: id })
         .select('vehicle_class')
         .then(response => res.json(response))
-        .catch(err => json.status(500).json({ error: err.message}));
+        .catch(err => res.status(500).json({ error: err.message}));
 })
 
 module.exports = router;
