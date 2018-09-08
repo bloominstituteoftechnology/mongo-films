@@ -6,14 +6,15 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   Resume.find()
+    // .populate("name", "Resume.planet")
     .populate({
-      path: "planets.item",
+      path: "name.item",
       populate: {
         path: "item",
-        model: "Planet"
+        model: "Resume"
       }
-      // "planets", "name climate terrain gravity diameter"
     })
+    // "planets", "name climate terrain gravity diameter"
     .then(resumes => {
       res.status(200).json(resumes);
     })
