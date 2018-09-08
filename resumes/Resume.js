@@ -2,16 +2,16 @@ const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Resume = new mongoose.Schema({
-  planet: {
+  film: {
     type: ObjectId,
-    ref: "Planet",
+    ref: "Film",
     required: true
   },
-  name: {
-    item: { type: ObjectId, ref: this.planet },
+  title: {
+    item: { type: ObjectId, ref: "Film" },
     display: { type: Boolean, default: false }
   },
-
+  // characters: [{ type: ObjectId, ref: "Character" }],
   // planets: [
   //   {
   //     id: Number,

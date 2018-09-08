@@ -8,13 +8,14 @@ router.get("/", (req, res) => {
   Resume.find()
     // .populate("name", "Resume.planet")
     .populate({
-      path: "name.item",
+      path: "title.item",
       populate: {
         path: "item",
         model: "Resume"
       }
     })
     // "planets", "name climate terrain gravity diameter"
+    // })
     .then(resumes => {
       res.status(200).json(resumes);
     })
