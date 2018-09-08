@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
   Resume.find()
     .populate({
-      path: "planets",
+      path: "planets.item",
       populate: {
         path: "item",
         model: "Planet"
