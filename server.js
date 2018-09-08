@@ -8,6 +8,7 @@ const speciesRouter = require('./species/speciesRouter.js');
 const starshipsRouter = require('./starships/starshipsRouter.js');
 const vehiclesRouter = require('./vehicles/vehiclesRouter.js');
 const planetsRouter = require('./planets/planetsRouter.js');
+const resumesRouter = require('./resumes/resumesRouter.js');
 
 const server = express();
 
@@ -25,6 +26,7 @@ server.use('/api/species', speciesRouter);
 server.use('/api/starships', starshipsRouter);
 server.use('/api/vehicles', vehiclesRouter);
 server.use('/api/planets', planetsRouter);
+server.use('/api/resumes', resumesRouter);
 
 server.get('/', (req, res) => res.send('API Running...'));
 
