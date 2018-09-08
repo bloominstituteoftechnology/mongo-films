@@ -1,5 +1,15 @@
 {
   "_id": { "$oid": "5aa995c2b97194b732c16800" },
   "film": { "$oid": "5aa995c2b97194b732c16800" },
-  "title": { "item": { "$oid": "5aa995c2b97194b732c16800" }, "display": true }
+  "characters": [
+    { "item": { "$oid": "5aa995a3b97194b732c167ab" }, "display": true },
+    { "item": { "$oid": "5aa995a3b97194b732c167ac" }, "display": false },
+    { "item": { "$oid": "5aa995a3b97194b732c167a9" }, "display": true }
+  ],
+  "vehicles": [
+    { "item": { "$oid": "5aa9964eb97194b732c16976" }, "display": true },
+    { "item": { "$oid": "5aa9964eb97194b732c16975" }, "display": false },
+    { "item": { "$oid": "5aa9964eb97194b732c16981" }, "display": true },
+    { "item": { "$oid": "5aa9964eb97194b732c16982" }, "display": false }
+  ]
 }

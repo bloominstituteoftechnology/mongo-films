@@ -7,8 +7,12 @@ const Resume = new mongoose.Schema({
     ref: "Film",
     required: true
   },
-  title: {
-    item: { type: ObjectId, ref: "Film" },
+  characters: {
+    item: { type: ObjectId, ref: "Character" },
+    display: { type: Boolean, default: false }
+  },
+  vehicles: {
+    item: { type: ObjectId, ref: "Vehicle" },
     display: { type: Boolean, default: false }
   },
   // characters: [{ type: ObjectId, ref: "Character" }],
