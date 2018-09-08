@@ -11,8 +11,8 @@ router.get("/", (req, res) => {
     .populate({
       path: "sections.skills.item",
       populate: {
-        path: "item",
-        model: "User"
+        path: "sections.skills",
+        model: "Resume"
       }
     })
     // .populate("title.item", "User")

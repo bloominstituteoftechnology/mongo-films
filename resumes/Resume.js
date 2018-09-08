@@ -76,7 +76,7 @@ const Resume = new Schema({
         id: Number,
         item: {
           type: ObjectId,
-          ref: "User.sections.skills"
+          ref: "User"
         },
         value: Boolean
       }
