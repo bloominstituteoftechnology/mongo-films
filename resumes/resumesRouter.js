@@ -7,12 +7,13 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   Resume.find()
-    .select("sections.skills")
+    // .select("sections.skills")
+    // .populate("sections.skills.item")
     .populate({
       path: "sections.skills.item",
       populate: {
-        path: "sections.skills",
-        model: "Resume"
+        path: "item",
+        model: "User"
       }
     })
     // .populate("title.item", "User")

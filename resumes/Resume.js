@@ -11,7 +11,7 @@ const Resume = new Schema({
   },
   title: [
     {
-      id: Number,
+      id: ObjectId,
       item: {
         type: ObjectId,
         ref: "User.title"
@@ -35,15 +35,17 @@ const Resume = new Schema({
       value: Boolean
     },
     portfolio: {
-      type: ObjectId,
-      ref: "User.links.portfolio",
+      item: {
+        type: ObjectId,
+        ref: "User.links.portfolio"
+      },
       value: Boolean
     }
   },
   sections: {
     experience: [
       {
-        id: Number,
+        id: ObjectId,
         item: {
           type: ObjectId,
           ref: "User.sections.experience"
@@ -53,7 +55,7 @@ const Resume = new Schema({
     ],
     education: [
       {
-        id: Number,
+        id: ObjectId,
         item: {
           type: ObjectId,
           ref: "User.sections.experience"
@@ -63,7 +65,7 @@ const Resume = new Schema({
     ],
     summary: [
       {
-        id: Number,
+        id: ObjectId,
         item: {
           type: ObjectId,
           ref: "User.sections.summary"
@@ -73,10 +75,10 @@ const Resume = new Schema({
     ],
     skills: [
       {
-        id: Number,
+        id: ObjectId,
         item: {
           type: ObjectId,
-          ref: "User"
+          ref: this.user
         },
         value: Boolean
       }
