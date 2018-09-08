@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Resume = new mongoose.Schema({
-  key: { type: Number, unique: true },
-  planet_ids: [Number],
   planets: [
     {
       id: Number,
