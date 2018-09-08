@@ -1,0 +1,332 @@
+{
+  "_id": {
+    "$oid": "5b773b66fce2cd0b749eb07f"
+  },
+  "sections": {
+    "summary": [
+      {
+        "content": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9311c5b1ae60580e134fab"
+        }
+      },
+      {
+        "content": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9311c5b1ae60580e134fad"
+        }
+      },
+      {
+        "content": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9311c6b1ae60580e134fb0"
+        }
+      },
+      {
+        "content": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9311c6b1ae60580e134fb4"
+        }
+      },
+      {
+        "content": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9311c6b1ae60580e134fb9"
+        }
+      },
+      {
+        "content": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9311c6b1ae60580e134fbf"
+        }
+      },
+      {
+        "content": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9322f6b1ae60580e1356b8"
+        }
+      },
+      {
+        "content": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b932c3eb1ae60580e135a72"
+        }
+      }
+    ],
+    "skills": [
+      {
+        "content": "New Skill",
+        "_id": {
+          "$oid": "5b92cd81fef2c134cba2ccbd"
+        }
+      }
+    ],
+    "experience": [
+      {
+        "title": "Title",
+        "company": "",
+        "location": "",
+        "description": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b918a5b83d0d4f86963aadb"
+        },
+        "from": {
+          "$date": "2018-09-06T20:13:11.494Z"
+        },
+        "to": {
+          "$date": "2018-09-06T20:13:11.495Z"
+        }
+      },
+      {
+        "title": "Title",
+        "company": "",
+        "location": "",
+        "description": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b92fbec8113674590b77117"
+        },
+        "from": {
+          "$date": "2018-09-06T20:13:11.494Z"
+        },
+        "to": {
+          "$date": "2018-09-06T20:13:11.495Z"
+        }
+      },
+      {
+        "title": "Title",
+        "company": "",
+        "location": "",
+        "description": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9311b8b1ae60580e134f6d"
+        },
+        "from": {
+          "$date": "2018-09-06T20:13:11.494Z"
+        },
+        "to": {
+          "$date": "2018-09-06T20:13:11.495Z"
+        }
+      },
+      {
+        "title": "Title",
+        "company": "",
+        "location": "",
+        "description": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9311b9b1ae60580e134f70"
+        },
+        "from": {
+          "$date": "2018-09-06T20:13:11.494Z"
+        },
+        "to": {
+          "$date": "2018-09-06T20:13:11.495Z"
+        }
+      },
+      {
+        "title": "Title",
+        "company": "",
+        "location": "",
+        "description": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9311b9b1ae60580e134f74"
+        },
+        "from": {
+          "$date": "2018-09-06T20:13:11.494Z"
+        },
+        "to": {
+          "$date": "2018-09-06T20:13:11.495Z"
+        }
+      },
+      {
+        "title": "Title",
+        "company": "",
+        "location": "",
+        "description": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9311bab1ae60580e134f79"
+        },
+        "from": {
+          "$date": "2018-09-06T20:13:11.494Z"
+        },
+        "to": {
+          "$date": "2018-09-06T20:13:11.495Z"
+        }
+      },
+      {
+        "title": "Title",
+        "company": "",
+        "location": "",
+        "description": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9311bdb1ae60580e134f7f"
+        },
+        "from": {
+          "$date": "2018-09-06T20:13:11.494Z"
+        },
+        "to": {
+          "$date": "2018-09-06T20:13:11.495Z"
+        }
+      },
+      {
+        "title": "Title",
+        "company": "",
+        "location": "",
+        "description": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9311bdb1ae60580e134f86"
+        },
+        "from": {
+          "$date": "2018-09-06T20:13:11.494Z"
+        },
+        "to": {
+          "$date": "2018-09-06T20:13:11.495Z"
+        }
+      },
+      {
+        "title": "Title",
+        "company": "",
+        "location": "",
+        "description": "\u201cMake the most of yourself....for that is all there is of you.\u201d \u2015 Ralph Waldo Emerson",
+        "_id": {
+          "$oid": "5b9311beb1ae60580e134f8e"
+        },
+        "from": {
+          "$date": "2018-09-06T20:13:11.494Z"
+        },
+        "to": {
+          "$date": "2018-09-06T20:13:11.495Z"
+        }
+      }
+    ],
+    "education": [
+      {
+        "school": "School",
+        "degree": "",
+        "fieldofstudy": "",
+        "_id": {
+          "$oid": "5b918a6283d0d4f86963aadc"
+        },
+        "from": {
+          "$date": "2018-09-06T20:13:17.954Z"
+        },
+        "to": {
+          "$date": "2018-09-06T20:13:17.954Z"
+        }
+      }
+    ]
+  },
+  "active": true,
+  "username": "bobbert",
+  "password": "$2b$11$Zzo2mfwvKrc57By7/kndM.4WuJp3YJhC0gr8hm0KJCii21LQj8.t.",
+  "email": "bobbert@gmail.com",
+  "createdAt": {
+    "$date": "2018-08-17T21:17:26.236Z"
+  },
+  "updatedAt": {
+    "$date": "2018-09-08T01:56:14.436Z"
+  },
+  "__v": 1664,
+  "name": {
+    "firstname": "Bobbert",
+    "middlename": "A.",
+    "lastname": "Swanson"
+  },
+  "phonenumber": "123-456-7694",
+  "links": {
+    "linkedin": "linkedin.com/in/bobbert",
+    "github": "github.com/test",
+    "portfolio": "www.test.com"
+  },
+  "location": "BobbertTown",
+  "title": [
+    {
+      "content": "z",
+      "_id": {
+        "$oid": "5b92ea74176fd84525550452"
+      }
+    },
+    {
+      "content": "HELLOOO",
+      "_id": {
+        "$oid": "5b92f20d81a71c489e05fdaa"
+      }
+    },
+    {
+      "content": "Bye",
+      "_id": {
+        "$oid": "5b92f2391f0f3548c3e3b0c7"
+      }
+    },
+    {
+      "content": "Hi",
+      "_id": {
+        "$oid": "5b92f57053fdcc4c5644ea10"
+      }
+    },
+    {
+      "content": "Hi",
+      "_id": {
+        "$oid": "5b92f57053fdcc4c5644ea0f"
+      }
+    },
+    {
+      "content": "Hi",
+      "_id": {
+        "$oid": "5b931f9db1ae60580e13554a"
+      }
+    },
+    {
+      "content": "Hi",
+      "_id": {
+        "$oid": "5b931fa0b1ae60580e13556d"
+      }
+    },
+    {
+      "content": "Hi",
+      "_id": {
+        "$oid": "5b931fa3b1ae60580e135592"
+      }
+    },
+    {
+      "content": "Add",
+      "_id": {
+        "$oid": "5b931fa6b1ae60580e1355b9"
+      }
+    },
+    {
+      "content": "Hello",
+      "_id": {
+        "$oid": "5b931fadb1ae60580e1355e2"
+      }
+    }
+  ],
+  "membership": false,
+  "subscription": null,
+  "resumes": [
+    {
+      "$oid": "5b9201d22c7e1a275c167cab"
+    },
+    {
+      "$oid": "5b92fa178113674590b770a5"
+    },
+    {
+      "$oid": "5b92fa288113674590b770c2"
+    },
+    {
+      "$oid": "5b9300a08113674590b77189"
+    },
+    {
+      "$oid": "5b93082437fbc35368dec26d"
+    },
+    {
+      "$oid": "5b93083337fbc35368dec288"
+    },
+    {
+      "$oid": "5b93083337fbc35368dec296"
+    },
+    {
+      "$oid": "5b93083337fbc35368dec2a4"
+    }
+  ],
+  "currentresume": 0
+}

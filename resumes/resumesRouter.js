@@ -1,13 +1,23 @@
 const express = require("express");
 
 const Resume = require("./Resume.js");
+const UserModel = require("./UserModel.js");
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
   Resume.find()
-    .populate("characters.item")
-    .populate("vehicles.item")
+    .select("sections.skills")
+    .populate({
+      path: "sections.skills.item",
+      populate: {
+        path: "item",
+        model: "User"
+      }
+    })
+    // .populate("title.item", "User")
+    // .populate("characters.item")
+    // .populate("vehicles.item")
     // .populate("name", "Resume.planet")
     // .populate({
     //   path: "characters.item"

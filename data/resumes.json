@@ -1,15 +1,203 @@
 {
-  "_id": { "$oid": "5aa995c2b97194b732c16800" },
-  "film": { "$oid": "5aa995c2b97194b732c16800" },
-  "characters": [
-    { "item": { "$oid": "5aa995a3b97194b732c167ab" }, "display": true },
-    { "item": { "$oid": "5aa995a3b97194b732c167ac" }, "display": false },
-    { "item": { "$oid": "5aa995a3b97194b732c167a9" }, "display": true }
+  "_id": {
+    "$oid": "5b9300a08113674590b77189"
+  },
+  "links": {
+    "linkedin": true,
+    "github": true,
+    "portfolio": true
+  },
+  "sections": {
+    "experience": [
+      {
+        "_id": {
+          "$oid": "5b918a5b83d0d4f86963aadb"
+        },
+        "value": true
+      },
+      {
+        "_id": {
+          "$oid": "5b92fbec8113674590b77117"
+        },
+        "value": true
+      },
+      {
+        "_id": {
+          "$oid": "5b9311b8b1ae60580e134f6d"
+        },
+        "value": false
+      },
+      {
+        "_id": {
+          "$oid": "5b9311b9b1ae60580e134f70"
+        },
+        "value": false
+      },
+      {
+        "_id": {
+          "$oid": "5b9311b9b1ae60580e134f74"
+        },
+        "value": false
+      },
+      {
+        "_id": {
+          "$oid": "5b9311bab1ae60580e134f79"
+        },
+        "value": false
+      },
+      {
+        "_id": {
+          "$oid": "5b9311bdb1ae60580e134f7f"
+        },
+        "value": false
+      },
+      {
+        "_id": {
+          "$oid": "5b9311bdb1ae60580e134f86"
+        },
+        "value": false
+      },
+      {
+        "_id": {
+          "$oid": "5b9311beb1ae60580e134f8e"
+        },
+        "value": false
+      }
+    ],
+    "education": [
+      {
+        "_id": {
+          "$oid": "5b918a6283d0d4f86963aadc"
+        },
+        "value": true
+      }
+    ],
+    "summary": [
+      {
+        "_id": {
+          "$oid": "5b9311c5b1ae60580e134fab"
+        },
+        "value": false
+      },
+      {
+        "_id": {
+          "$oid": "5b9311c5b1ae60580e134fad"
+        },
+        "value": false
+      },
+      {
+        "_id": {
+          "$oid": "5b9311c6b1ae60580e134fb0"
+        },
+        "value": false
+      },
+      {
+        "_id": {
+          "$oid": "5b9311c6b1ae60580e134fb4"
+        },
+        "value": false
+      },
+      {
+        "_id": {
+          "$oid": "5b9311c6b1ae60580e134fb9"
+        },
+        "value": false
+      },
+      {
+        "_id": {
+          "$oid": "5b9311c6b1ae60580e134fbf"
+        },
+        "value": false
+      },
+      {
+        "_id": {
+          "$oid": "5b9322f6b1ae60580e1356b8"
+        },
+        "value": false
+      },
+      {
+        "_id": {
+          "$oid": "5b932c3eb1ae60580e135a72"
+        },
+        "value": false
+      }
+    ],
+    "skills": [
+      {
+        "_id": {
+          "$oid": "5b92cd81fef2c134cba2ccbd"
+        },
+        "item": {
+          "$oid": "5b92cd81fef2c134cba2ccbd"
+        },
+        "value": true
+      }
+    ]
+  },
+  "title": [
+    {
+      "_id": {
+        "$oid": "5b92ea74176fd84525550452"
+      },
+      "value": false
+    },
+    {
+      "_id": {
+        "$oid": "5b92f20d81a71c489e05fdaa"
+      },
+      "value": false
+    },
+    {
+      "_id": {
+        "$oid": "5b92f2391f0f3548c3e3b0c7"
+      },
+      "value": false
+    },
+    {
+      "_id": {
+        "$oid": "5b92f57053fdcc4c5644ea10"
+      },
+      "value": false
+    },
+    {
+      "_id": {
+        "$oid": "5b92f57053fdcc4c5644ea0f"
+      },
+      "value": false
+    },
+    {
+      "_id": {
+        "$oid": "5b931f9db1ae60580e13554a"
+      },
+      "value": false
+    },
+    {
+      "_id": {
+        "$oid": "5b931fa0b1ae60580e13556d"
+      },
+      "value": false
+    },
+    {
+      "_id": {
+        "$oid": "5b931fa3b1ae60580e135592"
+      },
+      "value": false
+    },
+    {
+      "_id": {
+        "$oid": "5b931fa6b1ae60580e1355b9"
+      },
+      "value": false
+    },
+    {
+      "_id": {
+        "$oid": "5b931fadb1ae60580e1355e2"
+      },
+      "value": false
+    }
   ],
-  "vehicles": [
-    { "item": { "$oid": "5aa9964eb97194b732c16976" }, "display": true },
-    { "item": { "$oid": "5aa9964eb97194b732c16975" }, "display": false },
-    { "item": { "$oid": "5aa9964eb97194b732c16981" }, "display": true },
-    { "item": { "$oid": "5aa9964eb97194b732c16982" }, "display": false }
-  ]
+  "user": {
+    "$oid": "5b773b66fce2cd0b749eb07f"
+  },
+  "__v": 0
 }
