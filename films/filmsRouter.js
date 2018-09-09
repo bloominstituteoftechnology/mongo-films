@@ -21,7 +21,8 @@ router
       }
      }
        
-    console.log(query);
+    console.log(query); 
+    // url to search http://localhost:5000/api/films?release_date=2005
     Film.find(query, 'director producer release_date')
       .sort('episode')
       // .populate('starships', '-_id -__v')
