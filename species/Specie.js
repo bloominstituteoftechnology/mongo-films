@@ -9,6 +9,7 @@ const Specie = new mongoose.Schema({
   created: { type: Date, default: Date.now },
   eye_colors: String,
   people: [Number], // use this to populate the characters link as per readme
+  //not sure yet
   skin_colors: String,
   language: String,
   hair_colors: String,
@@ -16,6 +17,10 @@ const Specie = new mongoose.Schema({
   average_height: String,
   key: { type: Number, unique: true },
   homeworld_key: Number,
+  homeworld: {
+    type: ObjectId,
+    ref: 'Planet'
+  }
   // add homeworld field that links the specie to it's native planet
 });
 
