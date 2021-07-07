@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Planet = new mongoose.Schema({
   edited: { type: Date, default: Date.now },
@@ -12,6 +12,9 @@ const Planet = new mongoose.Schema({
   gravity: String,
   orbital_period: String,
   key: { type: Number, unique: true },
+  //empty arrays have to be instantiated in order for postman to populate the data
+  species: [],
+  characters: []
 });
 
-module.exports = mongoose.model('Planet', Planet);
+module.exports = mongoose.model("Planet", Planet);
