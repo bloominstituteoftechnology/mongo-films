@@ -1,9 +1,15 @@
-const express = require('express');
+const router = require('express').Router()
+const Starship = require('./Starship')
 
-const Starship = require('./Starship.js');
+router.get('/', async (req, res) => {
+  try {
+    const starships = await Starship.find({})
+      .populate('pilots')
+      .select('starship_class hyperdrive_rating')
+    res.json(starships)
+  } catch (err) {
+    res.status(500).json({ err: err.message })
+  }
+})
 
-const router = express.Router();
-
-// add endpoints here
-
-module.exports = router;
+module.exports = router
